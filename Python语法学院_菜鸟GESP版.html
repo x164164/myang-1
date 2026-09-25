@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python 语法学院 · 菜鸟知识点 × GESP 一~四级通关</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:#2f3542;
+    background:linear-gradient(160deg,#d4fc79 0%,#96e6a1 35%,#a1c4fd 100%);min-height:100vh}
+  button{font-family:inherit}
+
+  header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;
+    padding:11px 18px;box-shadow:0 3px 14px rgba(30,90,60,.12);position:sticky;top:0;z-index:60}
+  .logo{font-size:21px;font-weight:900;background:linear-gradient(135deg,#0f9b8e,#3867d6);
+    -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .stats{margin-left:auto;display:flex;gap:12px;align-items:center}
+  .stars{font-weight:900;font-size:16px;color:#b8860b;white-space:nowrap}
+  .progress{width:130px;height:11px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+  #progressFill{height:100%;width:0;background:linear-gradient(90deg,#f7d794,#f78fb3);transition:width .5s}
+  .mini-btn{border:none;background:#f1f5f9;border-radius:10px;font-size:15px;padding:6px 9px;cursor:pointer}
+  .mini-btn:hover{background:#e2e8f0}
+
+  nav.tabs{display:flex;gap:7px;padding:9px 14px;overflow-x:auto;background:rgba(255,255,255,.75);backdrop-filter:blur(8px)}
+  .tab{flex:0 0 auto;border:none;border-radius:99px;padding:7px 13px;font-size:14.5px;font-weight:800;
+    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);cursor:pointer;white-space:nowrap}
+  .tab.active{background:linear-gradient(135deg,#0f9b8e,#3867d6);color:#fff}
+  .tab.locked{opacity:.45}
+  .tab.done:not(.active){background:#dcfce7;color:#15803d}
+
+  main{max-width:1000px;margin:0 auto;padding:15px 15px 60px}
+  .card{background:#fff;border-radius:18px;padding:17px 19px;box-shadow:0 6px 18px rgba(30,90,60,.10);margin-bottom:15px}
+  .hidden{display:none}
+
+  .map-hero{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .map-hero .avatar{font-size:54px;animation:float 2.6s ease-in-out infinite}
+  .map-hero h2{margin:0 0 4px}.map-hero p{margin:4px 0 0;font-size:15px;color:#555;line-height:1.75}
+  .map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin-top:15px}
+  .lv-card{position:relative;background:#fff;border-radius:16px;padding:13px 14px;cursor:pointer;
+    box-shadow:0 4px 14px rgba(30,90,60,.10);transition:transform .2s;border:2px solid transparent}
+  .lv-card:hover{transform:translateY(-4px);border-color:#a7f3d0}
+  .lv-card.locked{filter:grayscale(.8);opacity:.55;cursor:not-allowed}
+  .lv-card .ic{font-size:32px}.lv-card .nm{font-weight:800;margin-top:5px;font-size:14.5px;line-height:1.45}
+  .lv-card .st{position:absolute;top:9px;right:11px;font-size:17px}
+  .lv-card .rf{font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.4}
+  .foot-tip{color:#7a8290;font-size:12.5px;text-align:center;margin-top:24px}
+
+  .back-btn{border:none;background:#fff;border-radius:12px;padding:8px 14px;font-weight:800;cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);margin-bottom:11px}
+  .lv-head{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+  .lv-head .ic{font-size:38px}.lv-head h2{margin:0;font-size:21px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .gchip{font-size:12px;font-weight:800;border-radius:99px;padding:4px 10px}
+  .gchip.runoob{background:#eef2ff;color:#4338ca}
+  .gchip.gesp{background:#fef3c7;color:#b45309}
+  .done-chip{background:#22c55e;color:#fff;font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 11px}
+
+  .story{background:linear-gradient(135deg,#fef9c3,#fef08a);display:flex;gap:13px;align-items:flex-start}
+  .story .avatar{font-size:42px;line-height:1}.story p{margin:0;font-size:15.5px;line-height:1.8}
+  h3.sec{margin:0 0 9px;font-size:17px}
+  h3.sec.learn{color:#0f9b8e}h3.sec.game{color:#e17055}h3.sec.hw{color:#6c5ce7}
+  .kb p{font-size:15.5px;line-height:1.85;margin:7px 0}
+  .kb b{color:#0f766e}
+  .tip{background:#ecfdf5;border-radius:12px;padding:9px 13px;font-size:14.5px;line-height:1.7}
+  .warn{background:#fff7ed;border-radius:12px;padding:9px 13px;font-size:14.5px;line-height:1.7}
+
+  .code{background:#282a36;color:#f8f8f2;font-family:Consolas,Monaco,monospace;padding:11px 14px;
+    border-radius:11px;font-size:15px;line-height:1.7;overflow-x:auto;margin:9px 0;white-space:pre-wrap}
+  .c{color:#8b93a8}.k{color:#ff79c6;font-weight:700}.s{color:#50fa7b}.n{color:#ffb86c}.f{color:#8be9fd}
+  code.ic{background:#eef2f7;border-radius:6px;padding:2px 7px;font-family:Consolas,monospace;font-size:14px;color:#0f4c5c}
+  .out{background:#0f1120;color:#7cfc9a;font-family:Consolas,monospace;padding:9px 12px;border-radius:10px;margin:7px 0;font-size:14.5px;white-space:pre-wrap}
+  .out::before{content:'运行结果  ';color:#f7d794;font-weight:700}
+
+  .task{font-size:16px;font-weight:800;margin-bottom:11px;line-height:1.65}
+  .qline{font-weight:800;margin:10px 0;font-size:16.5px;line-height:1.6}
+  .opts{display:flex;flex-wrap:wrap;gap:10px;margin:9px 0}
+  .opt{border:2px solid #0f9b8e;background:#fff;border-radius:12px;padding:10px 15px;font-size:15px;
+    font-weight:700;cursor:pointer;transition:.15s;line-height:1.5}
+  .opt:hover{background:#ecfdf5}
+  .opt.good{background:#22c55e;color:#fff;border-color:#22c55e}
+  .opt.bad{animation:shake .4s;border-color:#ef4444;background:#fee2e2}
+  .opt.code-opt{font-family:Consolas,Monaco,monospace}
+  .btn{border:none;border-radius:13px;padding:10px 19px;font-size:15.5px;font-weight:800;cursor:pointer;
+    background:linear-gradient(135deg,#0f9b8e,#3867d6);color:#fff;box-shadow:0 4px 0 rgba(20,80,90,.3)}
+  .btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(20,80,90,.3)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.ghost{background:#fff;color:#0f9b8e;border:2px solid #0f9b8e;box-shadow:none}
+  .btn.warn{background:linear-gradient(135deg,#f59e0b,#ef4444);box-shadow:0 4px 0 rgba(150,60,20,.3)}
+  .io{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:9px}
+  .inp{border:2px solid #99f6e4;border-radius:12px;padding:10px 12px;font-size:16px;width:200px;outline:none}
+  .inp:focus{border-color:#0f9b8e}
+  .bubble{background:#f0fdfa;border-radius:14px;padding:11px 14px;font-size:16px;font-weight:700;margin:9px 0;line-height:1.7}
+  .counter{font-weight:800;color:#0f9b8e;margin-top:8px}
+  .progress-dots{display:flex;gap:6px;margin:8px 0}
+  .dot{width:26px;height:8px;border-radius:99px;background:#d1d5db}
+  .dot.on{background:#0f9b8e}
+
+  .tv{background:#101426;border-radius:15px;min-height:88px;display:flex;align-items:center;justify-content:center;
+    color:#8fa0c5;font-size:15px;margin:9px 0;padding:10px}
+  .tv-on{color:#fff;font-size:23px;font-weight:900;animation:pop .5s;text-align:center}
+
+  .var-stage{display:flex;gap:30px;align-items:center;justify-content:center;padding:12px;min-height:105px;flex-wrap:wrap}
+  .item-fly{font-size:44px;transition:transform .6s,opacity .6s}
+  .item-fly.into{transform:translateX(85px) scale(.35);opacity:0}
+  .magic-box{font-size:44px;position:relative;padding-bottom:6px}
+  .magic-box span{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+    background:#0f9b8e;color:#fff;font-size:12px;padding:2px 9px;border-radius:8px;white-space:nowrap}
+
+  .sort-stage{text-align:center;padding:8px}
+  .sort-value{font-size:40px;font-weight:900;font-family:Consolas,monospace;color:#3867d6;min-height:58px}
+  .baskets{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .basket{border:3px dashed #0f9b8e;border-radius:14px;padding:11px 14px;font-weight:800;cursor:pointer;background:#f0fdfa;font-size:15px}
+  .basket:hover{background:#ccfbf1}
+
+  .calc-stage{display:flex;justify-content:center;align-items:center;gap:18px;font-size:40px;font-weight:900;margin:12px 0;flex-wrap:wrap;color:#0f4c5c}
+  .calc-stage .eq{color:#f59e0b}
+
+  .bool-stage{font-size:34px;font-weight:900;text-align:center;margin:14px 0;font-family:Consolas,monospace}
+  .bool-tf{font-size:22px;padding:14px 30px}
+  .bool-tf.t{border-color:#16a34a;color:#16a34a}.bool-tf.t:hover{background:#f0fdf4}
+  .bool-tf.f{border-color:#dc2626;color:#dc2626}.bool-tf.f:hover{background:#fef2f2}
+  .bool-res{font-size:26px;font-weight:900;text-align:center;margin-top:8px}
+
+  .str-cells{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  .scell{display:flex;flex-direction:column;align-items:center;gap:3px;border:3px solid #99f6e4;border-radius:12px;padding:8px 13px;background:#f0fdfa;transition:.2s}
+  .scell.hl{background:#fef08a;border-color:#f59e0b;transform:translateY(-5px)}
+  .scell b{font-size:26px;font-family:Consolas,monospace}
+  .scell small{color:#0f9b8e;font-weight:800;font-family:Consolas,monospace}
+
+  .gem{font-size:30px;display:flex;flex-direction:column;align-items:center;gap:2px;border:3px solid #e5e7eb;
+    border-radius:15px;padding:9px 15px;background:#fff;cursor:pointer;font-weight:800}
+  .gem span{font-size:13px}.gem.used{background:#f1f5f9}.gem.good{border-color:#22c55e;background:#dcfce7}.gem.bad{animation:shake .4s;border-color:#ef4444}
+  .gem-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin:11px 0}
+
+  .indent-row{display:flex;align-items:center;gap:6px;font-family:Consolas,monospace;font-size:15.5px;margin:5px 0;
+    background:#f8fafc;border-radius:9px;padding:5px 8px}
+  .indent-row button{width:28px;height:26px;border-radius:7px;border:1px solid #cbd5e1;background:#fff;font-weight:900;cursor:pointer}
+  .indent-line{white-space:pre;color:#0f4c5c}
+  .indent-mark{display:inline-block;width:14px;height:20px;margin-right:2px;border-left:3px dotted #0f9b8e}
+
+  .dict-book{background:#fffbeb;border:2px solid #fde68a;border-radius:14px;padding:12px 15px;font-family:Consolas,monospace;font-size:15.5px;line-height:1.9;margin:10px 0}
+  .set-pot{font-size:60px;text-align:center;margin:8px}.set-items{text-align:center;font-size:26px;letter-spacing:6px;min-height:38px;font-weight:900}
+
+  .slider{width:100%;accent-color:#0f9b8e;height:26px;cursor:pointer}
+  .sv{font-weight:800;font-size:16.5px}.mascot{font-size:29px;text-align:center;margin:9px;font-weight:900}
+  .m-wear{font-size:40px;margin:0 8px}
+  .dice{font-size:68px;text-align:center;margin:7px;user-select:none;font-weight:900;min-height:85px;line-height:85px}
+  .dice.shake{animation:shake .6s}
+  .sky{position:relative;height:125px;background:linear-gradient(#0f1b3d,#283a6d);border-radius:14px;overflow:hidden;margin:9px 0}
+  .fire{position:absolute;bottom:6px;font-size:29px;animation:rise .9s ease-out forwards}
+  @keyframes rise{from{transform:translateY(0) scale(.5);opacity:.3}to{transform:translateY(-84px) scale(1.35);opacity:1}}
+
+  .turtle-grid{display:grid;grid-template-columns:repeat(7,34px);gap:3px;justify-content:center;margin:12px 0}
+  .tg{width:34px;height:34px;border-radius:6px;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .tg.path{background:#fef9c3}.tg.t{background:#3867d6}
+  .scene{font-size:17px;font-weight:800;background:#f5f3ff;border-radius:13px;padding:12px 14px;margin:9px 0;line-height:1.8}
+
+  .hw-lock{opacity:.55;pointer-events:none;position:relative}
+  .lock-note{background:#ede9fe;border-radius:12px;padding:11px 14px;font-weight:800;color:#6d28d9;text-align:center}
+  .hw-q{border:1.5px solid #e0e7ff;border-radius:14px;padding:13px 15px;margin:11px 0}
+  .hw-q.correct{border-color:#22c55e;background:#f0fdf4}
+  .hw-q.wrong{border-color:#ef4444;background:#fef2f2}
+  .hw-type{display:inline-block;font-size:12px;font-weight:800;border-radius:99px;padding:3px 10px;margin-right:8px}
+  .hw-type.judge{background:#fce7f3;color:#be185d}.hw-type.choice{background:#dbeafe;color:#1d4ed8}
+  .why{background:#fffbeb;border-left:4px solid #f59e0b;border-radius:8px;padding:8px 12px;margin-top:9px;font-size:14.5px;line-height:1.7;display:none}
+  .hw-q.answered .why{display:block}
+  .hw-result{text-align:center;font-weight:900;font-size:17px;margin:12px 0}
+
+  .gesp-list{line-height:2.1;font-size:15.5px}
+  .gesp-list .ok{color:#16a34a;font-weight:800}
+  .gesp-list .pending{color:#9ca3af}
+  .cert{background:linear-gradient(135deg,#fff7d6,#ffe9a8);border:4px double #d97706;border-radius:18px;padding:24px;text-align:center;margin:14px 0}
+  .cert .seal{font-size:54px}
+
+  .hint{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#ea580c;color:#fff;
+    padding:11px 18px;border-radius:14px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:99;
+    max-width:84vw;font-size:14.5px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  .hint.show{opacity:1;transform:translate(-50%,0)}
+  .overlay{position:fixed;inset:0;background:rgba(15,40,40,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:15px}
+  .reward{background:#fff;border-radius:23px;padding:28px 34px;text-align:center;position:relative;animation:pop .45s;max-width:92vw;overflow:hidden}
+  .reward .big{font-size:62px;animation:float 1.6s ease-in-out infinite}
+  .reward h2{margin:8px 0 4px}.reward .sub{color:#555;font-weight:700;font-size:15px;line-height:1.7}
+  .reward .acts{display:flex;gap:11px;justify-content:center;margin-top:17px;flex-wrap:wrap}
+  .cf{position:absolute;top:-14px;width:10px;height:15px;border-radius:3px;animation:fall 2.4s linear forwards;z-index:1}
+
+  @keyframes pop{from{transform:scale(.5);opacity:0}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.5}}
+  @media(max-width:640px){.progress{width:90px}.logo{font-size:18px}.calc-stage{font-size:30px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="logo">🐢 Python 语法学院 · 菜鸟知识点 × GESP 一~四级</div>
+  <div class="stats">
+    <div class="stars">🏅 <span id="starCount">0</span>/39</div>
+    <div class="progress"><div id="progressFill"></div></div>
+    <button class="mini-btn" id="soundBtn" title="音效开关">🔊</button>
+    <button class="mini-btn" id="resetBtn" title="清空进度">🔄</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main>
+  <section id="mapView">
+    <div class="card map-hero">
+      <div class="avatar">🐢</div>
+      <div>
+        <h2>小海龟阿笨的 Python 通关之旅</h2>
+        <p>本站按 <b>菜鸟教程 Python3</b> 的知识点顺序编排，共 <b>39 课</b>，覆盖 <b>GESP 一、二、三、四级</b>。每课都有：<b>趣味故事 → 知识讲解 → 互动小游戏 → 课后作业（2~3 题）</b>。
+        作业和最后的 <b>GESP 一~四级模拟考级</b> 采用 CCF GESP 考级的判断题、选择题风格，每题都有讲解。攒够 39 颗 ⭐ 就去参加模拟考级吧！</p>
+      </div>
+    </div>
+    <div class="map-grid" id="mapGrid"></div>
+    <div class="foot-tip">💡 先玩通小游戏，课后作业才会解锁 · 进度自动保存在浏览器 · 知识点对应菜鸟教程 python3 教程章节</div>
+  </section>
+
+  <section id="lessonView" class="hidden">
+    <button class="back-btn" id="backMap">⬅ 返回课程地图</button>
+    <div id="lessonBody"></div>
+  </section>
+
+  <section id="guideView" class="hidden">
+    <button class="back-btn" id="backMap2">⬅ 返回课程地图</button>
+    <div class="card">
+      <h2 style="margin-top:0">📖 什么是 GESP？</h2>
+      <p style="font-size:15.5px;line-height:1.9">GESP 是 <b>中国计算机学会（CCF）</b>主办的“编程能力等级认证”，Python 方向分 1~8 级，<b>60 分及格</b>。
+      一级考试一般包含 <b>判断题、选择题和编程题</b>（具体题型与分值以当期官方公告为准）。本站内容覆盖 <b>GESP 一至四级</b>：一级基础语法，二级分支循环嵌套与 ASCII，三级进制、补码与枚举模拟，四级函数、排序与文件异常，跟着学就能逐级挑战！</p>
+    </div>
+    <div class="card">
+      <h2 style="margin-top:0">🎯 Python 一~四级考纲 × 本站课程</h2>
+      <div class="gesp-list" id="gespChecklist"></div>
+    </div>
+    <div class="card">
+      <h2 style="margin-top:0">📝 考级小技巧</h2>
+      <p style="font-size:15.5px;line-height:1.9">
+      ① <b>看清符号</b>：一个 <code class="ic">=</code> 是赋值，两个 <code class="ic">==</code> 才是比较相等；整除 <code class="ic">//</code>、取余 <code class="ic">%</code>、幂 <code class="ic">**</code> 是必考符号。<br>
+      ② <b>读代码要动手</b>：在草稿纸上一行行写下变量的值，循环题就数圈数。<br>
+      ③ <b>input 是字符串</b>：要算数先 <code class="ic">int()</code> 转换。<br>
+      ④ <b>缩进和冒号</b>：if / for / while / def 行尾都要有冒号 <code class="ic">:</code>，下一行缩进。</p>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ================= 基础工具 ================= */
+function mk(tag, cls, html){ var d = document.createElement(tag); if(cls) d.className = cls; if(html != null) d.innerHTML = html; return d; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+function para(t){ return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>'); }
+
+/* 代码高亮：纯文本 -> 安全 HTML */
+function hi(src){
+  return String(src).split('\n').map(function(line){
+    if(/^\s*#/.test(line)) return '<span class="c">'+esc(line)+'</span>';
+    var s = esc(line), toks = [];
+    s = s.replace(/(".*?"|'.*?')/g, function(m){ toks.push(m); return '\u0001'; });
+    s = s.replace(/\b(if|elif|else|for|while|in|def|return|import|from|break|continue|pass|not|and|or|is)\b/g,'<span class="k">$1</span>');
+    s = s.replace(/\b(print|input|range|len|int|float|str|bool|type|append|pop|randint|choice|sleep|forward|right|left|penup|pendown|circle|True|False|None|random|turtle|time)\b/g,'<span class="f">$1</span>');
+    s = s.replace(/\b\d+(\.\d+)?\b/g,'<span class="n">$&</span>');
+    s = s.replace(/\u0001/g, function(){ return '<span class="s">'+toks.shift()+'</span>'; });
+    return s;
+  }).join('\n');
+}
+function codeBlock(txt){ var p = mk('pre','code'); p.innerHTML = hi(txt); return p; }
+function outBlock(txt){ return mk('div','out', esc(txt)); }
+
+/* ================= 音效 ================= */
+var AC = null;
+function tone(kind){
+  if(!state.sound) return;
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    var seqs = { ok:[660,880], no:[180], click:[520], pop:[700], win:[523,659,784,1047] };
+    (seqs[kind]||[440]).forEach(function(f,i){
+      var o=AC.createOscillator(), g=AC.createGain();
+      o.type = kind==='no'?'sawtooth':'sine'; o.frequency.value=f;
+      var t0=AC.currentTime+i*0.12;
+      g.gain.setValueAtTime(0.12,t0); g.gain.exponentialRampToValueAtTime(0.001,t0+0.22);
+      o.connect(g); g.connect(AC.destination); o.start(t0); o.stop(t0+0.24);
+    });
+  }catch(e){}
+}
+
+/* ================= 存档 ================= */
+var KEY = 'pyAcademyGespV1';
+var state = { prog:{}, sound:true };
+try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s){ state.prog=s.prog||{}; state.sound=s.sound!==false; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function pGet(id,k){ return state.prog[id] && state.prog[id][k]; }
+function pSet(id,k,v){ state.prog[id]=state.prog[id]||{}; state.prog[id][k]=v; save(); }
+
+/* ================= 提示条 ================= */
+var toastEl=null;
+function hint(msg){
+  if(!toastEl){ toastEl=mk('div','hint'); document.body.appendChild(toastEl); }
+  toastEl.textContent=msg; toastEl.classList.add('show');
+  clearTimeout(toastEl._t); toastEl._t=setTimeout(function(){ toastEl.classList.remove('show'); },2800);
+}
+
+/* ============================================================
+   互动小游戏引擎
+============================================================ */
+
+/* 1. print 魔法广播站 */
+function gPrint(box, win){
+  var phrases=['Hello, World!','我学会 Python 啦！','GESP 考级加油！'];
+  var idx=0;
+  var task=mk('div','task'), screen=mk('div','tv','📺 等待施法…'), opts=mk('div','opts');
+  box.append(task,screen,opts);
+  function round(){
+    var p=phrases[idx];
+    task.innerHTML='任务 '+(idx+1)+'/3：让大屏幕出现 <b>'+esc(p)+'</b>，选出正确咒语！';
+    screen.innerHTML='📺 等待施法…'; opts.innerHTML='';
+    var right='print("'+p+'")';
+    shuffle([right,'Print("'+p+'")','print('+p+')']).forEach(function(code){
+      var b=mk('button','opt code-opt',esc(code));
+      b.onclick=function(){
+        if(code===right){
+          tone('ok'); b.classList.add('good');
+          screen.innerHTML='<div class="tv-on">✨ '+esc(p)+'</div>'; opts.innerHTML='';
+          idx++; if(idx>=3) setTimeout(win,900); else setTimeout(round,1300);
+        }else{
+          tone('no'); b.classList.add('bad');
+          hint(code.indexOf('Print')===0?'魔法词必须全小写 print！':'说的话要穿上英文引号 " " ！');
+          setTimeout(function(){ b.classList.remove('bad'); },550);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 2. 给代码排座位（缩进） */
+function gIndent(box, win){
+  var snippets=[
+    {lines:[['if 下雨:',0],['print("带伞")',1],['print("出门")',0]]},
+    {lines:[['for i in range(3):',0],['print(i)',1],['print("结束")',0]]},
+    {lines:[['age = 9',0],['if age >= 7:',0],['print("上学")',1],['if age == 9:',1],['print("四年级")',2]]}
+  ];
+  var si=0;
+  var task=mk('div','task'), stage=mk('div'), bar=mk('div','io');
+  box.append(task,stage,bar);
+  function round(){
+    var sp=snippets[si], lv=sp.lines.map(function(){ return 0; });
+    task.innerHTML='任务 '+(si+1)+'/3：代码小朋友坐错位置了！点 − / + 调整每行前面的缩进（虚线格），再运行检查。';
+    stage.innerHTML=''; bar.innerHTML='';
+    sp.lines.forEach(function(ln,row){
+      var r=mk('div','indent-row');
+      var minus=mk('button',null,'−'), plus=mk('button',null,'+'), txt=mk('span','indent-line');
+      function draw(){
+        var m=''; for(var k=0;k<lv[row];k++) m+='<span class="indent-mark"></span>';
+        txt.innerHTML=m+esc(ln[0]);
+      }
+      minus.onclick=function(){ if(lv[row]>0){lv[row]--;tone('click');draw();} };
+      plus.onclick=function(){ if(lv[row]<2){lv[row]++;tone('click');draw();} };
+      r.append(minus,plus,txt); draw(); stage.appendChild(r);
+    });
+    var run=mk('button','btn','▶ 运行检查');
+    bar.appendChild(run);
+    run.onclick=function(){
+      var ok=sp.lines.every(function(ln,i){ return lv[i]===ln[1]; });
+      if(ok){
+        tone('ok'); run.disabled=true; run.textContent='✔ 缩进正确！';
+        si++; if(si>=3) setTimeout(win,1000); else setTimeout(round,1500);
+      }else{
+        tone('no');
+        hint('记住：冒号 : 下面“属于它”的代码要缩进一格；不属于它的就顶格！');
+      }
+    };
+  }
+  round();
+}
+
+/* 3. 魔法盒子（变量） */
+function gVar(box, win){
+  var rounds=[
+    {box:'age', emo:'8️⃣', item:'数字 8', code:'<span class="v">age</span> = <span class="n">8</span>', q:'print(age) 会输出什么？', opts:['8','age','盒子'], a:0},
+    {box:'name', emo:'🐢', item:'名字“阿笨”', code:'<span class="v">name</span> = <span class="s">"阿笨"</span>', q:'print(name) 会输出什么？', opts:['阿笨','name','"name"'], a:0},
+    {box:'n', emo:'🔄', item:'数字先 3 后 5', code:'<span class="v">n</span> = <span class="n">3</span><br><span class="v">n</span> = <span class="n">5</span>', q:'print(n) 会输出什么？', opts:['3','5','35'], a:1}
+  ];
+  var ri=0,placed=false;
+  var task=mk('div','task'), stage=mk('div','var-stage'),
+      code=mk('pre','code','<span class="c"># 还没有东西被放进去</span>'), quiz=mk('div','opts');
+  box.append(task,stage,code,quiz);
+  function round(){
+    var r=rounds[ri]; placed=false;
+    task.innerHTML='魔法盒子 '+(ri+1)+'/3：把 '+r.emo+' <b>'+r.item+'</b> 放进贴着 <b>'+r.box+'</b> 标签的盒子！';
+    stage.innerHTML='<div class="item-fly" id="varItem">'+r.emo+'</div><div class="magic-box">📦<span>'+r.box+'</span></div>';
+    code.innerHTML='<span class="c"># 还没有东西被放进去</span>'; quiz.innerHTML='';
+    var put=mk('button','btn','把 '+r.item+' 放进去 ✋');
+    stage.appendChild(put);
+    put.onclick=function(){
+      if(placed) return; placed=true; tone('pop'); put.remove();
+      document.getElementById('varItem').classList.add('into');
+      setTimeout(function(){
+        code.innerHTML=r.code+'  <span class="c">← 放进去啦！</span>';
+        quiz.appendChild(mk('div','qline', r.q));
+        shuffle(r.opts.map(function(t,i){ return {t:t,ok:i===r.a}; })).forEach(function(o){
+          var b=mk('button','opt',esc(o.t));
+          b.onclick=function(){
+            if(o.ok){ tone('ok'); b.classList.add('good'); ri++; if(ri>=3) setTimeout(win,900); else setTimeout(round,1200); }
+            else{ tone('no'); b.classList.add('bad'); hint('喊盒子的名字，跳出来的是里面装的东西；重新赋值后，旧东西会被替换！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+          };
+          quiz.appendChild(b);
+        });
+      },600);
+    };
+  }
+  round();
+}
+
+/* 4. 数据类型分拣机 */
+function gSort(box, win){
+  var pool=[
+    {v:'7',k:0},{v:'3.14',k:1},{v:'"你好"',k:2},{v:'True',k:3},
+    {v:'-5',k:0},{v:'"9"',k:2},{v:'0.5',k:1},{v:'False',k:3}
+  ];
+  var items=shuffle(pool).slice(0,6), ii=0;
+  var names=['🧮 整数 int','🍰 小数 float','💬 字符串 str','🔘 布尔 bool'];
+  var task=mk('div','task'), stage=mk('div','sort-stage'),
+      val=mk('div','sort-value'), baskets=mk('div','baskets'), dots=mk('div','progress-dots');
+  for(var d=0; d<6; d++) dots.appendChild(mk('span','dot'));
+  stage.append(val,baskets); box.append(task,stage,dots);
+  function round(){
+    if(ii>=6){ win(); return; }
+    task.innerHTML='分拣任务 '+(ii+1)+'/6：这个数据属于哪一种类型？点对应的篮子！';
+    val.textContent=items[ii].v; baskets.innerHTML='';
+    names.forEach(function(n,k){
+      var b=mk('button','basket',n);
+      b.onclick=function(){
+        if(k===items[ii].k){
+          tone('ok'); val.style.color='#16a34a'; dots.children[ii].className='dot on';
+          setTimeout(function(){ val.style.color='#3867d6'; ii++; round(); },450);
+        }else{
+          tone('no'); b.style.borderColor='#ef4444';
+          hint('带引号的是字符串；有小数点的是 float；True/False 是布尔！');
+          setTimeout(function(){ b.style.borderColor=''; },600);
+        }
+      };
+      baskets.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 5. 算术泡泡 */
+function gCalc(box, win){
+  var pool=[
+    {e:'6 + 3 * 2',r:'12',ds:['9','18','15']},
+    {e:'17 // 5',r:'3',ds:['4','2','3.4']},
+    {e:'17 % 5',r:'2',ds:['3','2.4','5']},
+    {e:'2 ** 4',r:'16',ds:['8','6','32']},
+    {e:'(2 + 8) // 3',r:'3',ds:['3.3','10','4']}
+  ];
+  var qs=shuffle(pool), qi=0;
+  var task=mk('div','task'), stage=mk('div','calc-stage'), opts=mk('div','opts');
+  box.append(task,stage,opts);
+  function round(){
+    var q=qs[qi];
+    task.innerHTML='泡泡算术 '+(qi+1)+'/5：选出正确答案！';
+    stage.innerHTML='<span style="font-family:Consolas">'+q.e+'</span><span class="eq">= ?</span>';
+    opts.innerHTML='';
+    shuffle([q.r].concat(q.ds)).forEach(function(t){
+      var b=mk('button','opt big code-opt',esc(t));
+      b.onclick=function(){
+        if(t===q.r){
+          tone('ok'); b.classList.add('good');
+          stage.innerHTML='<span style="font-family:Consolas">'+q.e+'</span><span>= '+q.r+' ✔</span>';
+          opts.innerHTML=''; qi++; if(qi>=5) setTimeout(win,1100); else setTimeout(round,1200);
+        }else{
+          tone('no'); b.classList.add('bad');
+          hint('// 是整除（扔掉余数），% 是取余数，** 是乘方；先乘除后加减，有括号先算括号！');
+          setTimeout(function(){ b.classList.remove('bad'); },500);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 6. 真假大门 */
+function gBool(box, win){
+  var pool=[
+    {e:'3 > 2',r:true},{e:'4 >= 4',r:true},{e:'10 != 10',r:false},
+    {e:'(4 > 3) and (2 > 5)',r:false},{e:'(5 > 1) or (2 > 9)',r:true},{e:'not (1 > 2)',r:true}
+  ];
+  var qs=shuffle(pool).slice(0,5), qi=0;
+  var task=mk('div','task'), expr=mk('div','bool-stage'), opts=mk('div','opts');
+  box.append(task,expr,opts);
+  function round(){
+    var q=qs[qi];
+    task.innerHTML='真假守卫 '+(qi+1)+'/5：这个表达式是真(True)还是假(False)？';
+    expr.textContent=q.e; opts.innerHTML='';
+    [['✅ True',true,'t'],['❌ False',false,'f']].forEach(function(pair){
+      var b=mk('button','opt bool-tf '+pair[2],pair[0]);
+      b.onclick=function(){
+        if(pair[1]===q.r){
+          tone('ok'); b.classList.add('good');
+          expr.innerHTML=esc(q.e)+'  →  <span style="color:'+(q.r?'#16a34a':'#dc2626')+'">'+q.r+'</span>';
+          opts.innerHTML=''; qi++; if(qi>=5) setTimeout(win,1100); else setTimeout(round,1200);
+        }else{
+          tone('no'); b.classList.add('bad');
+          hint('and 要两边都真；or 一边真就真；not 把真假翻过来！');
+          setTimeout(function(){ b.classList.remove('bad'); },500);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 7. 聊天机器人（input / 类型转换） */
+function gChat(box, win){
+  var steps=[
+    {q:'你叫什么名字？', code:'<span class="v">name</span> = <span class="f">input</span>(<span class="s">"你叫什么名字？"</span>)<br><span class="f">print</span>(<span class="s">"你好，"</span> + <span class="v">name</span>)',
+      num:false, reply:function(v){ return '你好，'+v; }},
+    {q:'你最喜欢的食物是什么？', code:'<span class="v">food</span> = <span class="f">input</span>(<span class="s">"你最喜欢的食物是什么？"</span>)<br><span class="f">print</span>(<span class="s">"我也喜欢"</span> + <span class="v">food</span> + <span class="s">"！"</span>)',
+      num:false, reply:function(v){ return '我也喜欢'+v+'！'; }},
+    {q:'你今年几岁？（输入一个数字）', code:'<span class="v">age</span> = <span class="f">int</span>(<span class="f">input</span>(<span class="s">"你今年几岁？"</span>))<br><span class="f">print</span>(<span class="s">"明年你就"</span> + <span class="f">str</span>(<span class="v">age</span> + <span class="n">1</span>) + <span class="s">"岁啦"</span>)',
+      num:true, reply:function(v){ return '明年你就'+(parseInt(v,10)+1)+'岁啦'; }}
+  ];
+  var si=0;
+  var task=mk('div','task'), code=mk('pre','code'), bot=mk('div','bubble'), io=mk('div','io'), out=mk('div');
+  box.append(task,code,bot,io,out);
+  function round(){
+    var s=steps[si];
+    task.textContent='聊天任务 '+(si+1)+'/3：输入你的回答，交给 input()！';
+    code.innerHTML=s.code; bot.innerHTML='🤖 '+s.q; io.innerHTML=''; out.innerHTML='';
+    var inp=mk('input','inp'); inp.placeholder=s.num?'输入数字':'在这里输入…';
+    var btn=mk('button','btn','⏎ 交给 input()');
+    var go=function(){
+      var v=inp.value.trim();
+      if(!v){ hint('先打字，再交给 input() 哦！'); return; }
+      if(s.num && (!/^\d+$/.test(v))){ hint('这题要输入数字，int() 才能转换！'); return; }
+      tone('ok');
+      bot.innerHTML='🤖 收到！input() 把你说的“<b>'+esc(v)+'</b>”存进了变量';
+      out.innerHTML='<div class="out">'+esc(s.reply(v))+'</div>';
+      si++;
+      if(si>=3) setTimeout(win,1500);
+      else{ io.innerHTML=''; var nb=mk('button','btn','继续 →'); nb.onclick=round; io.appendChild(nb); }
+    };
+    btn.onclick=go; inp.onkeydown=function(e){ if(e.key==='Enter') go(); };
+    io.append(inp,btn);
+  }
+  round();
+}
+
+/* 8. 字符串找座位 */
+function gString(box, win){
+  var word='PYTHON';
+  var rounds=[
+    {q:'s[0] 是哪个字符？',r:'P',hl:[0]},
+    {q:'s[3] 是哪个字符？',r:'H',hl:[3]},
+    {q:'s[-1] 是哪个字符？',r:'N',hl:[5]},
+    {q:'s[1:4] 切片取出了什么？',r:'YTH',hl:[1,2,3]}
+  ];
+  var ri=0;
+  var task=mk('div','task'), cells=mk('div','str-cells'), qline=mk('div','qline'), opts=mk('div','opts');
+  box.append(task,cells,qline,opts);
+  function drawCells(hl){
+    cells.innerHTML='';
+    for(var i=0;i<word.length;i++){
+      var c=mk('div','scell'+(hl&&hl.indexOf(i)>=0?' hl':''));
+      c.innerHTML='<b>'+word[i]+'</b><small>'+i+' / '+(i-word.length)+'</small>';
+      cells.appendChild(c);
+    }
+  }
+  function round(){
+    var r=rounds[ri];
+    task.innerHTML='找座位任务 '+(ri+1)+'/4：观察每颗字符的编号（正数从头数，负数从尾数），回答问题！';
+    drawCells([]); qline.textContent=r.q; opts.innerHTML='';
+    var wrongs=shuffle(word.split('').filter(function(x){ return r.r.length===1 && x!==r.r; })).slice(0,2);
+    shuffle([r.r].concat(wrongs).concat(r.r.length>1?['PYT','THON']:[]).filter(function(v,i,a){ return a.indexOf(v)===i; })).forEach(function(t){
+      var b=mk('button','opt code-opt',esc(t));
+      b.onclick=function(){
+        if(t===r.r){
+          tone('ok'); b.classList.add('good'); drawCells(r.hl);
+          opts.innerHTML=''; ri++; if(ri>=4) setTimeout(win,1100); else setTimeout(round,1300);
+        }else{
+          tone('no'); b.classList.add('bad');
+          hint('编号从 0 开始；负数从后往前数；s[1:4] 包含 1、2、3，不包含 4！');
+          setTimeout(function(){ b.classList.remove('bad'); },500);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 9. 列表宝石背包 */
+function gGem(box, win){
+  var gems=[{n:'红宝石',e:'🔴'},{n:'蓝宝石',e:'🔵'},{n:'绿宝石',e:'🟢'}];
+  var bag=[], step=0;
+  var task=mk('div','task'), row=mk('div','gem-row'), bagView=mk('pre','code'), act=mk('div','io');
+  box.append(task,row,bagView,act);
+  function draw(){
+    bagView.innerHTML='<span class="v">bag</span> = ['+bag.map(function(g){ return '<span class="s">"'+g.n+'"</span>'; }).join(', ')+']';
+  }
+  function setTask(){
+    if(step===0) task.innerHTML='任务 1/3：用 <b>append()</b> 把三颗宝石都装进背包！';
+    else if(step===1) task.innerHTML='任务 2/3：列表编号从 <b>0</b> 开始，bag[0] 是哪颗？点一点！';
+    else task.innerHTML='任务 3/3：执行 <b>pop()</b>，看看取出谁！';
+  }
+  draw(); setTask();
+  gems.forEach(function(g){
+    var b=mk('button','gem',g.e+'<span>'+g.n+'</span>'); row.appendChild(b);
+    b.onclick=function(){
+      if(step===0){
+        if(bag.some(function(x){ return x.n===g.n; })) return;
+        bag.push(g); tone('pop'); b.classList.add('used'); draw();
+        if(bag.length===3){ step=1; setTask(); tone('ok'); }
+      }else if(step===1){
+        if(g.n===bag[0].n){
+          tone('ok'); b.classList.add('good'); hint('bag[0] 是第 1 颗“'+g.n+'”，因为编号从 0 开始！');
+          step=2; setTask();
+        }else{ tone('no'); b.classList.add('bad'); hint('从 0 开始数：bag[0] 是最先装进去的那一颗！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      }
+    };
+  });
+  var popBtn=mk('button','btn','执行 bag.pop()'); act.appendChild(popBtn);
+  popBtn.onclick=function(){
+    if(step!==2){ hint('先完成前面的任务哦！'); return; }
+    var last=bag.pop(); tone('pop'); draw();
+    act.innerHTML='<div class="out">pop() 取出了：'+last.n+' '+last.e+'，背包里还剩 '+bag.length+' 颗</div>';
+    setTimeout(win,1600);
+  };
+}
+
+/* 10. 元组电话簿 / 11 字典电话簿 */
+function gDict(box, win){
+  var book=[['皮皮龙','555-0001'],['机器人','555-0002'],['小精灵','555-0003']];
+  var task=mk('div','task'), bookView=mk('div','dict-book'), bubble=mk('div','bubble'), io=mk('div','io'), out=mk('div');
+  box.append(task,bookView,bubble,io,out);
+  var rounds=[
+    {ask:'查一查：皮皮龙的电话号码是多少？',r:'555-0001'},
+    {ask:'再查：小精灵的电话号码是多少？',r:'555-0003'}
+  ], ri=0;
+  function drawBook(extra){
+    bookView.innerHTML='tel = {<br>'+book.map(function(p){ return '&nbsp;&nbsp;<span class="s">"'+p[0]+'"</span>: <span class="s">"'+p[1]+'"</span>'; }).join(',<br>')+(extra||'')+'<br>}';
+  }
+  function round(){
+    drawBook();
+    task.innerHTML='电话簿任务 '+(ri+1)+'/3';
+    if(ri<2){
+      bubble.innerHTML='🤖 '+rounds[ri].ask+'（输入号码，格式 555-0000）';
+      io.innerHTML=''; out.innerHTML='';
+      var inp=mk('input','inp'); inp.placeholder='例如 555-0001';
+      var btn=mk('button','btn','🔍 查 tel["名字"]');
+      var go=function(){
+        if(inp.value.trim()===rounds[ri].r){
+          tone('ok'); out.innerHTML='<div class="out">'+rounds[ri].r+'</div>';
+          ri++; setTimeout(round,1300);
+        }else{ tone('no'); hint('用“名字”这个键，去字典里找对应的值！'); }
+      };
+      btn.onclick=go; inp.onkeydown=function(e){ if(e.key==='Enter') go(); };
+      io.append(inp,btn);
+    }else{
+      bubble.innerHTML='🤖 新朋友“小海龟”号码是 555-0004，点按钮把它加进电话簿！';
+      io.innerHTML=''; out.innerHTML='';
+      var add=mk('button','btn','执行 tel["小海龟"] = "555-0004"');
+      io.appendChild(add);
+      add.onclick=function(){
+        tone('ok');
+        drawBook(',<br>&nbsp;&nbsp;<span class="s">"小海龟"</span>: <span class="s">"555-0004"</span>');
+        out.innerHTML='<div class="out">加好啦！字典又多了一对“键:值”</div>';
+        setTimeout(win,1500);
+      };
+    }
+  }
+  round();
+}
+
+/* 12. 集合去重锅 */
+function gSet(box, win){
+  var rounds=[
+    {items:[3,3,1,2,2,2], q:'去重后锅里还剩几个不同的数字？', opts:['6','3','2'], r:'3'},
+    {items:[5,5,5], q:'全是 5，去重后还剩几个？', opts:['3','1','0'], r:'1'},
+    {expr:true, q:'4 in {1, 2, 3} 的结果是？', opts:['True','False','4'], r:'False'}
+  ];
+  var ri=0;
+  var task=mk('div','task'), pot=mk('div','set-pot','🍲'), items=mk('div','set-items'), qline=mk('div','qline'), opts=mk('div','opts');
+  box.append(task,pot,items,qline,opts);
+  function round(){
+    var r=rounds[ri];
+    task.innerHTML='去重任务 '+(ri+1)+'/3';
+    items.textContent=r.expr?'{1, 2, 3}':r.items.join('  ');
+    qline.textContent=r.q; opts.innerHTML='';
+    shuffle(r.opts).forEach(function(t){
+      var b=mk('button','opt code-opt',esc(t));
+      b.onclick=function(){
+        if(t===r.r){
+          tone('ok'); b.classList.add('good'); opts.innerHTML='';
+          ri++; if(ri>=3) setTimeout(win,900); else setTimeout(round,1200);
+        }else{
+          tone('no'); b.classList.add('bad');
+          hint('集合会自动把重复的东西去掉，相同的只留一个；in 用来判断“在不在里面”。');
+          setTimeout(function(){ b.classList.remove('bad'); },500);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 13. 天气 if */
+function gWeather(box, win){
+  var tasks=[{want:'棉袄',label:'冷飕飕的雪天',emo:'❄️'},{want:'短袖',label:'热辣辣的夏天',emo:'☀️'},{want:'外套',label:'凉飕飕的秋天',emo:'🍂'}];
+  var ti=0;
+  var task=mk('div','task'), code=mk('pre','code');
+  var slider=mk('input','slider'); slider.type='range'; slider.min=-5; slider.max=40; slider.value=rnd(18,28);
+  var tv=mk('div','sv'), mascot=mk('div','mascot'), okBtn=mk('button','btn','确定 ✔');
+  function branch(t){ return t>=30?'短袖':(t>=15?'外套':'棉袄'); }
+  function draw(){
+    var t=+slider.value, b=branch(t);
+    tv.innerHTML='温度：<b>'+t+'℃</b>';
+    code.innerHTML='<span class="k">if</span> 温度 <span class="k">&gt;=</span> <span class="n">30</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;穿短袖 🩳'+(b==='短袖'?'  <span class="c">← 走这条</span>':'')+
+      '<br><span class="k">elif</span> 温度 <span class="k">&gt;=</span> <span class="n">15</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;穿外套 🧥'+(b==='外套'?'  <span class="c">← 走这条</span>':'')+
+      '<br><span class="k">else</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;穿棉袄 🧣'+(b==='棉袄'?'  <span class="c">← 走这条</span>':'');
+    mascot.innerHTML='🐢 <span class="m-wear">'+(b==='短袖'?'🩳':(b==='外套'?'🧥':'🧣'))+'</span>现在穿：'+b;
+  }
+  slider.oninput=draw; draw();
+  function setTask(){ task.innerHTML='任务 '+(ti+1)+'/3：'+tasks[ti].emo+' '+tasks[ti].label+'！拖动滑块让阿笨穿上 <b>'+tasks[ti].want+'</b>，再确定。'; }
+  setTask();
+  okBtn.onclick=function(){
+    var b=branch(+slider.value);
+    if(b===tasks[ti].want){ tone('ok'); ti++; if(ti>=3) setTimeout(win,800); else{ setTask(); hint('任务完成！'); } }
+    else{ tone('no'); hint('看看温度落在哪一段条件里，再拖滑块！'); }
+  };
+  box.append(task,code,slider,tv,mascot,okBtn);
+}
+
+/* 14. while 猜数字 */
+function gGuess(box, win){
+  var secret=rnd(1,10), times=0;
+  var task=mk('div','task','我心里想了一个 1~10 的数，while 会让你一直猜，直到猜中！'),
+      code=mk('pre','code','<span class="k">while</span> 猜测 <span class="k">!=</span> 答案:<br>&nbsp;&nbsp;&nbsp;&nbsp;再猜一次！<br><span class="f">print</span>(<span class="s">"猜中啦！"</span>)'),
+      bubble=mk('div','bubble','🐢 猜猜看是几？'),
+      io=mk('div','io'), counter=mk('div','counter','while 循环次数：0');
+  box.append(task,code,bubble,io,counter);
+  var inp=mk('input','inp'); inp.type='number'; inp.placeholder='输入 1~10';
+  var btn=mk('button','btn','🎯 猜！');
+  var go=function(){
+    var v=parseInt(inp.value,10);
+    if(!(v>=1&&v<=10)){ hint('请输入 1~10 的整数！'); return; }
+    times++; counter.textContent='while 循环次数：'+times; inp.value='';
+    if(v===secret){
+      tone('ok');
+      bubble.innerHTML='🎉 猜中啦！答案是 <b>'+secret+'</b>！while 转了 '+times+' 次后条件不成立，终于停下！';
+      io.innerHTML='<div class="out">猜中啦！</div>';
+      setTimeout(win,1500);
+    }else{
+      tone('no');
+      bubble.innerHTML=v>secret?'🐢 大了！往小猜 ⬇':'🐢 小了！往大猜 ⬆';
+      hint('“猜测 != 答案”还成立，while 继续转！');
+    }
+  };
+  btn.onclick=go; inp.onkeydown=function(e){ if(e.key==='Enter') go(); };
+  io.append(inp,btn);
+}
+
+/* 15. for 烟花 */
+function gFire(box, win){
+  var tasks=[{n:5,label:'5'},{n:3,label:'3'}], ti=0, busy=false;
+  var task=mk('div','task'), code=mk('pre','code');
+  var slider=mk('input','slider'); slider.type='range'; slider.min=0; slider.max=8; slider.value=5;
+  var sv=mk('div','sv'), run=mk('button','btn','▶ 放烟花'), sky=mk('div','sky'), counter=mk('div','counter','i 的值：还没开始');
+  box.append(task,code,slider,sv,run,sky,counter);
+  function draw(){
+    sv.innerHTML='当前 range(<b>'+slider.value+'</b>)';
+    code.innerHTML='<span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="n">'+slider.value+'</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;放一个烟花 🎆';
+  }
+  slider.oninput=draw; draw();
+  task.innerHTML='任务 1/2：让烟花大会放出 <b>5</b> 个烟花！';
+  run.onclick=function(){
+    if(busy) return;
+    busy=true; sky.innerHTML='';
+    var n=+slider.value, i=0;
+    var t=setInterval(function(){
+      if(i>=n){
+        clearInterval(t); busy=false;
+        if(n===tasks[ti].n){
+          tone('ok'); ti++;
+          if(ti>=2) setTimeout(win,800);
+          else{ task.innerHTML='任务 2/2：现在只放 <b>3</b> 个烟花！'; hint('改一改 range 里的数字再来！'); }
+        }else{ tone('no'); hint('刚才放了 '+n+' 个，目标是 '+tasks[ti].label+' 个！'); }
+        return;
+      }
+      var f=mk('span','fire','🎆'); f.style.left=(8+Math.random()*84)+'%'; sky.appendChild(f);
+      counter.textContent='i = '+i+'（第 '+(i+1)+' 次）'; tone('pop'); i++;
+    },420);
+  };
+}
+
+/* 16-18. 场景选择题通用引擎（元组 / break-continue / 函数 / 模块） */
+function gScene(box, win, cfg){
+  var ri=0;
+  var task=mk('div','task'), scene=mk('div','scene'), code=mk('pre','code'), qline=mk('div','qline'), opts=mk('div','opts');
+  if(cfg.intro) box.appendChild(mk('div','task',cfg.intro));
+  box.append(task,scene,code,qline,opts);
+  function round(){
+    var r=cfg.rounds[ri];
+    task.textContent=cfg.title+'：第 '+(ri+1)+'/'+cfg.rounds.length+' 题';
+    scene.innerHTML=r.scene; code.innerHTML=hi(r.code); qline.textContent=r.q; opts.innerHTML='';
+    shuffle(r.opts).forEach(function(o){
+      var b=mk('button','opt'+(o.code!==false?' code-opt':''),esc(o.t));
+      b.onclick=function(){
+        if(o.ok){
+          tone('ok'); b.classList.add('good'); opts.innerHTML='';
+          if(o.why) hint(o.why);
+          ri++; if(ri>=cfg.rounds.length) setTimeout(win,1000); else setTimeout(round,1500);
+        }else{
+          tone('no'); b.classList.add('bad'); hint(o.why||r.tip||cfg.tip||'再想想！');
+          setTimeout(function(){ b.classList.remove('bad'); },550);
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 19. 小海龟网格 */
+function gTurtle(box, win){
+  var rounds=[
+    {cmds:[['F',2]], q:'小海龟最后停在哪里？', opts:['出发点东边 2 格','出发点西边 2 格','出发点原地'], r:0},
+    {cmds:[['F',1],['R',1],['F',1]], q:'右转后再前进，小海龟停在哪里？', opts:['出发点东南方向（东1南1）','出发点东北方向','出发点东边 2 格'], r:0},
+    {cmds:[['F',1],['R',1],['F',1],['R',1],['F',1],['R',1],['F',1]], q:'小海龟画出了什么形状？', opts:['正方形','三角形','一条直线'], r:0}
+  ];
+  var ri=0;
+  var task=mk('div','task'), grid=mk('div','turtle-grid'), qline=mk('div','qline'), opts=mk('div','opts'), bar=mk('div','io');
+  box.append(task,grid,qline,opts,bar);
+  var SIZE=7, C=3;
+  function render(px,py,dir,pathSet){
+    grid.innerHTML='';
+    for(var y=0;y<SIZE;y++) for(var x=0;x<SIZE;x++){
+      var cell=mk('div','tg'+(pathSet[x+','+y]?' path':'')+((x===px&&y===py)?' t':''));
+      if(x===px&&y===py){ cell.textContent=['➡️','⬇️','⬅️','⬆️'][dir]; }
+      grid.appendChild(cell);
+    }
+  }
+  function round(){
+    var r=rounds[ri];
+    task.textContent='海龟任务 '+(ri+1)+'/3：点“▶ 运行”，看小海龟怎么走，再回答问题！';
+    qline.textContent=''; opts.innerHTML=''; bar.innerHTML='';
+    var x=C,y=C,dir=0,path={}; path[x+','+y]=1;
+    render(x,y,dir,path);
+    var run=mk('button','btn','▶ 运行'); bar.appendChild(run);
+    run.onclick=function(){
+      run.disabled=true;
+      var flat=[];
+      r.cmds.forEach(function(c){ for(var k=0;k<c[1];k++) flat.push(c[0]); });
+      var step=0;
+      var t=setInterval(function(){
+        var cmd=flat[step];
+        if(cmd==='R') dir=(dir+1)%4;
+        else if(cmd==='L') dir=(dir+3)%4;
+        else{
+          if(dir===0)x++; else if(dir===1)y++; else if(dir===2)x--; else y--;
+          path[x+','+y]=1;
+        }
+        tone('pop'); render(x,y,dir,path); step++;
+        if(step>=flat.length){
+          clearInterval(t);
+          qline.textContent=r.q;
+          r.opts.forEach(function(o,i){
+            var b=mk('button','opt',o);
+            b.onclick=function(){
+              if(i===r.r){ tone('ok'); b.classList.add('good'); opts.innerHTML=''; ri++; if(ri>=3) setTimeout(win,900); else setTimeout(round,1300); }
+              else{ tone('no'); b.classList.add('bad'); hint('right 是向右转 90°；前进只改变位置，不改变朝向！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+            };
+            opts.appendChild(b);
+          });
+        }
+      },480);
+    };
+  }
+  round();
+}
+
+/* ============================================================
+   二~四级互动小游戏（第 20~39 课）
+============================================================ */
+
+/* 21. 九九乘法墙：点亮交叉格 */
+function gMulTable(box, win){
+  var rounds=[{i:3,j:4},{i:6,j:7},{i:9,j:8}], ri=0;
+  var task=mk('div','task'), wall=mk('div'), hint2=mk('div','counter');
+  wall.style.display='grid'; wall.style.gridTemplateColumns='repeat(10,1fr)'; wall.style.gap='3px'; wall.style.maxWidth='560px'; wall.style.margin='10px auto';
+  box.append(task,wall,hint2);
+  function round(){
+    var r=rounds[ri];
+    task.innerHTML='乘法墙任务 '+(ri+1)+'/3：第 <b>'+r.i+'</b> 行和第 <b>'+r.j+'</b> 列交叉的格子，就是 '+r.i+' × '+r.j+'！点亮它（点正确的格子）';
+    wall.innerHTML='';
+    var corner=mk('div','tg'); corner.textContent='×'; corner.style.background='#334155'; corner.style.color='#fff'; corner.style.fontWeight='900'; wall.appendChild(corner);
+    for(var j=1;j<=9;j++){ var h=mk('div','tg'); h.textContent=j; h.style.background='#dbeafe'; h.style.fontWeight='800'; h.style.fontSize='12px'; wall.appendChild(h); }
+    for(var i=1;i<=9;i++){
+      var rh=mk('div','tg'); rh.textContent=i; rh.style.background='#dbeafe'; rh.style.fontWeight='800'; rh.style.fontSize='12px'; wall.appendChild(rh);
+      for(var jj=1;jj<=9;jj++){
+        (function(ii,jj){
+          var cell=mk('div','tg'); cell.textContent=ii*jj; cell.style.fontSize='11px'; cell.style.cursor='pointer';
+          if(ii===r.i) cell.style.background='#fef9c3';
+          if(jj===r.j) cell.style.background='#fef9c3';
+          if(ii===r.i && jj===r.j) cell.style.background='#fde68a';
+          cell.onclick=function(){
+            if(ii===r.i && jj===r.j){
+              tone('ok'); cell.style.background='#22c55e'; cell.style.color='#fff'; cell.textContent=r.i+'×'+r.j;
+              hint2.innerHTML='✔ '+r.i+' × '+r.j+' = '+(r.i*r.j);
+              ri++; if(ri>=3) setTimeout(win,1000); else setTimeout(round,1300);
+            }else{
+              tone('no'); cell.style.background='#fecaca';
+              hint('先找到左边的行号 '+r.i+'，再找到上面的列号 '+r.j+'，交叉格才是答案！');
+              setTimeout(function(){ cell.style.background=''; },600);
+            }
+          };
+          wall.appendChild(cell);
+        })(i,jj);
+      }
+    }
+  }
+  round();
+}
+
+/* 22. ASCII 密码尺 */
+function gAscii(box, win){
+  var rounds=[{c:'A',sh:2,r:'C'},{c:'D',sh:3,r:'G'},{c:'Y',sh:1,r:'Z'}], ri=0;
+  var task=mk('div','task'), ruler=mk('div','str-cells'), qline=mk('div','qline'), code=mk('pre','code'), opts=mk('div','opts');
+  box.append(task,ruler,qline,code,opts);
+  function round(){
+    var r=rounds[ri];
+    task.innerHTML='密码尺任务 '+(ri+1)+'/3：每个字母都有一个 ASCII 编号（A=65）。把字母往后移 '+r.sh+' 位，会变成谁？';
+    ruler.innerHTML='';
+    for(var i=0;i<26;i++){
+      var ch=String.fromCharCode(65+i);
+      var cell=mk('div','scell'+(ch===r.c||ch===r.r?' hl':''));
+      cell.innerHTML='<b>'+ch+'</b><small>'+(65+i)+'</small>';
+      ruler.appendChild(cell);
+    }
+    qline.innerHTML='把 <b>'+r.c+'</b> 往后移 '+r.sh+' 位 → ？';
+    code.innerHTML='<span class="v">新编号</span> = <span class="f">ord</span>(<span class="s">"'+r.c+'"</span>) + <span class="n">'+r.sh+'</span>   <span class="c"># 65 加 '+r.sh+'</span><br><span class="f">chr</span>(新编号)';
+    opts.innerHTML='';
+    var wrongs=shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(function(x){ return x!==r.r; })).slice(0,3);
+    shuffle([r.r].concat(wrongs)).forEach(function(t){
+      var b=mk('button','opt big',t);
+      b.onclick=function(){
+        if(t===r.r){ tone('ok'); b.classList.add('good'); opts.innerHTML=''; ri++; if(ri>=3) setTimeout(win,900); else setTimeout(round,1300); }
+        else{ tone('no'); b.classList.add('bad'); hint('在尺子上从 '+r.c+' 开始往后数 '+r.sh+' 格！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 24. 流程图连连看 */
+function gFlowchart(box, win){
+  var rounds=[
+    {q:'下面这个流程图是哪一种程序结构？', want:0,
+     chart:'<div style="text-align:center;font-family:Consolas,monospace;line-height:1.4">┌─────────┐<br>│ 开始　　│<br>└────┬────┘<br>┌────┴────┐<br>│ 第1步　 │<br>└────┬────┘<br>┌────┴────┐<br>│ 第2步　 │<br>└────┬────┘<br>　　▼ 结束</div>',
+     opts:['顺序结构','分支结构','循环结构']},
+    {q:'菱形的“是/否”两条岔路，是哪一种结构？', want:1,
+     chart:'<div style="text-align:center;font-family:Consolas,monospace;line-height:1.4">　　　◇ 下雨了吗？<br>　是 ╱　　　╲ 否<br>▼　　　　　▼<br>带伞　　　戴帽</div>',
+     opts:['顺序结构','分支结构','循环结构']},
+    {q:'箭头绕回菱形、反复判断的是哪一种结构？', want:2,
+     chart:'<div style="text-align:center;font-family:Consolas,monospace;line-height:1.4">　　　◇ 还没写完？<br>　是 ╱　　　╲ 否<br>▼ 再写一个字　│<br>└──────────┘<br>　　　　　　　▼ 交作业</div>',
+     opts:['顺序结构','分支结构','循环结构']}
+  ];
+  var ri=0;
+  var task=mk('div','task'), chartBox=mk('div','scene'), opts=mk('div','opts');
+  box.append(task,chartBox,opts);
+  function round(){
+    var r=rounds[ri];
+    task.textContent='流程图任务 '+(ri+1)+'/3：认一认下面的流程图！';
+    chartBox.innerHTML=r.chart; opts.innerHTML='';
+    r.opts.forEach(function(t,i){
+      var b=mk('button','opt',t);
+      b.onclick=function(){
+        if(i===r.want){ tone('ok'); b.classList.add('good'); opts.innerHTML=''; ri++; if(ri>=3) setTimeout(win,900); else setTimeout(round,1300); }
+        else{ tone('no'); b.classList.add('bad'); hint('矩形=处理步骤，菱形=判断；有岔路是分支，箭头绕圈是循环！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      opts.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 27. 字符串魔法台 */
+function gStrMethods(box, win){
+  var s0='  Hello Python  ';
+  var steps=[
+    {want:'HELLO PYTHON', tip:'全部变成大写（两头还有空格）', btn:'upper'},
+    {want:'Hello Python', tip:'去掉字符串两头的空格', btn:'strip'},
+    {want:'你好 Python', tip:'把 Hello 替换成 你好（在“去掉空格”的基础上）', btn:'replace'}
+  ];
+  var si=0, cur=s0;
+  var task=mk('div','task'), code=mk('pre','code'), screen=mk('div','out'), bar=mk('div','opts');
+  var btns=[['upper','大写'],['lower','小写'],['strip','去空格'],['replace','替换'],['split','切开'],['len','数字数']];
+  box.append(task,code,screen,bar);
+  function draw(){
+    task.innerHTML='魔法台任务 '+(si+1)+'/3：'+steps[si].tip+'<br>当前句子：<code class="ic">'+esc(cur===''?'（空）':cur)+'</code>';
+    screen.textContent='';
+    code.innerHTML='<span class="v">s</span> = <span class="s">"'+esc(cur)+'"</span>';
+    bar.innerHTML='';
+    btns.forEach(function(pair){
+      var b=mk('button','opt code-opt',pair[1]+'<small style="display:block;font-family:Microsoft YaHei">.'+pair[0]+'()</small>');
+      b.onclick=function(){
+        var v, label;
+        if(pair[0]==='upper'){ v=cur.toUpperCase(); label=v; }
+        else if(pair[0]==='lower'){ v=cur.toLowerCase(); label=v; }
+        else if(pair[0]==='strip'){ v=cur.replace(/^\s+|\s+$/g,''); label=v; }
+        else if(pair[0]==='replace'){ v=cur.replace(/Hello/g,'你好'); label=v; }
+        else if(pair[0]==='split'){ label='["'+cur.trim().split(/\s+/).join('", "')+'"]（列表）'; v=cur; }
+        else { label='长度 '+cur.length; v=cur; }
+        screen.textContent='>>> '+label;
+        if(pair[0]==='upper'||pair[0]==='strip'||pair[0]==='replace') cur=v;
+        if(pair[0]===steps[si].btn){
+          var ok = (steps[si].btn==='upper' && cur===steps[si].want) ||
+                   (steps[si].btn==='strip' && cur===steps[si].want) ||
+                   (steps[si].btn==='replace' && cur===steps[si].want);
+          if(ok){
+            tone('ok'); si++;
+            if(si>=3) setTimeout(win,1200); else { setTimeout(draw,700); }
+          }
+        }else{
+          tone('click');
+        }
+      };
+      bar.appendChild(b);
+    });
+  }
+  draw();
+}
+
+/* 28. 排序小火车（相邻交换） */
+function gListTrain(box, win){
+  var puzzles=[[5,2,7,1],[9,4,6,3]], pi=0;
+  var task=mk('div','task'), row=mk('div','gem-row'), bar=mk('div','io'), note=mk('div','counter');
+  box.append(task,row,bar,note);
+  function round(){
+    var arr=puzzles[pi].slice();
+    var target=arr.slice().sort(function(a,b){return a-b;}).join(',');
+    task.innerHTML='小火车任务 '+(pi+1)+'/2：车厢顺序乱了！<b>点击两节相邻车厢</b>交换位置，把数字从小到大排好。';
+    note.textContent='目标：'+target;
+    row.innerHTML=''; bar.innerHTML='';
+    var cars=[];
+    arr.forEach(function(v,idx){
+      var c=mk('button','gem','🚃<span>'+v+'</span>');
+      c.dataset.v=v;
+      c.onclick=function(){
+        cars.push(c);
+        c.style.borderColor='#f59e0b';
+        if(cars.length===2){
+          var a=cars[0], b=cars[1];
+          if(a===b){ a.style.borderColor=''; cars=[]; return; }
+          var all=[...row.children];
+          var ia=all.indexOf(a), ib=all.indexOf(b);
+          if(Math.abs(ia-ib)!==1){ tone('no'); hint('只能交换相邻的两节车厢！'); a.style.borderColor=''; b.style.borderColor=''; cars=[]; return; }
+          tone('pop');
+          if(ia<ib) row.insertBefore(b,a); else row.insertBefore(a,b);
+          a.style.borderColor=''; b.style.borderColor=''; cars=[];
+          var now=[...row.querySelectorAll('.gem span')].map(function(x){return x.textContent;}).join(',');
+          if(now===target){
+            tone('ok'); note.innerHTML='🎉 排好啦：'+now;
+            pi++; if(pi>=2) setTimeout(win,1100); else setTimeout(round,1600);
+          }
+        }
+      };
+      row.appendChild(c);
+    });
+  }
+  round();
+}
+
+/* 29. 水果店记账（字典统计） */
+function gDictCount(box, win){
+  var fruits=[['🍎','苹果'],['🍌','香蕉'],['🍇','葡萄']];
+  var seq=['🍎','🍌','🍎','🍎','🍇','🍌','🍎'];
+  var counts={'🍎':0,'🍌':0,'🍇':0};
+  var task=mk('div','task'), seqBox=mk('div','bubble'), row=mk('div','gem-row'), bar=mk('div','io'), out=mk('div');
+  box.append(task,seqBox,row,bar,out);
+  task.innerHTML='水果店任务：水果一批到货（'+seq.join(' ')+'）。点 + 号记账，把每种水果的数量数对，再点检查！';
+  seqBox.textContent='到货：'+seq.join('  ');
+  var counters={};
+  fruits.forEach(function(f){
+    var g=mk('div','gem',''+f[0]+'<span>'+f[1]+' × <b data-f="'+f[0]+'">0</b></span>');
+    var plus=mk('button','btn ghost','+1');
+    plus.style.padding='4px 12px';
+    plus.onclick=function(){
+      counts[f[0]]++; tone('pop');
+      g.querySelector('b').textContent=counts[f[0]];
+    };
+    var wrap=mk('div'); wrap.style.textAlign='center'; wrap.append(g, mk('br'), plus);
+    row.appendChild(wrap); counters[f[0]]=g;
+  });
+  var check=mk('button','btn','✅ 检查账本');
+  bar.appendChild(check);
+  check.onclick=function(){
+    var truth={}; seq.forEach(function(f){ truth[f]=(truth[f]||0)+1; });
+    var ok=fruits.every(function(f){ return counts[f[0]]===truth[f[0]]; });
+    if(ok){
+      tone('ok');
+      out.innerHTML='<div class="out">fruits = {"🍎": 4, "🍌": 2, "🍇": 1}　记账正确！</div>';
+      check.disabled=true; setTimeout(win,1500);
+    }else{
+      tone('no'); hint('数错啦！一个一个点着数，每种水果出现几次就点几次 +1。');
+    }
+  };
+}
+
+/* 25. 进制转换器 */
+function gBaseConv(box, win){
+  var steps=[{n:10,btn:'bin',r:'0b1010'},{n:8,btn:'oct',r:'0o10'},{n:255,btn:'hex',r:'0xff'}], si=0;
+  var task=mk('div','task'), code=mk('pre','code'), disp=mk('div','sort-value','10'), bar=mk('div','opts'), out=mk('div'), quiz=mk('div','opts');
+  box.append(task,code,disp,bar,out,quiz);
+  function round(){
+    var s=steps[si];
+    task.innerHTML='转换任务 '+(si+1)+'/3：把十进制数 <b>'+s.n+'</b> 转换成对应的进制！';
+    disp.textContent=s.n; out.innerHTML=''; quiz.innerHTML='';
+    code.innerHTML='<span class="v">n</span> = <span class="n">'+s.n+'</span>';
+    bar.innerHTML='';
+    [['bin','二进制 0b'],['oct','八进制 0o'],['hex','十六进制 0x']].forEach(function(p){
+      var b=mk('button','opt code-opt',p[1]+'<small style="display:block;font-family:Microsoft YaHei">.'+p[0]+'()</small>');
+      b.onclick=function(){
+        var v={bin:'0b'+s.n.toString(2),oct:'0o'+s.n.toString(8),hex:'0x'+s.n.toString(16)}[p[0]];
+        if(p[0]===s.btn){
+          tone('ok'); b.classList.add('good');
+          out.innerHTML='<div class="out">'+v+'</div>';
+          si++; if(si>=3){ quizQ(); } else setTimeout(round,1600);
+        }else{
+          tone('no'); b.classList.add('bad');
+          out.innerHTML='<div class="out">'+v+'（这不是题目要的进制哦）</div>';
+          setTimeout(function(){ b.classList.remove('bad'); },500);
+        }
+      };
+      bar.appendChild(b);
+    });
+  }
+  function quizQ(){
+    task.innerHTML='加试题：int("1010", 2) 是把二进制 1010 转回十进制，结果是？';
+    code.innerHTML='<span class="f">int</span>(<span class="s">"1010"</span>, <span class="n">2</span>)';
+    quiz.innerHTML='';
+    ['10','8','1010'].forEach(function(t,i){
+      var b=mk('button','opt code-opt',t);
+      b.onclick=function(){
+        if(i===0){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); hint('1×8+0×4+1×2+0×1 = 10！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      quiz.appendChild(b);
+    });
+  }
+  round();
+}
+
+/* 30. 鸡兔同笼枚举机 */
+function gEnum(box, win){
+  var H=8, L=22, h=0;
+  var task=mk('div','task','鸡兔同笼：头共 8 个，腿共 22 条。点“试下一组”，让电脑一只一只枚举！'),
+      code=mk('pre','code'), board=mk('div','scene'), bar=mk('div','io'), result=mk('div');
+  code.innerHTML='<span class="k">for</span> 鸡 <span class="k">in</span> <span class="f">range</span>(头数 + <span class="n">1</span>):<br>&nbsp;&nbsp;&nbsp;&nbsp;兔 = 头数 - 鸡<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> 鸡×2 + 兔×4 == 腿数: 找到啦！';
+  var btn=mk('button','btn','🔍 试下一组');
+  bar.appendChild(btn);
+  box.append(task,code,board,bar,result);
+  function draw(found){
+    var rabbit=H-h, legs=h*2+rabbit*4;
+    board.innerHTML='🐔 鸡 = <b>'+h+'</b> 只　🐰 兔 = <b>'+rabbit+'</b> 只<br>腿数：'+h+'×2 + '+rabbit+'×4 = <b>'+legs+'</b> 条'+
+      (found?'　🎉 正好 22！':(legs<L?'（还差 '+(L-legs)+' 条腿）':'（多了 '+(legs-L)+' 条腿）'));
+  }
+  draw(false);
+  btn.onclick=function(){
+    var rabbit=H-h, legs=h*2+rabbit*4;
+    if(legs===L){
+      tone('ok');
+      result.innerHTML='<div class="out">答案：鸡 '+h+' 只，兔 '+rabbit+' 只！枚举成功。</div>';
+      btn.disabled=true;
+      quiz();
+      return;
+    }
+    tone('click'); h++; if(h>H){ hint('全都试过了？再想想题目数据。'); h=0; } draw(false);
+  };
+  function quiz(){
+    var q=mk('div','qline','考考你：如果头 8 个、腿 26 条，鸡兔各几只？');
+    var oo=mk('div','opts');
+    [['鸡3兔5',true],['鸡5兔3'],['鸡4兔4']].forEach(function(o){
+      var b=mk('button','opt',o[0]);
+      b.onclick=function(){
+        if(o[1]){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); hint('验证：3×2+5×4=6+20=26！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      oo.appendChild(b);
+    });
+    result.append(q,oo);
+  }
+}
+
+/* 31. 模拟法：报数出圈 */
+function gSim(box, win){
+  var kids=[1,2,3,4,5,6], order=[], started=false;
+  var task=mk('div','task','6 个小朋友围成圈报数，数到 3 的人出列。点“下一拍”，一步步模拟！'),
+      circle=mk('div','bubble'), bar=mk('div','io'), out=mk('div');
+  var btn=mk('button','btn','▶ 下一拍');
+  bar.appendChild(btn);
+  box.append(task,circle,bar,out);
+  var arr=kids.slice(), idx=0, count=0;
+  function draw(){
+    circle.innerHTML='圈里：'+(arr.length?arr.map(function(n){ return '🧒'+n; }).join('　'):'（空了）')+
+      '<br>出列顺序：'+(order.length?order.map(function(n){return '🧒'+n;}).join(' → '):'（还没有人出列）');
+  }
+  draw();
+  btn.onclick=function(){
+    if(arr.length===1){ quiz(); return; }
+    count++;
+    tone('pop');
+    var n=arr[idx];
+    circle.innerHTML+='<br>报数：🧒'+n+' 喊 “'+count+'”';
+    if(count===3){
+      arr.splice(idx,1); order.push(n); count=0;
+      if(arr.length===1){ order.push(arr[0]); arr=[]; draw(); setTimeout(quiz,400); return; }
+      idx=idx%arr.length;
+    }else{
+      idx=(idx+1)%arr.length;
+    }
+    draw();
+  };
+  function quiz(){
+    btn.disabled=true;
+    out.innerHTML='<div class="qline">最后留下的小朋友是几号？</div>';
+    var oo=mk('div','opts');
+    [[1,true],[4,false],[5,false]].forEach(function(o){
+      var b=mk('button','opt big',o[0]+'号');
+      b.onclick=function(){
+        if(o[1]){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); hint('出列顺序是 3 → 6 → 4 → 2 → 5，最后留下 1 号！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      oo.appendChild(b);
+    });
+    out.appendChild(oo);
+  }
+}
+
+/* 35. 模拟文件柜 */
+function gFile(box, win){
+  var content='';
+  var steps=[
+    {tip:'任务 1/3：在输入框写“你好”，点【写入 w】（会覆盖原内容）', act:'w', need:'你好'},
+    {tip:'任务 2/3：再写“Python”，点【追加 a】（加在末尾）', act:'a', need:'你好Python'},
+    {tip:'任务 3/3：点【读取 r】，看看文件里的完整内容', act:'r', need:null}
+  ];
+  var si=0;
+  var task=mk('div','task'), file=mk('div','dict-book'), io=mk('div','io'), bar=mk('div','opts'), out=mk('div');
+  var inp=mk('input','inp'); inp.placeholder='输入要写入的内容…'; inp.value='你好';
+  io.appendChild(inp);
+  [['w','✍️ 写入 w'],['a','➕ 追加 a'],['r','📖 读取 r']].forEach(function(p){
+    var b=mk('button','btn'+(p[0]==='r'?' ghost':''),p[1]);
+    b.onclick=function(){
+      var s=steps[si];
+      if(p[0]!==s.act){
+        if(p[0]==='r'){ tone('click'); out.innerHTML='<div class="out">文件内容：'+esc(content||'（空）')+'</div>'; return; }
+        tone('no'); hint('任务要求点【'+({w:'写入 w',a:'追加 a',r:'读取 r'})[s.act]+'】，按步骤来！'); return;
+      }
+      if(p[0]==='w'){ content=inp.value||''; tone('ok'); file.innerHTML='📄 diary.txt<br>'+esc(content); inp.value='Python'; }
+      else if(p[0]==='a'){ content+=inp.value||''; tone('ok'); file.innerHTML='📄 diary.txt<br>'+esc(content); inp.value=''; }
+      else { tone('ok'); out.innerHTML='<div class="out">'+esc(content)+'</div>'; }
+      if(p[0]!=='r' && content===s.need){ si++; task.innerHTML=steps[si]?steps[si].tip:'完成！'; }
+      if(p[0]==='r' && si===2){ task.innerHTML='🎉 三个动作都完成：w 覆盖、a 追加、r 读取！'; setTimeout(win,1300); }
+    };
+    bar.appendChild(b);
+  });
+  task.innerHTML=steps[0].tip;
+  file.innerHTML='📄 diary.txt<br><span style="color:#9ca3af">（空文件）</span>';
+  box.append(task,file,io,bar,out);
+}
+
+/* 36. 冒泡排序可视化 */
+function gBubble(box, win){
+  var orig=[5,3,4,1,2], a=orig.slice();
+  var task=mk('div','task','相邻两数比一比：左边大就交换，像水泡把大数字“顶”到右边！'),
+      row=mk('div','gem-row'), info=mk('div','counter'), bar=mk('div','io'), quiz=mk('div');
+  var stepBtn=mk('button','btn','▶ 比较下一对');
+  bar.appendChild(stepBtn);
+  box.append(task,row,info,bar,quiz);
+  var i=0, j=0, swaps=0, done=false;
+  function render(hl){
+    row.innerHTML='';
+    a.forEach(function(v,k){
+      var c=mk('div','gem'+(hl&&(k===hl[0]||k===hl[1])?' used':''),''+v+'<span>'+k+'</span>');
+      if(hl && (k===hl[0]||k===hl[1])) c.style.borderColor='#f59e0b';
+      row.appendChild(c);
+    });
+  }
+  render(null);
+  info.textContent='第 1 轮冒泡：从第 0 对开始';
+  stepBtn.onclick=function(){
+    if(done){ return; }
+    if(j < a.length-1-i){
+      render([j,j+1]);
+      if(a[j] > a[j+1]){
+        var t=a[j]; a[j]=a[j+1]; a[j+1]=t; swaps++; tone('pop');
+      }else tone('click');
+      info.textContent='比较 a['+j+'] 和 a['+(j+1)+']'+(a[j]>=a[j+1]?'（已交换/不用换）':'')+'　已交换 '+swaps+' 次';
+      j++;
+      if(j >= a.length-1-i){
+        i++; j=0;
+        if(i>=a.length-1){
+          done=true; render(null);
+          info.innerHTML='🎉 排序完成：'+a.join(', ')+'，一共交换 '+swaps+' 次！';
+          stepBtn.disabled=true; quizQ();
+        }else{
+          info.textContent='第 '+(i+1)+' 轮冒泡开始（右边 '+i+' 个已就位）　已交换 '+swaps+' 次';
+        }
+      }
+    }
+  };
+  function quizQ(){
+    quiz.appendChild(mk('div','qline','冒泡排序为什么是“稳定”的排序？'));
+    var oo=mk('div','opts');
+    [['相等的两个数不会交换，相对顺序不变',true],['它交换次数最少'],['它永远最快']].forEach(function(o){
+      var b=mk('button','opt',o[0]);
+      b.onclick=function(){
+        if(o[1]){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      oo.appendChild(b);
+    });
+    quiz.appendChild(oo);
+  }
+}
+
+/* 37. 选择排序可视化 */
+function gSelectSort(box, win){
+  var orig=[4,2,5,1,3], a=orig.slice();
+  var task=mk('div','task','每轮从队伍里挑出最小的，和最前面的位置交换！'),
+      row=mk('div','gem-row'), info=mk('div','counter'), bar=mk('div','io'), quiz=mk('div');
+  var btn=mk('button','btn','▶ 进行下一轮');
+  bar.appendChild(btn);
+  box.append(task,row,info,bar,quiz);
+  var pass=0;
+  function render(fixed, minIdx){
+    row.innerHTML='';
+    a.forEach(function(v,k){
+      var cls='gem'; if(k<fixed) cls+=' good'; if(k===minIdx) cls+=' used';
+      var c=mk('div',cls,'' + v + '<span>'+k+'</span>');
+      if(k===minIdx) c.style.borderColor='#ef4444';
+      row.appendChild(c);
+    });
+  }
+  render(0,null);
+  info.textContent='第 1 轮：在位置 0~4 里找最小的';
+  btn.onclick=function(){
+    if(pass>=a.length-1){ quizQ(); return; }
+    var mi=pass;
+    for(var k=pass+1;k<a.length;k++) if(a[k]<a[mi]) mi=k;
+    var t=a[pass]; a[pass]=a[mi]; a[mi]=t;
+    swapsAnim();
+    tone('pop');
+    pass++;
+    info.textContent='第 '+(pass+1)+' 轮：最小的 '+a[pass-1]+' 放到了位置 '+ (pass-1)+(pass<a.length-1?'，继续在后面找':'，排序完成');
+    function swapsAnim(){ render(pass, mi); }
+    if(pass>=a.length-1){ info.innerHTML='🎉 排序完成：'+a.join(', '); btn.disabled=true; setTimeout(quizQ,500); }
+  };
+  function quizQ(){
+    quiz.innerHTML='';
+    quiz.appendChild(mk('div','qline','插入排序像“整理扑克牌”，它是怎么工作的？'));
+    var oo=mk('div','opts');
+    [['把新牌插到前面已排好的牌中合适的位置',true],['每次扔掉最大的牌'],['随机交换两张牌']].forEach(function(o){
+      var b=mk('button','opt',o[0]);
+      b.onclick=function(){
+        if(o[1]){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      oo.appendChild(b);
+    });
+    quiz.appendChild(oo);
+  }
+}
+
+/* 38. 斐波那契兔子 */
+function gFib(box, win){
+  var f=[1,1];
+  var task=mk('div','task','兔子家族的数量：每个月的兔子数 = 前两个月之和！点按钮让时间前进～'),
+      code=mk('pre','code','f[1] = 1, f[2] = 1<br>f[n] = f[n-1] + f[n-2]'),
+      row=mk('div','gem-row'), bar=mk('div','io'), info=mk('div','counter'), quiz=mk('div');
+  var btn=mk('button','btn','🐰 过一个月');
+  bar.appendChild(btn);
+  box.append(task,code,row,bar,info,quiz);
+  function draw(){
+    row.innerHTML='';
+    f.forEach(function(v,k){
+      var c=mk('div','gem','🐰<span>第'+(k+1)+'月：'+v+'对</span>');
+      row.appendChild(c);
+    });
+  }
+  draw(); info.textContent='第 1、2 个月：各 1 对兔子';
+  btn.onclick=function(){
+    if(f.length>=8){ btn.disabled=true; quizQ(); return; }
+    f.push(f[f.length-1]+f[f.length-2]);
+    tone('pop'); draw();
+    info.textContent='第 '+(f.length)+' 月：'+f[f.length-3]+' + '+f[f.length-2]+' = '+f[f.length-1]+' 对';
+    if(f.length>=8) btn.disabled=true;
+  };
+  function quizQ(){
+    quiz.appendChild(mk('div','qline','数列 1, 1, 2, 3, 5, 8, … 第 7 项是多少？'));
+    var oo=mk('div','opts');
+    [['13',true],['11'],['8']].forEach(function(o){
+      var b=mk('button','opt big code-opt',o[0]);
+      b.onclick=function(){
+        if(o[1]){ tone('ok'); b.classList.add('good'); setTimeout(win,1000); }
+        else{ tone('no'); b.classList.add('bad'); hint('第7项 = 第5项 + 第6项 = 5 + 8 = 13！'); setTimeout(function(){ b.classList.remove('bad'); },500); }
+      };
+      oo.appendChild(b);
+    });
+    quiz.appendChild(oo);
+  }
+}
+
+/* ============================================================
+   课后作业引擎（GESP 风格判断 + 选择）
+============================================================ */
+function renderHomework(box, lesson, onPass){
+  var qs=lesson.hw;
+  var need=qs.length===2?2:2;  /* 3题对2题，2题全对 */
+  var lockNote=mk('div','lock-note','🔒 先完成上面的互动小游戏，课后作业才会解锁哦！');
+  var wrap=mk('div');
+  function refresh(){
+    if(!pGet(lesson.id,'g')){
+      box.innerHTML=''; box.appendChild(lockNote); return;
+    }
+    box.innerHTML='';
+    var title=mk('div','task','📝 课后作业（GESP 考级题型 · '+qs.length+' 题，至少答对 '+need+' 题）');
+    box.appendChild(title);
+    var answered={};
+    qs.forEach(function(q,qi){
+      var card=mk('div','hw-q');
+      var head=mk('div','qline');
+      head.innerHTML='<span class="hw-type '+(q.type==='判断'?'judge':'choice')+'">'+q.type+'题</span>'+esc(q.q);
+      card.appendChild(head);
+      if(q.code) card.appendChild(codeBlock(q.code));
+      var oo=mk('div','opts');
+      q.opts.forEach(function(t,oi){
+        var isCode=/[()=<>%/*]/.test(t);
+        var b=mk('button','opt'+(isCode?' code-opt':''),esc(t));
+        b.onclick=function(){
+          if(answered[qi]!==undefined) return;
+          answered[qi]=oi;
+          card.classList.add('answered');
+          card.classList.add(oi===q.a?'correct':'wrong');
+          b.classList.add(oi===q.a?'good':'bad');
+          if(oi!==q.a){
+            tone('no');
+            var rightBtn=oo.children[q.a]; rightBtn.classList.add('good');
+          }else tone('ok');
+          checkDone();
+        };
+        oo.appendChild(b);
+      });
+      card.appendChild(oo);
+      card.appendChild(mk('div','why','💡 解析：'+esc(q.why)));
+      box.appendChild(card);
+    });
+    var res=mk('div','hw-result'); box.appendChild(res);
+    var retry=mk('div','io'); box.appendChild(retry);
+    function checkDone(){
+      var n=Object.keys(answered).length;
+      if(n<qs.length){ res.textContent='已完成 '+n+' / '+qs.length+' 题'; return; }
+      var score=qs.filter(function(q,qi){ return answered[qi]===q.a; }).length;
+      if(score>=need){
+        res.innerHTML='🎉 答对 '+score+' / '+qs.length+' 题，作业通过！获得 ⭐';
+        pSet(lesson.id,'h',1); onPass();
+      }else{
+        res.innerHTML='😢 只答对 '+score+' / '+qs.length+' 题，差一点点！';
+        var rb=mk('button','btn','🔄 再做一次');
+        rb.onclick=function(){ refresh(); };
+        retry.innerHTML=''; retry.appendChild(rb);
+      }
+    }
+    if(pGet(lesson.id,'h')) res.innerHTML='✅ 本课作业已通过（可再做复习）';
+  }
+  refresh();
+}
+
+/* ============================================================
+   课程数据
+============================================================ */
+var LESSONS=[
+{
+ id:'l1', icon:'📣', name:'认识 Python 与 print()',
+ ref:'Python3 简介 / 第一个 Python3 程序', lv:'GESP 一级 · 输入输出',
+ story:'计算机只听得懂“编程语言”。Python 是一条会变魔术的小蛇——名字来自一个搞笑喜剧团，却被全世界用来做游戏、网站、人工智能。今天它要教你第一句魔法：print，让屏幕替你说话！',
+ secs:[
+  {h:'Python 是什么？', p:'Python 是一种**简单好读**的高级编程语言，文件后缀是 **.py**。从航天飞机到扫地机器人，背后都可能有 Python 的功劳。'},
+  {h:'第一个程序 print()', code:'print("Hello, World!")', out:'Hello, World!', p:'**print()** 就像一个大喇叭，把括号里的内容**显示到屏幕上**。', tip:'注意：print 要**全部小写**；想显示的话要穿上英文引号 " "。'}
+ ],
+ game:gPrint,
+ hw:[
+  {type:'判断', q:'print() 的作用是把内容显示到屏幕上。', a:0, opts:['正确','错误'], why:'print 是 Python 的输出函数，程序的结果都靠它显示出来。'},
+  {type:'选择', q:'下面哪行代码能正确输出 你好 ？', a:1, opts:['PRINT("你好")','print("你好")','print(你好)'], why:'print 必须全小写；要说的文字必须加引号。'},
+  {type:'选择', q:'Python 程序文件的扩展名通常是？', a:2, opts:['.txt','.exe','.py'], why:'.py 是 Python 源文件的标准扩展名。'}
+ ]
+},
+{
+ id:'l2', icon:'📐', name:'注释与缩进',
+ ref:'Python3 基础语法', lv:'GESP 一级 · 编程规范',
+ story:'程序王国里有两条规矩：写给人看的“小纸条”叫**注释**，电脑会假装没看见；代码小朋友还要排好队，谁在谁的屋檐下（比如 if 里面），就要往里缩一格——这就是**缩进**。',
+ secs:[
+  {h:'注释：# 开头的小纸条', code:'# 这一行是注释，电脑不会执行\nprint("我会执行")', out:'我会执行', p:'**#** 后面整行都是注释，专门用来写说明，让别人（和以后的自己）看懂代码。'},
+  {h:'缩进：表示“谁属于谁”', code:'if 下雨:\n    print("带伞")   # 前面空了4格，属于 if\nprint("出门")       # 顶格写，不属于 if', p:'Python 用行首空格表示层级，一级缩进通常是 **4 个空格**，同一层级要对齐，漏了缩进程序会报错！'},
+  {h:'变量命名规矩', p:'名字只能用**字母、数字、下划线**，不能以数字开头（2name 不行），而且**区分大小写**，Age 和 age 是两个不同的变量。'}
+ ],
+ game:gIndent,
+ hw:[
+  {type:'判断', q:'# 后面的注释内容，计算机也会当成代码执行。', a:1, opts:['正确','错误'], why:'注释只给人看，运行时计算机会直接跳过。'},
+  {type:'选择', q:'Python 通常用几个空格表示一级缩进？', a:1, opts:['2 个','4 个','随便几个都行'], why:'PEP8 规范推荐 4 个空格，同一层级必须对齐。'},
+  {type:'选择', q:'下面哪个是合法的变量名？', a:0, opts:['my_name','2name','my-name'], why:'不能数字开头，也不能包含减号，下划线可以。'}
+ ]
+},
+{
+ id:'l3', icon:'📦', name:'变量与赋值',
+ ref:'Python3 变量', lv:'GESP 一级 · 变量',
+ story:'变量是贴着名字标签的**魔法盒子**：把东西放进去（=），喊它的名字，东西就会跳出来。还可以放新东西把旧的换掉！',
+ secs:[
+  {h:'= 是“放进去”', code:'age = 8\nprint(age)', out:'8', p:'这里的 **= 不是数学里的“相等”**，而是赋值：把右边的 8 放进左边的盒子 age。'},
+  {h:'变量可以重新赋值', code:'n = 3\nn = 5\nprint(n)', out:'5', p:'再次赋值时，盒子里原来的 3 会被新值 5 替换掉。'},
+  {h:'变量能参与计算', code:'a = 3\nb = 4\nprint(a + b)', out:'7'}
+ ],
+ game:gVar,
+ hw:[
+  {type:'判断', q:'age = 10 的意思是把 10 放进变量 age 里。', a:0, opts:['正确','错误'], why:'= 是赋值号，右边的值存入左边的变量。'},
+  {type:'选择', q:'a = 3 之后又写 a = 5，print(a) 输出？', a:1, opts:['3','5','35'], why:'第二次赋值把旧值 3 覆盖成了 5。'},
+  {type:'选择', q:'下面哪个变量名合法？', a:2, opts:['2x','my name','_score'], why:'不能数字开头、不能有空格，下划线开头是允许的。'}
+ ]
+},
+{
+ id:'l4', icon:'🧬', name:'四种基本数据类型',
+ ref:'Python3 基本数据类型 / Number', lv:'GESP 一级 · 数据类型',
+ story:'数据王国有四大家族：没有小数点的**整数**、带小数点的**小数**、穿引号衣服的**字符串**，以及只会说“真/假”的**布尔**。学会 type 照妖镜，谁也藏不住身份！',
+ secs:[
+  {h:'四大家族', code:'a = 7        # int 整数\nb = 3.14     # float 浮点数（小数）\nc = "你好"    # str 字符串\nd = True     # bool 布尔：只有 True / False'},
+  {h:'type() 查看类型', code:'print(type("8"))', out:"<class 'str'>", p:'穿上引号的 8 是字符串；不穿引号的 8 才是整数。'},
+  {h:'类型转换', code:'print(int("8") + 2)\nprint(str(8) + "岁")', out:'10\n8岁', p:'**int()** 转整数、**float()** 转小数、**str()** 转字符串。'}
+ ],
+ game:gSort,
+ hw:[
+  {type:'判断', q:'3.14 是整数类型 int。', a:1, opts:['正确','错误'], why:'带小数点的是 float 浮点型，整数 int 没有小数点。'},
+  {type:'选择', q:'type("8") 的结果是？', a:2, opts:["<class 'int'>","<class 'float'>","<class 'str'>"], why:'加了引号就是字符串 str。'},
+  {type:'选择', q:'int("5") + 3 的结果是？', a:0, opts:['8','53','报错'], why:'int("5") 把字符串变成整数 5，5+3=8。'}
+ ]
+},
+{
+ id:'l5', icon:'🧮', name:'算术运算符',
+ ref:'Python3 运算符', lv:'GESP 一级 · 基本运算',
+ story:'Python 是一台超级计算器：加减乘除之外，还有三把秘密武器——**//** 整除（只留商）、**%** 取余（只留余数）、****** 乘方（几个几相乘）！',
+ secs:[
+  {h:'四则运算', code:'print(7 + 2)\nprint(7 - 2)\nprint(7 * 2)\nprint(7 / 2)', out:'9\n5\n14\n3.5', p:'注意：**/** 除出来的结果永远是小数。电脑里乘号是 *，不是 ×。'},
+  {h:'三把秘密武器', code:'print(7 // 2)   # 整除：3\nprint(7 % 2)    # 取余：1\nprint(2 ** 3)   # 2的3次方：8', out:'3\n1\n8', tip:'分东西时：每人分几个用 //，分完剩几个用 %。'},
+  {h:'运算顺序', p:'先算 **，再算 * / // %，最后算 + -；有 **( )** 括号先算括号里的。'}
+ ],
+ game:gCalc,
+ hw:[
+  {type:'选择', q:'17 // 5 的结果是？', a:1, opts:['4','3','3.4'], why:'整除只保留商，17÷5=3 余 2，// 得 3。'},
+  {type:'选择', q:'17 % 5 的结果是？', a:0, opts:['2','3','5'], why:'% 取余数，17÷5 余 2。'},
+  {type:'判断', q:'2 ** 3 的结果是 8。', a:0, opts:['正确','错误'], why:'** 是乘方，2×2×2=8。'}
+ ]
+},
+{
+ id:'l6', icon:'⚖️', name:'比较与逻辑运算符',
+ ref:'Python3 运算符', lv:'GESP 一级 · 关系/逻辑运算',
+ story:'真假王国有两扇大门：比较符号会判断“真 True / 假 False”；**and** 要两边都真，**or** 一边真就放行，**not** 专门把真假翻跟头！',
+ secs:[
+  {h:'比较运算', code:'print(3 > 2)      # True\nprint(3 == 2)     # False\nprint(3 != 2)     # True', p:'>、<、>=、<=、==（相等）、!=（不等），结果只有 True 或 False。', warn:'一个 = 是赋值，两个 == 才是“相等吗”，考级最爱在这里挖坑！'},
+  {h:'逻辑运算', code:'print(3 > 2 and 5 > 9)   # False（一边假）\nprint(3 > 2 or 5 > 9)    # True（一边真就行）\nprint(not 3 > 2)         # False（真被翻成假）'}
+ ],
+ game:gBool,
+ hw:[
+  {type:'选择', q:'3 > 5 的结果是？', a:1, opts:['True','False'], why:'3 比 5 小，比较不成立，结果 False。'},
+  {type:'选择', q:'(3 > 2) and (1 > 5) 的结果是？', a:1, opts:['True','False'], why:'and 要求两边都真，1>5 是假，所以整体为假。'},
+  {type:'判断', q:'not False 的结果是 True。', a:0, opts:['正确','错误'], why:'not 会翻转真假，False 翻成 True。'}
+ ]
+},
+{
+ id:'l7', icon:'🎤', name:'输入 input() 与输出 print()',
+ ref:'Python3 输入和输出', lv:'GESP 一级 · 输入输出（重点）',
+ story:'机器人小问号举着 input 话筒向你提问。**特别小心**：input 收到的东西天生穿着引号（字符串），想做算术必须先请 int() 脱掉引号！',
+ secs:[
+  {h:'input() 收到的是字符串', code:'name = input("你叫什么？")\nprint("你好，" + name)', p:'程序会停下来等你打字，输入的内容以**字符串**形式存入变量。'},
+  {h:'数字输入要转换', code:'age = int(input("你几岁？"))\nprint(age + 1)', p:'不转换直接 +1 会报错或出错，因为字符串不能和数字相加。'},
+  {h:'print 打印多个内容', code:'print("我", 8, "岁")', out:'我 8 岁', p:'用逗号隔开多项，print 会自动在中间加空格。'}
+ ],
+ game:gChat,
+ hw:[
+  {type:'判断', q:'input() 得到的数据默认是字符串类型。', a:0, opts:['正确','错误'], why:'即使输入的是数字，input 得到的也是字符串，要 int() 转换。'},
+  {type:'选择', q:'键盘输入 5，int(input()) + 2 的结果是？', a:1, opts:['52','7','报错'], why:'转换后是整数 5，5+2=7。'},
+  {type:'选择', q:'print("我", 8, "岁") 的输出是？', a:0, opts:['我 8 岁','我8岁','我, 8, 岁'], why:'逗号分隔的多项之间会自动加一个空格。'}
+ ]
+},
+{
+ id:'l8', icon:'🍡', name:'字符串：编号、切片与拼接',
+ ref:'Python3 字符串', lv:'GESP 二三级衔接 · 一级有字符串基础',
+ story:'字符串是一串文字糖葫芦，每颗山楂（字符）都有座位号——从 **0** 开始数！倒着数还有负数座位号。',
+ secs:[
+  {h:'索引：从 0 开始', code:'s = "PYTHON"\nprint(s[0])    # P\nprint(s[-1])   # N（倒数第1个）', out:'P\nN'},
+  {h:'切片：切一段', code:'print(s[1:4])', out:'YTH', p:'s[1:4] 取编号 **1、2、3**，包含开头不包含结尾。'},
+  {h:'拼接与重复', code:'print("ab" + "cd")\nprint("ab" * 3)\nprint(len("PYTHON"))', out:'abcd\nababab\n6', p:'+ 手拉手拼接，* 重复，len() 数长度。'}
+ ],
+ game:gString,
+ hw:[
+  {type:'选择', q:'s = "PYTHON"，s[0] 是？', a:0, opts:['P','Y','N'], why:'编号从 0 开始，第一个字符是 P。'},
+  {type:'选择', q:'s[-1] 是？', a:2, opts:['P','Y','N'], why:'负数索引从末尾数，-1 是最后一个字符 N。'},
+  {type:'判断', q:'"ab" * 3 的结果是 ababab。', a:0, opts:['正确','错误'], why:'字符串乘整数表示重复 3 次。'}
+ ]
+},
+{
+ id:'l9', icon:'🎒', name:'列表：一排格子',
+ ref:'Python3 列表', lv:'GESP 三级内容 · 提前打基础',
+ story:'列表是一只魔法背包，里面的格子也从 0 编号。append 往兜里塞东西，pop 从兜里掏出最后一个！',
+ secs:[
+  {h:'创建与访问', code:'bag = ["红宝石", "蓝宝石", "绿宝石"]\nprint(bag[0])', out:'红宝石'},
+  {h:'添加 append / 取出 pop', code:'bag.append("钻石")\nprint(bag.pop())', out:'钻石', p:'pop() 取出**最后一个**元素，背包里也会少一个。'},
+  {h:'修改与长度', code:'bag[0] = "黄宝石"\nprint(len(bag))', p:'用编号可以直接修改格子里的内容，len() 数有几个元素。'}
+ ],
+ game:gGem,
+ hw:[
+  {type:'选择', q:'a = [10, 20, 30]，a[0] 是？', a:0, opts:['10','20','30'], why:'列表编号从 0 开始。'},
+  {type:'选择', q:'a.append(99) 之后，a[-1] 是？', a:2, opts:['10','30','99'], why:'append 加在末尾，-1 正是最后一个元素。'},
+  {type:'判断', q:'列表里只能存放数字。', a:1, opts:['正确','错误'], why:'列表可以放数字、字符串等各种类型，还能混着放。'}
+ ]
+},
+{
+ id:'l10', icon:'🔒', name:'元组：被冻住的列表',
+ ref:'Python3 元组', lv:'GESP 三级内容 · 认识即可',
+ story:'元组是一列被魔法冻住的队伍，用小括号 () 排好，能看能数，**但谁也不许改动它**——加不进、删不掉、改不了！',
+ secs:[
+  {h:'元组用 ( )', code:'t = (10, 20, 30)\nprint(t[1])', out:'20', p:'元组也能按编号访问，规则和列表一样从 0 开始。'},
+  {h:'元组不能修改', code:'t[0] = 99   # 报错！', p:'运行会报 TypeError，因为元组是**只读**的。适合存一组不希望被改掉的数据，比如一年四季。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🔒 冻住的队伍', tip:'元组只能读，不能改、不能加！',
+   rounds:[
+    {scene:'t = ("🔴","🔵","🟢") 三只冻住的宝石', code:'print(t[1])', q:'t[1] 是谁？', opts:[{t:'🔴'},{t:'🔵',ok:true},{t:'🟢'}]},
+    {scene:'有人想偷偷换宝石…', code:'t = (5, 10)\nt[0] = 99', q:'运行会怎样？', opts:[{t:'t 变成 (99, 10)'},{t:'程序报错，元组不能修改',ok:true,why:'元组是只读的，赋值修改会报 TypeError。'},{t:'t 变成 (5, 10, 99)'}]},
+    {scene:'数数队伍有多长', code:'print(len((1, 2, 3, 4)))', q:'结果是？', opts:[{t:'3'},{t:'4',ok:true},{t:'5'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'元组创建后还可以用 append() 添加元素。', a:1, opts:['正确','错误'], why:'元组是只读的，不能添加、删除或修改。'},
+  {type:'选择', q:'t = (10, 20)，t[1] 是？', a:1, opts:['10','20','报错'], why:'元组按索引访问，编号 1 是 20。'},
+  {type:'选择', q:'下面哪个是元组？', a:0, opts:['(1, 2, 3)','[1, 2, 3]','{1, 2, 3}'], why:'小括号是元组，方括号是列表，花括号是集合/字典。'}
+ ]
+},
+{
+ id:'l11', icon:'📒', name:'字典：键值对电话簿',
+ ref:'Python3 字典', lv:'GESP 三级内容 · 提前打基础',
+ story:'字典是一本神奇电话簿：左边写“名字”（键），右边写“号码”（值）。喊一声名字，号码立刻出现；新朋友还能随时加页！',
+ secs:[
+  {h:'用 { } 创建字典', code:'tel = {"皮皮龙": "555-0001", "机器人": "555-0002"}\nprint(tel["皮皮龙"])', out:'555-0001', p:'通过 **键（名字）** 查找 **值（号码）**。'},
+  {h:'添加或修改', code:'tel["小海龟"] = "555-0004"   # 新键就是添加\ntel["机器人"] = "555-0099"   # 旧键就是修改', p:'键不存在 = 添加新的一对；键已存在 = 覆盖旧值。'}
+ ],
+ game:gDict,
+ hw:[
+  {type:'选择', q:'d = {"小明": 110}，d["小明"] 是？', a:0, opts:['110','小明','报错'], why:'用键 "小明" 查到对应的值 110。'},
+  {type:'判断', q:'字典通过“键”来查找对应的“值”。', a:0, opts:['正确','错误'], why:'这正是字典（键值对）的工作方式。'},
+  {type:'选择', q:'d 中没有 "小红"，执行 d["小红"] = 120 会？', a:1, opts:['报错','添加一对新数据','什么也不做'], why:'给不存在的键赋值，就是往字典里添加新的键值对。'}
+ ]
+},
+{
+ id:'l12', icon:'🍲', name:'集合：自动去重的魔法锅',
+ ref:'Python3 集合', lv:'GESP 三级内容 · 认识即可',
+ story:'魔法锅有个怪脾气：同样的东西只收一个！一堆重复数字倒进去，“咕嘟”一声就全部去重了。',
+ secs:[
+  {h:'集合会自动去重', code:'a = {3, 3, 1, 2, 2, 2}\nprint(a)', out:'{1, 2, 3}', p:'集合里的元素**不能重复**，而且没有顺序，所以不能用编号访问。'},
+  {h:'in 判断在不在', code:'print(2 in {1, 2, 3})\nprint(5 in {1, 2, 3})', out:'True\nFalse'}
+ ],
+ game:gSet,
+ hw:[
+  {type:'选择', q:'set([1, 1, 2, 3, 3]) 去重后有几个元素？', a:1, opts:['5 个','3 个','1 个'], why:'重复的 1 和 3 都只留一个，剩 {1,2,3}。'},
+  {type:'判断', q:'集合中的元素可以重复。', a:1, opts:['正确','错误'], why:'集合最大的特点就是元素唯一、自动去重。'},
+  {type:'选择', q:'4 in {1, 2, 3} 的结果是？', a:1, opts:['True','False','4'], why:'4 不在集合里，in 运算结果是 False。'}
+ ]
+},
+{
+ id:'l13', icon:'🌦️', name:'条件语句 if / elif / else',
+ ref:'Python3 条件控制', lv:'GESP 一级 · 选择结构（重点）',
+ story:'程序要学会做选择：**如果**下雨就带伞，**否则如果**刮风就穿外套，**否则**就放心出门！这就是 if 三兄弟。',
+ secs:[
+  {h:'if 与 if-else', code:'age = 8\nif age >= 7:\n    print("上小学")\nelse:\n    print("还没上学")', out:'上小学', p:'条件成立走 if 分支，不成立走 else 分支。'},
+  {h:'if-elif-else', code:'score = 85\nif score >= 90:\n    print("优秀")\nelif score >= 80:\n    print("良好")\nelse:\n    print("加油")', out:'良好', tip:'if / elif 行尾必须有冒号 :，下一行必须缩进！'}
+ ],
+ game:gWeather,
+ hw:[
+  {type:'选择', q:'age = 8；if age >= 7: print("上学") 会输出？', a:0, opts:['上学','什么都不输出','报错'], why:'8>=7 条件成立，执行缩进的 print。'},
+  {type:'判断', q:'if 语句那一行的末尾要写冒号 : 。', a:0, opts:['正确','错误'], why:ifTip()},
+  {type:'选择', q:'score = 85（>=90优，>=80良，否则加油），输出？', a:1, opts:['优秀','良好','加油'], why:'85 不满足第一个条件，满足 elif 的 >=80，输出良好。'}
+ ]
+},
+{
+ id:'l14', icon:'🎯', name:'while 循环',
+ ref:'Python3 循环语句', lv:'GESP 一级 · 循环结构（重点）',
+ story:'while 是一台停不下来的旋转木马：**当**条件成立就一直转，条件不成立才停下。千万别忘了让条件慢慢变“假”，否则会变成死循环！',
+ secs:[
+  {h:'while 当…就重复', code:'i = 0\nwhile i < 3:\n    print(i)\n    i = i + 1', out:'0\n1\n2', p:'循环三要素：**开始值（i=0）、条件（i<3）、每次变化（i+1）**，缺一不可。'},
+  {h:'死循环', code:'i = 0\nwhile i < 3:\n    print(i)   # 忘记 i = i + 1，永远停不下来！', warn:'条件永远成立时程序会卡住，叫做死循环。'}
+ ],
+ game:gGuess,
+ hw:[
+  {type:'判断', q:'while 后面的条件为 True 时，会重复执行循环体。', a:0, opts:['正确','错误'], why:'这就是 while 的含义：条件成立就一直循环。'},
+  {type:'选择', code:'i = 0\nwhile i < 3:\n    print(i)\n    i = i + 1', q:'输出是？', a:1, opts:['0 1 2 3','0 1 2','1 2 3'], why:'i 等于 3 时条件不成立，循环结束，不打印 3。'},
+  {type:'选择', q:'循环里忘记写 i = i + 1 会怎样？', a:2, opts:['循环一次都不执行','正常结束','变成死循环'], why:'条件永远成立，程序无法停止。'}
+ ]
+},
+{
+ id:'l15', icon:'🎆', name:'for 循环与 range()',
+ ref:'Python3 循环语句', lv:'GESP 一级 · 循环结构（重点）',
+ story:'for 是训练有素的烟花队长，range(n) 一声令下，它就从 0 开始整整齐齐放 n 次烟花！',
+ secs:[
+  {h:'range(n)：0 到 n-1', code:'for i in range(3):\n    print(i)', out:'0\n1\n2', p:'range(3) 数 3 个数：**0、1、2**，从 0 开始，到 3 之前停止。'},
+  {h:'range(a, b)：从 a 到 b-1', code:'for i in range(2, 5):\n    print(i)', out:'2\n3\n4'},
+  {h:'遍历字符串', code:'for ch in "AB":\n    print(ch)', out:'A\nB'}
+ ],
+ game:gFire,
+ hw:[
+  {type:'选择', q:'range(3) 依次产生哪些数？', a:0, opts:['0、1、2','1、2、3','0、1、2、3'], why:'从 0 开始，共 3 个数，不包含 3。'},
+  {type:'选择', q:'for i in range(2, 5) 中 i 依次是？', a:1, opts:['2、3、4、5','2、3、4','1、2、3、4'], why:'含起点 2，不含终点 5。'},
+  {type:'判断', q:'for ch in "ab" 的循环体会执行 2 次。', a:0, opts:['正确','错误'], why:'字符串有 2 个字符，循环就执行 2 次。'}
+ ]
+},
+{
+ id:'l16', icon:'🚦', name:'break 与 continue',
+ ref:'Python3 循环语句', lv:'GESP 一二级 · 循环控制',
+ story:'循环跑道上有两个信号灯：**break** 是红灯——立刻冲出跑道结束比赛；**continue** 是跳过垫——跳过这一圈剩下的动作，直接跑下一圈。',
+ secs:[
+  {h:'break：立刻结束整个循环', code:'for i in range(5):\n    if i == 3:\n        break\n    print(i)', out:'0\n1\n2', p:'i 等于 3 时直接跳出，后面的数都不再打印。'},
+  {h:'continue：跳过本次', code:'for i in range(5):\n    if i == 1:\n        continue\n    print(i)', out:'0\n2\n3\n4', p:'只有 i 等于 1 那一圈被跳过，其它圈照常。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🚦 循环红绿灯', tip:'break 结束整个循环；continue 只跳过这一次！',
+   rounds:[
+    {scene:'跑道上突然亮起红灯', code:'while True:\n    break\nprint("到终点")', q:'循环会执行几次？', opts:[{t:'0 次'},{t:'1 次，然后立刻结束',ok:true,why:'break 立刻跳出循环，但跳出前循环体已进入一次。'},{t:'永远重复'}]},
+    {scene:'for i in range(5)，i==3 时 break', code:'for i in range(5):\n    if i == 3:\n        break\n    print(i)', q:'会输出什么？', opts:[{t:'0 1 2',ok:true},{t:'0 1 2 3 4'},{t:'3 4'}]},
+    {scene:'i==1 时踩上跳过垫 continue', code:'for i in range(5):\n    if i == 1:\n        continue\n    print(i)', q:'会输出什么？', opts:[{t:'0 2 3 4',ok:true},{t:'0 1 2 3 4'},{t:'1'}]}
+   ]}); },
+ hw:[
+  {type:'选择', q:'循环中遇到 break 会怎样？', a:1, opts:['跳过本次，继续下次','立刻结束整个循环','暂停一下再继续'], why:'break 是直接跳出整个循环。'},
+  {type:'判断', q:'continue 会让整个循环立刻结束。', a:1, opts:['正确','错误'], why:'continue 只跳过本次循环，循环还会继续。'},
+  {type:'选择', code:'for i in range(5):\n    if i == 3:\n        break\n    print(i)', q:'输出是？', a:0, opts:['0 1 2','0 1 2 3','0 1 2 3 4'], why:'i==3 时 break，3 没来得及打印。'}
+ ]
+},
+{
+ id:'l17', icon:'⚗️', name:'函数 def：魔法配方机',
+ ref:'Python3 函数', lv:'GESP 四级定义 · 一级要求理解调用',
+ story:'函数是一台魔法配方机：把材料（**参数**）放进去，它按配方加工，从出口送出成品（**return**）。配方写一次，可以用很多次！',
+ secs:[
+  {h:'定义与调用', code:'def double(x):\n    return x * 2\n\nprint(double(6))', out:'12', p:'**def** 定义函数，x 是参数；**return** 把结果送出函数。定义不会自动执行，必须**调用**才运行。'},
+  {h:'多个参数', code:'def add(a, b):\n    return a + b\n\nprint(add(3, 4))', out:'7'},
+  {h:'没有 return', code:'def hi():\n    print("你好")\n\nprint(hi())', out:'你好\nNone', p:'函数不写 return，默认送出 None（空）。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'⚗️ 魔法配方机', tip:'参数从入口进，结果从 return 出！',
+   rounds:[
+    {scene:'配方：进去的数 +10', code:'def f(x):\n    return x + 10\nprint(f(5))', q:'f(5) 输出？', opts:[{t:'5'},{t:'15',ok:true},{t:'510'}]},
+    {scene:'配方：两个材料相加', code:'def add(a, b):\n    return a + b\nprint(add(3, 4))', q:'输出？', opts:[{t:'7',ok:true},{t:'34'},{t:'12'}]},
+    {scene:'这台机器没有出口 return', code:'def hi():\n    print("你好")\nprint(hi())', q:'第二行 print 拿到什么？', opts:[{t:'你好'},{t:'None',ok:true,why:'函数没有 return 时，默认返回 None。'},{t:'0'}]}
+   ]}); },
+ hw:[
+  {type:'选择', code:'def f(x):\n    return x * 2\nprint(f(4))', q:'输出是？', a:1, opts:['6','8','42'], why:'4*2=8，return 把 8 送出。'},
+  {type:'判断', q:'函数定义后不会自动执行，必须调用才会运行。', a:0, opts:['正确','错误'], why:'def 只是制定配方，f() 才是真正使用。'},
+  {type:'选择', q:'return 的作用是？', a:0, opts:['把结果送出函数','打印结果','结束电脑'], why:'return 将函数计算结果返回给调用处。'}
+ ]
+},
+{
+ id:'l18', icon:'🧰', name:'模块 import：借用魔法工具箱',
+ ref:'Python3 模块', lv:'GESP 一级 · random 常用',
+ story:'不用自己发明所有魔法！Python 备好了很多工具箱（**模块**）：random 管随机，time 管时间。喊一声 import，工具箱就借到手啦！',
+ secs:[
+  {h:'import random 随机数', code:'import random\nprint(random.randint(1, 6))', out:'1~6 中的随机一个整数', p:'**randint(1, 6)** 在 1 到 6 之间（**包含 1 和 6**）随机挑一个整数。'},
+  {h:'随机挑选', code:'print(random.choice(["石头", "剪刀", "布"]))', out:'三个中的随机一个'},
+  {h:'时间模块（了解）', code:'import time\ntime.sleep(1)   # 程序暂停 1 秒'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🧰 工具箱抽卡', tip:'randint(a,b) 的范围包含 a 和 b！',
+   rounds:[
+    {scene:'幸运骰子摇起来', code:'import random\nrandom.randint(1, 6)', q:'下面哪个数永远摇不出来？', opts:[{t:'0',ok:true,why:'范围是 1~6，包含 1 和 6，但没有 0。'},{t:'3'},{t:'6'}]},
+    {scene:'要在 1~10 之间随机取整数', code:'import random\n# ？处填什么', q:'应该写 random.？(1, 10)？', opts:[{t:'randint',ok:true},{t:'random'},{t:'choice'}]},
+    {scene:'随机出拳', code:'random.choice(["石头","剪刀","布"])', q:'可能的结果是？', opts:[{t:'一定出石头'},{t:'三个里面随机一个',ok:true},{t:'报错'}]}
+   ]}); },
+ hw:[
+  {type:'选择', q:'random.randint(1, 6) 永远不会返回哪个数？', a:0, opts:['0','1','6'], why:'randint(1,6) 包含两端，只在 1~6 中取值。'},
+  {type:'判断', q:'使用模块之前必须先用 import 导入。', a:0, opts:['正确','错误'], why:'不 import 就找不到模块里的工具。'},
+  {type:'选择', q:'想生成 1~10 的随机整数，应写？', a:1, opts:['random.randint(0, 10)','random.randint(1, 10)','random.randint(1, 9)'], why:'包含两端，1 到 10 就写 (1,10)。'}
+ ]
+},
+{
+ id:'l19', icon:'🐢', name:'Turtle 海龟画图（GESP 特色）',
+ ref:'GESP 一级特色考点', lv:'GESP 一级 · Turtle 绘图',
+ story:'地上有一只神奇小海龟，它会听命令前进、转弯，身后还拖着画笔。forward 前进、right 右转——用最简单的命令，它能画出正方形、星星和整个世界！',
+ secs:[
+  {h:'基本命令', code:'import turtle\nturtle.forward(100)   # 前进100步\nturtle.right(90)      # 向右转90度\nturtle.forward(100)', p:'**forward(d)** 前进，**right(角度)** / **left(角度)** 转弯，海龟默认面朝右方（东）。'},
+  {h:'用循环画正方形', code:'for i in range(4):\n    turtle.forward(100)\n    turtle.right(90)', p:'四条边 + 四次右转 90°，正好画出正方形并回到起点。'},
+  {h:'抬笔与落笔（了解）', code:'turtle.penup()     # 抬起笔，移动不画线\nturtle.pendown()   # 放下笔，继续画线'}
+ ],
+ game:gTurtle,
+ hw:[
+  {type:'判断', q:'turtle.right(90) 会让小海龟向右转 90 度。', a:0, opts:['正确','错误'], why:'right 是右转，left 是左转，单位是角度。'},
+  {type:'选择', q:'小海龟默认面朝哪个方向？', a:0, opts:['右边（东）','上边（北）','左边（西）'], why:'海龟初始方向朝右（东）。'},
+  {type:'选择', q:'前进 4 次、每次后右转 90°，画出的是？', a:1, opts:['三角形','正方形','圆形'], why:'4 条边、4 个 90° 转角正好围成正方形。'}
+ ]
+},
+
+/* ================= GESP 二级 ================= */
+{
+ id:'l20', icon:'🌡️', name:'多层分支与嵌套 if',
+ ref:'Python3 条件控制（进阶）', lv:'GESP 二级 · 多层分支',
+ story:'成绩公告栏要贴很多等级：90 分以上优秀、80 分以上良好……一个 if 已经不够用了。if-elif-else 三兄弟排着队来判断；if 里面还能再套 if，就像大门里还有小门！',
+ secs:[
+  {h:'多级判断 if-elif-else', code:'score = 95\nif score >= 90:\n    print("优秀")\nelif score >= 60:\n    print("及格")\nelse:\n    print("加油")', out:'优秀', p:'从上往下，哪个条件先成立就走哪条路，后面的不再判断。'},
+  {h:'if 嵌套：门里还有门', code:'age = 10\nif age >= 6:\n    if age >= 10:\n        print("上四年级")\n    else:\n        print("上低年级")', out:'上四年级', tip:'内层 if 要比外层再多缩进一格，层级关系才清楚。'},
+  {h:'组合条件 and / or', code:'year = 2024\nif year % 4 == 0 and year % 100 != 0:\n    print("闰年")', out:'闰年'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🌡️ 公告栏判断', tip:'从上往下逐条判断，成立一条就结束！',
+   rounds:[
+    {scene:'score = 95（>=90优秀，>=60及格，否则加油）', code:'if score >= 90:\n    print("优秀")\nelif score >= 60:\n    print("及格")\nelse:\n    print("加油")', q:'输出是？', opts:[{t:'优秀',ok:true},{t:'及格'},{t:'加油'}]},
+    {scene:'year = 2024 是闰年吗？', code:'if year % 4 == 0 and year % 100 != 0:\n    print("闰年")\nelse:\n    print("平年")', q:'输出是？', opts:[{t:'闰年',ok:true,why:'2024 能被 4 整除且不是整百年，是闰年。'},{t:'平年'},{t:'报错'}]},
+    {scene:'age = 10：先看满不满 6 岁，再看满不满 10 岁', code:'if age >= 6:\n    if age >= 10:\n        print("四年级")\n    else:\n        print("低年级")', q:'输出是？', opts:[{t:'四年级',ok:true},{t:'低年级'},{t:'什么都不输出'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'if-elif-else 中，前面的条件成立后，后面的 elif 不会再判断。', a:0, opts:['正确','错误'], why:'多分支只会执行第一个成立的分支。'},
+  {type:'选择', code:'s = 85\nif s >= 90:\n    print("优")\nelif s >= 80:\n    print("良")\nelse:\n    print("加油")', q:'输出是？', a:1, opts:['优','良','加油'], why:'85 不满足 >=90，但满足 >=80。'},
+  {type:'选择', q:'判断闰年“能被4整除且不能被100整除”，应用哪个逻辑词？', a:0, opts:['and','or','not'], why:'两个条件要同时成立，用 and。'}
+ ]
+},
+{
+ id:'l21', icon:'🔢', name:'循环嵌套与九九乘法表',
+ ref:'Python3 循环语句（嵌套）', lv:'GESP 二级 · 循环嵌套',
+ story:'一层循环像转一圈摩天轮，两层循环就是“摩天轮里还套着旋转木马”！外层转一下，内层要完整转一整圈——九九乘法表就是这么印出来的。',
+ secs:[
+  {h:'循环里套循环', code:'for i in range(1, 4):\n    for j in range(1, 4):\n        print(i * j, end=" ")\n    print()', out:'1 2 3 \n2 4 6 \n3 6 9 ', p:'外层 i 每取一个值，内层 j 都要从 1 跑到 3。'},
+  {h:'打印九九乘法表', code:'for i in range(1, 10):\n    for j in range(1, i + 1):\n        print(i, "×", j, "=", i*j, end="  ")\n    print()'},
+  {h:'break 只跳出自己所在的一层', code:'for i in range(3):\n    for j in range(3):\n        if j == 1:\n            break\n    print(i)', out:'0\n1\n2', warn:'内层 break 只跳出内层循环，外层循环还会继续！'}
+ ],
+ game:gMulTable,
+ hw:[
+  {type:'判断', q:'多层循环中，内层的 break 只能结束它所在的那一层循环。', a:0, opts:['正确','错误'], why:'break 只跳出当前层，外层不受影响。'},
+  {type:'选择', code:'for i in range(2):\n    for j in range(3):\n        print("*", end="")', q:'一共打印多少个 *？', a:1, opts:['5 个','6 个','3 个'], why:'外层 2 次 × 内层 3 次 = 6 次。'},
+  {type:'选择', q:'九九乘法表中 6 × 7 的结果在第几行第几列？', a:2, opts:['第 7 行第 6 列','第 6 行第 6 列','第 6 行第 7 列'], why:'i=6 是第 6 行，j=7 是第 7 列，交叉格 42。'}
+ ]
+},
+{
+ id:'l22', icon:'🔤', name:'ASCII 编码与类型转换',
+ ref:'Python3 类型转换 / ASCII', lv:'GESP 二级 · ASCII 编码',
+ story:'计算机只认识数字，于是给每个字母发了一个数字工牌：A 是 65，B 是 66……这套工牌就叫 ASCII 码。ord() 查工牌号，chr() 凭号码找字母！',
+ secs:[
+  {h:'ord() 与 chr()', code:'print(ord("A"))\nprint(chr(65))\nprint(ord("a") - ord("A"))', out:'65\nA\n32', p:'大写字母 A~Z 是 65~90，小写 a~z 是 97~122，大小写相差 32。'},
+  {h:'数字 ↔ 字符串', code:'print(int("12") + 3)\nprint(str(12) + "3")\nprint(float("3.5"))', out:'15\n123\n3.5', p:'int()、str()、float() 是三种常用的“变身魔法”。'},
+  {h:'变身失败会报错', code:'int("你好")   # ValueError', warn:'不是所有字符串都能变成数字，乱变身程序会报 ValueError！'}
+ ],
+ game:gAscii,
+ hw:[
+  {type:'选择', q:'ord("A") 的值是？', a:0, opts:['65','97','32'], why:'大写字母 A 的 ASCII 码是 65。'},
+  {type:'选择', q:'chr(66) 是哪个字符？', a:1, opts:['A','B','C'], why:'65 是 A，66 就是 B。'},
+  {type:'判断', q:'int("12") + 3 的结果是 15。', a:0, opts:['正确','错误'], why:'字符串 "12" 转成整数后 12+3=15。'}
+ ]
+},
+{
+ id:'l23', icon:'🧮', name:'常用数学函数',
+ ref:'Python3 数学函数 / math 模块', lv:'GESP 二级 · 简单数学函数',
+ story:'数学王国派来一群小助手：abs 专门去掉负号，max/min 是大小裁判，sum 是加法冠军，math.sqrt 会开平方！',
+ secs:[
+  {h:'内置数学函数', code:'print(abs(-9))\nprint(max(3, 9, 2))\nprint(min(3, 9, 2))\nprint(sum([1, 2, 3]))', out:'9\n9\n2\n6'},
+  {h:'math 模块', code:'import math\nprint(math.sqrt(16))', out:'4.0', p:'平方根 sqrt(16)=4，结果是浮点数 4.0。'},
+  {h:'四舍五入 round()', code:'print(round(3.6))\nprint(round(3.4))', out:'4\n3'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🧮 数学助手出动', tip:'max 取最大、min 取最小、abs 去负号、sqrt 开平方！',
+   rounds:[
+    {scene:'abs 去掉负号', code:'print(abs(-9))', q:'结果是？', opts:[{t:'9',ok:true},{t:'-9'},{t:'0'}]},
+    {scene:'三个数选最大', code:'print(max(3, 9, 2))', q:'结果是？', opts:[{t:'2'},{t:'3'},{t:'9',ok:true}]},
+    {scene:'平方根魔法', code:'import math\nprint(math.sqrt(16))', q:'结果是？', opts:[{t:'4'},{t:'4.0',ok:true,why:'sqrt 的结果是浮点数，所以是 4.0。'},{t:'8.0'}]}
+   ]}); },
+ hw:[
+  {type:'选择', q:'abs(-15) 的结果是？', a:1, opts:['-15','15','0'], why:'abs 求绝对值，去掉负号得 15。'},
+  {type:'选择', q:'sum([2, 4, 6]) 的结果是？', a:0, opts:['12','6','246'], why:'sum 把列表里的数全部加起来。'},
+  {type:'判断', q:'使用 math.sqrt() 之前要先 import math。', a:0, opts:['正确','错误'], why:'模块中的函数必须先导入模块才能使用。'}
+ ]
+},
+{
+ id:'l24', icon:'🗺️', name:'流程图与三大结构',
+ ref:'程序设计语言特点 / 流程图', lv:'GESP 二级 · 流程图',
+ story:'程序也有“地图”——流程图！圆角椭圆是开始结束，矩形是干活，菱形是路口判断，箭头指挥前进方向。',
+ secs:[
+  {h:'常见图形', p:'**椭圆**：开始/结束；**矩形**：处理步骤；**菱形**：条件判断（有“是/否”两条路）；**箭头**：执行方向。'},
+  {h:'三大结构', p:'**顺序结构**：一步接一步；**分支结构**：菱形判断，走不同的路；**循环结构**：箭头绕回去反复执行。'},
+  {h:'小知识：存储与网络', p:'内存速度快但断电数据就没了；硬盘/U盘能长期保存；光盘靠激光读写，**不怕强磁场**。'}
+ ],
+ game:gFlowchart,
+ hw:[
+  {type:'选择', q:'流程图中菱形框表示什么？', a:2, opts:['开始结束','处理步骤','条件判断'], why:'菱形是判断框，有“是/否”两个出口。'},
+  {type:'判断', q:'箭头绕回菱形反复判断，表示循环结构。', a:0, opts:['正确','错误'], why:'循环结构的特征就是流程线绕回判断处。'},
+  {type:'选择', q:'下面哪种存储器不怕强磁场干扰？', a:1, opts:['机械硬盘','光盘','U盘'], why:'光盘靠激光读写，属于物理结构，不受磁场影响（GESP 真题考点）。'}
+ ]
+},
+
+/* ================= GESP 三级 ================= */
+{
+ id:'l25', icon:'🔄', name:'进制转换（二/八/十/十六）',
+ ref:'Python3 进制 / bin oct hex', lv:'GESP 三级 · 进制转换',
+ story:'十进制是人类的习惯，二进制是电脑的母语！电脑用 0 和 1 说话，八进制、十六进制是二进制的“简写”。Python 里三个函数一键互转。',
+ secs:[
+  {h:'十进制转其他进制', code:'print(bin(10))\nprint(oct(10))\nprint(hex(255))', out:'0b1010\n0o12\n0xff', p:'bin→二进制（0b 前缀），oct→八进制（0o），hex→十六进制（0x，a~f 表示 10~15）。'},
+  {h:'字符串进制转回十进制', code:'print(int("1010", 2))\nprint(int("ff", 16))', out:'10\n255', p:'int(字符串, 进制) 第二个参数告诉它“这串数字是几进制”。'},
+  {h:'手算小技巧', p:'二进制 1010 = 1×8 + 0×4 + 1×2 + 0×1 = **10**。每一位的权是 2 的幂。'}
+ ],
+ game:gBaseConv,
+ hw:[
+  {type:'选择', q:'bin(10) 的结果是？', a:1, opts:['1010','0b1010','0o12'], why:'10 的二进制是 1010，Python 显示时带 0b 前缀。'},
+  {type:'选择', q:'把十进制 2024 转成八进制用哪个函数？', a:2, opts:['bin(2024)','hex(2024)','oct(2024)'], why:'oct 是八进制（octal）转换函数（GESP 真题）。'},
+  {type:'判断', q:'int("ff", 16) 的结果是 255。', a:0, opts:['正确','错误'], why:'ff = 15×16+15 = 255。'}
+ ]
+},
+{
+ id:'l26', icon:'🧊', name:'原码、反码与补码',
+ ref:'数据编码', lv:'GESP 三级 · 原码/反码/补码',
+ story:'负数在电脑里怎么存？科学家发明了三件“冰外套”：原码、反码、补码。正数三件外套都一样；负数要先取反再加 1。这样减法也能变加法，电脑算得飞快！',
+ secs:[
+  {h:'原码：最高位表示正负', p:'8 位二进制中，最高位 0 表示正数、1 表示负数。例如 +5 的原码是 **0000 0101**，-5 的原码是 **1000 0101**。'},
+  {h:'反码与补码（负数）', p:'负数的**反码**：符号位不变，其余位 0↔1 取反；**补码 = 反码 + 1**。-5 的补码是 **1111 1011**。正数的原码=反码=补码。'},
+  {h:'为什么用补码', p:'有了补码，电脑里的减法可以变成加法来算，运算器设计更简单，还不会出现 +0 和 -0 两个零。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🧊 冰外套三兄弟', tip:'正数三码相同；负数：反码取反、补码再加 1！',
+   rounds:[
+    {scene:'+5 的 8 位原码是 0000 0101', code:'# 正数的三件外套', q:'+5 的反码和补码是？', opts:[{t:'都是 0000 0101',ok:true,why:'正数的原码、反码、补码完全相同。'},{t:'1111 1010'},{t:'1111 1011'}]},
+    {scene:'8 位二进制里的 -1', code:'# -1 的补码', q:'-1 的 8 位补码是？', opts:[{t:'1000 0001'},{t:'1111 1110'},{t:'1111 1111',ok:true,why:'-1 原码 10000001 → 反码 11111110 → +1 = 11111111。'}]},
+    {scene:'电脑为什么爱用补码？', code:'# 补码的好处', q:'下列说法正确的是？', opts:[{t:'能让减法变加法，统一运算',ok:true},{t:'可以让数字变大一倍'},{t:'没有任何用处'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'正数的原码、反码、补码都相同。', a:0, opts:['正确','错误'], why:'只有负数需要取反加一，正数三码一致。'},
+  {type:'选择', q:'8 位二进制中，-1 的补码是？', a:2, opts:['10000001','11111110','11111111'], why:'反码 11111110 再加 1 得 11111111。'},
+  {type:'选择', q:'8 位原码中最高位为 1 表示什么？', a:1, opts:['正数','负数','数字 1'], why:'最高位是符号位，1 代表负、0 代表正。'}
+ ]
+},
+{
+ id:'l27', icon:'✂️', name:'字符串常用方法',
+ ref:'Python3 字符串（方法）', lv:'GESP 三级 · 字符串函数',
+ story:'文字精灵开了一家美容院：upper 把字母变大写，strip 剪两头空格，replace 做换词手术，split 一刀切成列表，join 再把它们缝起来！',
+ secs:[
+  {h:'大小写与去空格', code:'print("Hello".upper())\nprint("HELLO".lower())\nprint("  hi  ".strip())', out:'HELLO\nhello\nhi'},
+  {h:'替换、查找、切分、拼接', code:'print("猫和狗".replace("狗", "鸟"))\nprint("a,b,c".split(","))\nprint("-".join(["A", "B"]))', out:'猫和鸟\n[\'a\', \'b\', \'c\']\nA-B'},
+  {h:'重要：字符串不可变', code:'s = "abc"\ns.upper()\nprint(s)', out:'abc', warn:'方法不会改变原字符串，要保存结果必须 s = s.upper()！'}
+ ],
+ game:gStrMethods,
+ hw:[
+  {type:'选择', code:"s = 'gesp.ccf.org.cn'\nprint(s.split('.', 1))", q:'输出是？', a:0, opts:["['gesp', 'ccf.org.cn']","['gesp','ccf','org','cn']","报错"], why:'split 的第二个参数 1 表示只切第一刀（GESP 真题）。'},
+  {type:'选择', q:'"Hello".replace("l", "L") 的结果是？', a:1, opts:['heLLo','HeLLo','HELLO'], why:'只替换字母 l，H 和 o 不变，结果是 HeLLo。'},
+  {type:'判断', q:'s="abc"; s.upper() 后，s 仍然是 "abc"。', a:0, opts:['正确','错误'], why:'字符串不可变，方法返回新字符串，不重新赋值就不会改变 s。'}
+ ]
+},
+{
+ id:'l28', icon:'🚃', name:'列表进阶与推导式',
+ ref:'Python3 列表（切片/排序/推导式）', lv:'GESP 三级 · 列表高级应用',
+ story:'列表小火车升级啦！切片能一次摘走好几节车厢，sort 能让车厢自动排队，列表推导式就像“神奇复制机”——一行代码生成整列车！',
+ secs:[
+  {h:'切片 [起:止:步长]', code:'a = [0, 1, 2, 3, 4]\nprint(a[1:4])\nprint(a[::-1])', out:'[1, 2, 3]\n[4, 3, 2, 1, 0]', p:'步长 -1 表示倒着取，整个列表就反转了。'},
+  {h:'排序与反转', code:'a = [3, 1, 2]\na.sort()\nprint(a)\na.reverse()\nprint(a)', out:'[1, 2, 3]\n[3, 2, 1]', warn:'sort() 直接改变原列表；想保留原列表用 sorted(a)。'},
+  {h:'列表推导式', code:'print([i for i in range(1, 8) if i % 2 == 0])', out:'[2, 4, 6]', p:'读作：把 1~7 中“满足偶数条件”的 i 收集成新列表。'},
+  {h:'二维列表：表格一样的列表', code:'a = [[1, 2, 3],\n     [4, 5, 6]]\nprint(a[1][2])\nfor row in a:\n    print(sum(row))', out:'6\n6\n15', p:'列表里装列表就是**二维列表**，像一张表格：a[1][2] 是第 2 行第 3 列的值 6；外层循环取“行”，再遍历一行里的元素（四级考点）。'}
+ ],
+ game:gListTrain,
+ hw:[
+  {type:'选择', q:'[i for i in range(1, 36) if i % 7 == 0] 的结果是？', a:1, opts:['[7, 14, 21, 28]','[7, 14, 21, 28, 35]','[0, 7, 14, 21, 28, 35]'], why:'range(1,36) 包含 1~35，7 的倍数有 5 个（GESP 真题）。'},
+  {type:'选择', code:"a = ['o','r','a','n','g','e']\na.sort()\na.reverse()\nprint(a)", q:'输出是？', a:2, opts:["['a','e','g','n','o','r']","['e','g','n','a','r','o']","['r','o','n','g','e','a']"], why:'先升序 aegnor，再反转得 rongea（GESP 真题）。'},
+  {type:'判断', q:'a[::-1] 可以把列表倒序取出。', a:0, opts:['正确','错误'], why:'步长为 -1 的切片实现倒序。'}
+ ]
+},
+{
+ id:'l29', icon:'📚', name:'字典与集合综合应用',
+ ref:'Python3 字典/集合（综合）', lv:'GESP 三级 · 字典集合应用',
+ story:'字典电话簿升级成了“统计局”：update 能合并两本簿子，用集合给名单去重，再用字典数数——水果摊上各有多少水果，一眼算清！',
+ secs:[
+  {h:'字典合并 update', code:'a = {"name": "Tom", "age": 12}\nb = {"name": "Join", "email": "x@q.com"}\nb.update(a)\nprint(len(b))', out:'3', p:'同名的键 name 被覆盖，age 是新键，最终 3 对。'},
+  {h:'集合去重统计', code:'print(set("banana"))\nprint(len(set("banana")))', out:"{'b', 'a', 'n'}\n3", p:'集合自动去重，配合 len 就能数“有几种不同字符”。'},
+  {h:'zip 配对打包', code:'print(dict(zip(["a", "b"], [1, 2])))', out:"{'a': 1, 'b': 2}"}
+ ],
+ game:gDictCount,
+ hw:[
+  {type:'选择', code:"s = 'Happy new year'\nprint(len(set(s)))", q:'集合中元素个数描述正确的是？', a:0, opts:['空格也算一个字符，重复字母只算一次','每个字母都算','结果是 14'], why:'set 去重，空格也是字符；H、p、a、n、e、w、y、r 与空格共 9 种。'},
+  {type:'判断', q:'print(list("GESP")) 输出 [\'G\', \'E\', \'S\', \'P\']。', a:0, opts:['正确','错误'], why:'list 能把字符串拆成单个字符的列表（GESP 真题）。'},
+  {type:'选择', code:'a={"name":"Tom","age":12}\nb={"name":"Join","email":"j@q.com"}\nb.update(a)\nprint(len(b))', q:'输出是？', a:2, opts:['2','4','3'], why:'name 被覆盖不增加数量，age 新增，共 3 对（GESP 真题）。'}
+ ]
+},
+
+{
+ id:'l30', icon:'🐔', name:'枚举法：一个一个试',
+ ref:'算法：枚举法', lv:'GESP 三级 · 枚举算法',
+ story:'鸡和兔关在同一个笼子里，只数到 8 个头、22 条腿，鸡兔各几只？不用列方程！让电脑从“鸡 0 只”开始，一只一只地试——这就是枚举法，笨办法但最可靠。',
+ secs:[
+  {h:'枚举的套路', code:'for 鸡 in range(头数 + 1):\n    兔 = 头数 - 鸡\n    if 鸡*2 + 兔*4 == 腿数:\n        print(鸡, 兔)', p:'让电脑把所有可能一个不漏地试一遍，符合条件的就是答案。'},
+  {h:'为什么 range 要到头数+1', p:'鸡最少 0 只、最多等于总头数（全是鸡），range(头数+1) 正好包含 0~头数。'},
+  {h:'枚举的关键', tip:'① 确定范围（从哪试到哪）；② 确定判断条件；③ 一个都不能漏，也不能重复试。'}
+ ],
+ game:gEnum,
+ hw:[
+  {type:'选择', q:'鸡兔同笼，8 个头、22 条腿，鸡兔各几只？', a:1, opts:['鸡6兔2','鸡5兔3','鸡3兔5'], why:'5×2+3×4=10+12=22。'},
+  {type:'选择', q:'鸡兔同笼 8 个头，枚举鸡的只数时范围应是？', a:0, opts:['0 到 8','1 到 8','0 到 4'], why:'可能全是兔（鸡0只）也可能全是鸡（鸡8只）。'},
+  {type:'判断', q:'枚举法的核心是把所有可能的情况逐个检查，不能遗漏。', a:0, opts:['正确','错误'], why:'枚举又叫穷举，要求遍历全部可能。'}
+ ]
+},
+{
+ id:'l31', icon:'🔁', name:'模拟法：照着规则一步步走',
+ ref:'算法：模拟法', lv:'GESP 三级 · 模拟算法',
+ story:'6 个小朋友围成圈报数，数到 3 出列，谁会留到最后？不用找公式，照着游戏规则一步一步“演”出来——这就是模拟法，电脑最擅长干这个！',
+ secs:[
+  {h:'什么是模拟', p:'把题目规则原原本本翻译成程序步骤，让电脑像做游戏一样**一步步执行**，过程走完答案自然出现。'},
+  {h:'模拟的小技巧', p:'① 先用纸笔或表格手动走 1~2 步；② 用列表表示“圈里还剩谁”；③ 记录每一步变量变化，避免数错。'},
+  {h:'典型场景', code:'# 报数出圈、排队上车、时钟走动\n# 天气变化、游戏回合……\n# 规则越清楚，模拟越简单'}
+ ],
+ game:gSim,
+ hw:[
+  {type:'选择', code:'x = 0\nfor i in range(1, 5):\n    x = x + i\nprint(x)', q:'这是一个简单模拟，最终 x 是？', a:1, opts:['15','10','4'], why:'循环累加 1+2+3+4=10。'},
+  {type:'判断', q:'模拟法适合规则清晰、可以一步步照做的问题。', a:0, opts:['正确','错误'], why:'模拟就是按规则复现整个过程。'},
+  {type:'选择', q:'做模拟题时，避免数错的好办法是？', a:2, opts:['凭感觉猜答案','不写过程直接报数','用表格记录每一步的变量'], why:'列表格记录状态是模拟法最重要的习惯。'}
+ ]
+},
+
+/* ================= GESP 四级 ================= */
+{
+ id:'l32', icon:'⚗️', name:'函数进阶：参数与返回值',
+ ref:'Python3 函数（参数）', lv:'GESP 四级 · 函数定义与调用',
+ story:'魔法配方机升级：可以同时投放多份材料（多个参数），还能给材料设“默认值”——不放就用默认的。但要记住：默认材料必须排在最后！',
+ secs:[
+  {h:'形参与实参', code:'def add(a, b):      # a、b 是形参（占位材料）\n    return a + b\nprint(add(3, 4))      # 3、4 是实参（真实材料）', out:'7'},
+  {h:'默认参数必须放最后', code:'def greet(name, word="你好"):\n    print(word, name)\ngreet("阿笨")\ngreet("阿笨", "再见")', out:'你好 阿笨\n再见 阿笨', warn:'def f(a=10, b) 是错误的！有默认值的参数要排在没有默认值的后面。'},
+  {h:'return 把结果送出来', code:'def add10(a):\n    a = a + 10\n    return a\nx = 100\ny = add10(x)\nprint(x, y)', out:'100 110', p:'函数里 a+10 不会改变外面的 x；return 把新值 110 送出来（GESP 真题）。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'⚗️ 配方机升级版', tip:'形参是占位、实参是真实材料；return 送出结果！',
+   rounds:[
+    {scene:'def add(a, b): return a + b', code:'print(add(3, 4))', q:'输出是？', opts:[{t:'7',ok:true},{t:'34'},{t:'43'}]},
+    {scene:'def f(a, b=10): return a * b', code:'print(f(3))', q:'只给一个材料时输出？', opts:[{t:'30',ok:true,why:'b 用默认值 10，3×10=30。'},{t:'3'},{t:'报错'}]},
+    {scene:'GESP 真题：函数内 a=a+10', code:'def add10(a):\n    a = a + 10\n    return a\na = 100\nb = add10(a)\nprint(a, b)', q:'输出是？', opts:[{t:'100 110',ok:true,why:'整数是不可变对象，函数内改动不影响外面的 a。'},{t:'110 110'},{t:'100 100'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'调用函数时传入的真实数据叫“实参”，定义时的占位变量叫“形参”。', a:0, opts:['正确','错误'], why:'这是形参与实参的定义。'},
+  {type:'选择', q:'下面哪个函数定义是错误的？', a:1, opts:['def f(a, b=10):','def f(a=10, b):','def f(a, b):'], why:'带默认值的参数必须放在普通参数后面（GESP 真题）。'},
+  {type:'选择', code:'def f(a):\n    a = a + 10\n    return a\na = 5\nprint(f(a), a)', q:'输出是？', a:0, opts:['15 5','15 15','5 5'], why:'return 出 15；外面的 a 没有被改变，仍是 5。'}
+ ]
+},
+{
+ id:'l33', icon:'📦', name:'作用域与引用传递',
+ ref:'函数参数传递 / 作用域', lv:'GESP 四级 · 作用域与传参',
+ story:'函数内外各有各的“盒子架”：函数里新建的盒子，外面看不见。但列表这种大箱子有“共享魔法”——把箱子传进函数，在里面往里塞东西，外面的箱子也变了！',
+ secs:[
+  {h:'局部变量与全局变量', code:'def f():\n    x = 10      # 局部变量\nf()\nprint(x)        # 报错！外面看不见', warn:'函数内部定义的变量只在函数内有效。想在函数内修改全局变量需要 global 声明。'},
+  {h:'列表传入会“共享”（GESP 真题）', code:'def add(a):\n    a.append(10)\n    return a\na = [1, 2, 3]\nb = add(a)\nprint(a, b)', out:'[1, 2, 3, 10] [1, 2, 3, 10]', p:'列表是可变对象，形参 a 和外面的 a 指向同一个箱子，append 两边都看得见。'},
+  {h:'重新赋值就不再共享', code:'def add(a):\n    a = a.append(10)  # append 返回 None！\n    return a', out:'外面 [1,2,3,10]，函数返回 None', warn:'a.append(10) 没有返回值（None）；不要把它再赋给 a！'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'📦 箱子归属之谜', tip:'数字字符串“传复印件”，列表字典“共享真箱子”！',
+   rounds:[
+    {scene:'GESP 真题：列表传进函数并 append', code:'def add(a):\n    a.append(10)\n    return a\na = [1, 2, 3]\nb = add(a)\nprint(a, b)', q:'输出是？', opts:[{t:'[1,2,3,10] [1,2,3,10]',ok:true,why:'列表共享同一个箱子，append 后两边都多了 10。'},{t:'[1,2,3] [1,2,3,10]'},{t:'[1,2,3,10] None'}]},
+    {scene:'GESP 真题：a = a.append(10)', code:'def add(a):\n    a = a.append(10)\n    return a\na = [1, 2, 3]\nb = add(a)\nprint(a, b)', q:'输出是？', opts:[{t:'[1,2,3,10] [1,2,3,10]'},{t:'[1,2,3,10] None',ok:true,why:'append 原地修改列表但返回 None，b 得到 None。'},{t:'None None'}]},
+    {scene:'函数内部定义的变量', code:'def f():\n    x = 10\nf()\nprint(x)', q:'最后一行会怎样？', opts:[{t:'输出 10'},{t:'报错，x 在函数外不存在',ok:true},{t:'输出 0'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'把列表传给函数，函数内 append 的元素，函数外也能看到。', a:0, opts:['正确','错误'], why:'列表是可变对象，传的是同一个箱子的引用。'},
+  {type:'判断', q:'append() 方法执行后会返回修改后的新列表。', a:1, opts:['正确','错误'], why:'append 原地修改并返回 None，这是高频陷阱。'},
+  {type:'选择', q:'想在函数内部修改全局变量，需要先使用哪个关键字声明？', a:0, opts:['global','local','return'], why:'global 声明后函数内才能给全局变量赋值。'}
+ ]
+},
+{
+ id:'l34', icon:'🚨', name:'异常处理 try / except',
+ ref:'Python3 异常处理', lv:'GESP 四级 · 异常处理',
+ story:'程序也会“摔跤”：除以 0、输入文字当数字、清单越界……try 像给程序戴上护膝，摔倒了 except 接住它，finally 无论如何都要执行（比如关上文件）！',
+ secs:[
+  {h:'try-except-else-finally', code:'try:\n    n = int(input())\nexcept ValueError:\n    print("输入的不是整数")\nelse:\n    print("没出错，收到", n)\nfinally:\n    print("无论如何都执行")', p:'try 放可能出错的代码；except 接住对应错误；else 在没出错时执行；finally 必定执行。'},
+  {h:'常见异常', code:'1 / 0          # ZeroDivisionError\nint("3.14")    # ValueError\n[1, 2][3]      # IndexError\n{"a": 1}["b"]  # KeyError\nprint(x)       # NameError（x 未定义）', tip:'考级常考：输入 3.14 给 int() 会触发 ValueError，而不是 ZeroDivisionError！'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'🚨 抓 Bug 小卫士', tip:'看错误现象，说出它的“异常名字”！',
+   rounds:[
+    {scene:'计算 1 / 0', code:'print(1 / 0)', q:'会抛出什么异常？', opts:[{t:'ZeroDivisionError',ok:true},{t:'ValueError'},{t:'IndexError'}]},
+    {scene:'把 "3.14" 变成整数', code:'int("3.14")', q:'会抛出什么异常？', opts:[{t:'ZeroDivisionError'},{t:'ValueError',ok:true,why:'3.14 不是合法的整数字符串，int 转换失败。'},{t:'KeyError'}]},
+    {scene:'从两个元素的列表取第 4 个', code:'[1, 2][3]', q:'会抛出什么异常？', opts:[{t:'IndexError',ok:true,why:'索引 3 超出列表范围，是下标越界。'},{t:'ValueError'},{t:'TypeError'}]},
+    {scene:'查字典里不存在的键', code:'{"a": 1}["b"]', q:'会抛出什么异常？', opts:[{t:'KeyError',ok:true},{t:'IndexError'},{t:'NameError'}]}
+   ]}); },
+ hw:[
+  {type:'判断', q:'else 子句中的代码只有在 try 里没有发生异常时才执行。', a:0, opts:['正确','错误'], why:'else 是“没出错才走”的分支（GESP 真题判断）。'},
+  {type:'选择', code:'try:\n    m = int(input())\n    n = int(input())\n    print(m / n)\nexcept ZeroDivisionError:\n    print(1)\nexcept:\n    print(2)\nfinally:\n    print(4)', q:'输入 3.14 时输出？', a:2, opts:['1 和 4','只输出 4','2 和 4'], why:'int("3.14") 抛 ValueError，被通用 except 接住输出 2，finally 再输出 4（GESP 真题）。'},
+  {type:'选择', q:'finally 子句的特点是？', a:1, opts:['只在出错时执行','无论是否出错都会执行','只在没出错时执行'], why:'finally 常用于关闭文件等收尾工作，必定执行。'}
+ ]
+},
+{
+ id:'l35', icon:'📁', name:'文件读写（r / w / a）',
+ ref:'Python3 文件读写', lv:'GESP 四级 · 文件操作',
+ story:'电脑里的文件像一个个笔记本："r" 是翻开看（读），"w" 是换一本新的写（旧内容会被擦掉！），"a" 是翻到最后一页接着写。用完一定要把本子合上 close()！',
+ secs:[
+  {h:'三种打开模式', code:'f = open("diary.txt", "w")  # w 写入（覆盖）\nf.write("你好")\nf.close()\nf = open("diary.txt", "a")  # a 追加（末尾续写）\nf.write("Python")\nf.close()\nf = open("diary.txt", "r")  # r 读取\nprint(f.read())\nf.close()', out:'你好Python', warn:'w 会清空原文件！想保留旧内容请用 a。'},
+  {h:'with 自动关门', code:'with open("a.txt", "w") as f:\n    f.write("hello")   # 缩进结束自动 close()'},
+  {h:'二进制与编码', code:'open("a.png", "rb")       # 读图片等二进制文件加 b\nopen("a.txt", encoding="utf-8")  # 中文指定 utf-8'}
+ ],
+ game:gFile,
+ hw:[
+  {type:'选择', q:'想在已存在文件末尾续写，应使用哪种模式？', a:2, opts:['w','r','a'], why:'a（append）把指针放到文件末尾，不会覆盖旧内容（GESP 真题）。'},
+  {type:'选择', q:'复制图片文件时，打开和写入应使用什么模式？', a:0, opts:['rb 和 wb','r 和 w','a 和 a'], why:'图片是二进制文件，要加 b（GESP 真题）。'},
+  {type:'判断', q:'用 w 模式打开一个已有文件，原内容会被清空。', a:0, opts:['正确','错误'], why:'w 模式会新建或截断文件，这是高频考点。'}
+ ]
+},
+{
+ id:'l36', icon:'🫧', name:'冒泡排序',
+ ref:'排序算法：冒泡排序', lv:'GESP 四级 · 排序算法',
+ story:'水里的小气泡总是一个一个往上冒！冒泡排序让相邻两个数“比个子”，左边大就交换。每走一趟，最大的数就沉到最右边。',
+ secs:[
+  {h:'冒泡怎么排', code:'a = [5, 3, 4, 1, 2]\nfor i in range(len(a) - 1):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j+1] = a[j+1], a[j]', p:'第 i 轮结束，右边 i 个数已经就位，所以内层不用再比较它们。'},
+  {h:'特点', p:'**稳定排序**：相等的两个数不交换，原来谁在前还在前；时间复杂度 **O(n²)**，数据越多越慢。'}
+ ],
+ game:gBubble,
+ hw:[
+  {type:'选择', q:'冒泡排序每完成一轮，哪个位置的数一定就位？', a:1, opts:['最左边','最右边（本轮最大值）','中间'], why:'每轮把最大的数一路交换到未排序部分的最右端。'},
+  {type:'判断', q:'冒泡排序是稳定的排序算法。', a:0, opts:['正确','错误'], why:'相等元素不交换，相对顺序保持不变。'},
+  {type:'选择', q:'冒泡排序使用双层循环，它的时间复杂度是？', a:2, opts:['O(1)','O(n)','O(n²)'], why:'两层循环嵌套，操作次数随 n² 增长。'}
+ ]
+},
+{
+ id:'l37', icon:'👆', name:'选择排序与插入排序',
+ ref:'排序算法：选择/插入排序', lv:'GESP 四级 · 排序算法',
+ story:'选择排序像排队选队长：每轮从剩下的人里挑最矮的，跟最前面的位置交换；插入排序像理扑克牌：每摸一张新牌，就插到手里已排好的牌中合适的位置。',
+ secs:[
+  {h:'选择排序', code:'a = [4, 2, 5, 1, 3]\nfor i in range(len(a) - 1):\n    mi = i\n    for j in range(i + 1, len(a)):\n        if a[j] < a[mi]:\n            mi = j\n    a[i], a[mi] = a[mi], a[i]', p:'每轮选最小值放到前面。注意：它可能把相等元素“跳着交换”，所以**不稳定**。'},
+  {h:'插入排序', code:'for i in range(1, len(a)):\n    key = a[i]\n    j = i - 1\n    while j >= 0 and a[j] > key:\n        a[j+1] = a[j]\n        j -= 1\n    a[j+1] = key', p:'像抓牌一样把新元素插入前面有序区，相等元素不会越过彼此，**稳定**。'}
+ ],
+ game:gSelectSort,
+ hw:[
+  {type:'选择', q:'GESP 真题：下列关于稳定性的说法正确的是？', a:2, opts:['冒泡排序不稳定','插入排序不稳定','选择排序不稳定'], why:'选择排序的跨位交换可能改变相等元素的相对顺序（GESP 真题）。'},
+  {type:'选择', code:'a = [3, 1, 2]\n# 选择排序第 1 轮后', q:'第一轮（把最小值换到位置0）后数组是？', a:1, opts:['[1, 2, 3]','[1, 3, 2]','[2, 1, 3]'], why:'第 1 轮选出最小值 1，与位置 0 的 3 交换，得 [1,3,2]。'},
+  {type:'判断', q:'插入排序的工作方式类似整理手中的扑克牌。', a:0, opts:['正确','错误'], why:'新元素插入到前面已排好序的牌列中，正是插入排序。'}
+ ]
+},
+{
+ id:'l38', icon:'🐰', name:'递推：斐波那契数列',
+ ref:'算法：递推', lv:'GESP 四级 · 递推算法',
+ story:'小兔子有个神奇规律：刚出生的兔子两个月后开始每月生一对。第1、2月各1对，之后每个月的数量都等于前两个月之和！不用往前追，只要从前面两项“推”出下一项——这就是递推。',
+ secs:[
+  {h:'斐波那契数列', code:'1, 1, 2, 3, 5, 8, 13, 21 …', p:'递推关系：**f[n] = f[n-1] + f[n-2]**，起点 f[1]=f[2]=1。'},
+  {h:'用循环递推', code:'a, b = 1, 1\nfor i in range(6):\n    a, b = b, a + b\nprint(a)', out:'13', p:'每次让 a、b 这对“前两项”向前滚一格，新值由旧值推出。'},
+  {h:'递推的关键', tip:'① 找到递推关系式（后面的怎么由前面的得到）；② 确定初始条件（最初几项）；③ 用循环一步步推到答案。'}
+ ],
+ game:gFib,
+ hw:[
+  {type:'选择', q:'斐波那契数列 1,1,2,3,5,8,… 的第 7 项是？', a:1, opts:['8','13','21'], why:'第7项 = 第5项 + 第6项 = 5 + 8 = 13。'},
+  {type:'判断', q:'递推算法是用前面已知的项一步步推出后面的项。', a:0, opts:['正确','错误'], why:'这正是递推的基本思想。'},
+  {type:'选择', q:'使用递推前，除了递推关系式还必须确定什么？', a:0, opts:['初始条件（最初的项）','电脑的颜色','变量的字体'], why:'没有起点就无法开始递推。'}
+ ]
+},
+{
+ id:'l39', icon:'📈', name:'算法复杂度与稳定性',
+ ref:'算法复杂度估算', lv:'GESP 四级 · 复杂度',
+ story:'同样给 100 个数排队，有的算法只走 100 步，有的要走 10000 步！复杂度就是给算法“计时”的记号：一层循环 O(n)，两层嵌套 O(n²)。',
+ secs:[
+  {h:'大 O 记号', code:'print(a)            # O(1)  和数据多少无关\nfor x in a: ...     # O(n)  一层循环\nfor x in a:\n    for y in a: ... # O(n²) 两层嵌套', p:'n=100 时，O(n) 约 100 次操作，O(n²) 约 10000 次，差距巨大。'},
+  {h:'时间 vs 空间', p:'**时间复杂度**看操作次数；**空间复杂度**看额外占用的存储空间。'},
+  {h:'稳定性回顾', p:'冒泡 ✅ 稳定、插入 ✅ 稳定、选择 ❌ 不稳定。稳定 = 相等关键字排完序后相对顺序不变。'}
+ ],
+ game:function(box,win){ gScene(box,win,{
+   title:'📈 算法测速员', tip:'数循环层数：0层 O(1)，1层 O(n)，2层 O(n²)！',
+   rounds:[
+    {scene:'GESP 真题：求列表平均值', code:'def avg(nums):\n    s = 0\n    for x in nums:\n        s += x\n    return s / len(nums)', q:'时间复杂度是？', opts:[{t:'O(1)'},{t:'O(n)',ok:true,why:'只有一层循环，数据 n 个就循环 n 次（GESP 真题）。'},{t:'O(n²)'}]},
+    {scene:'双重循环找因数', code:'for i in range(1, n):\n    for j in range(1, n):\n        ...', q:'时间复杂度是？', opts:[{t:'O(1)'},{t:'O(n)'},{t:'O(n²)',ok:true}]},
+    {scene:'直接取列表第一个元素', code:'print(a[0])', q:'时间复杂度是？', opts:[{t:'O(1)',ok:true},{t:'O(n)'},{t:'O(n²)'}]}
+   ]}); },
+ hw:[
+  {type:'选择', q:'一层 for 循环遍历 n 个数据，时间复杂度是？', a:1, opts:['O(1)','O(n)','O(n²)'], why:'循环次数随 n 线性增长。'},
+  {type:'选择', q:'两层相互嵌套的循环，每层都与 n 有关，复杂度是？', a:2, opts:['O(n)','O(2n)','O(n²)'], why:'嵌套循环次数相乘：n×n = n²。'},
+  {type:'判断', q:'n=100 时，O(n²) 算法大约要做 10000 次操作。', a:0, opts:['正确','错误'], why:'100×100=10000，数量级上是对的。'}
+ ]
+}
+];
+
+function ifTip(){ return 'if、elif、else、for、while、def 行尾都必须有冒号，下一行缩进。'; }
+
+/* ============================================================
+   GESP 模拟考级
+============================================================ */
+var EXAM_POOL=[
+ {type:'判断', q:'Python 用缩进来表示代码之间的层级关系。', a:0, opts:['正确','错误'], why:'Python 依靠缩进区分代码块，同一层级要对齐。'},
+ {type:'选择', q:'print(10 // 3) 的结果是？', a:1, opts:['3.3','3','4'], why:'// 是整除，只保留商 3。'},
+ {type:'选择', q:'input() 从键盘得到的数据是什么类型？', a:2, opts:['整数 int','小数 float','字符串 str'], why:'input 的结果永远是字符串，数字也要 int() 转换。'},
+ {type:'选择', q:'type(True) 的结果是？', a:1, opts:["<class 'int'>","<class 'bool'>","<class 'str'>"], why:'True/False 是布尔类型 bool。'},
+ {type:'判断', q:'"ab" + "cd" 的结果是 "abcd"。', a:0, opts:['正确','错误'], why:'+ 可以拼接字符串。'},
+ {type:'选择', q:'a = [1]; a.append(2); print(len(a)) 输出？', a:1, opts:['1','2','3'], why:'append 加了一个元素，长度变成 2。'},
+ {type:'选择', q:'7 % 2 的结果是？', a:0, opts:['1','3','0'], why:'7 除以 2 余 1。'},
+ {type:'选择', q:'not (3 > 4) 的结果是？', a:0, opts:['True','False','3'], why:'3>4 为 False，not 翻转后是 True。'},
+ {type:'选择', q:'for i in range(4) 循环几次？', a:1, opts:['3 次','4 次','5 次'], why:'range(4) 是 0、1、2、3，共 4 次。'},
+ {type:'判断', q:'元组创建后可以随意修改其中的元素。', a:1, opts:['正确','错误'], why:'元组是只读的，不能修改。'},
+ {type:'选择', q:'d = {"a": 1}; print(d["a"]) 输出？', a:0, opts:['1','a','报错'], why:'按键 "a" 找到值 1。'},
+ {type:'选择', code:'score = 85\nif score >= 90:\n    print("优")\nelif score >= 80:\n    print("良")\nelse:\n    print("加油")', q:'输出是？', a:1, opts:['优','良','加油'], why:'85 满足 >=80 的 elif 分支。'},
+ {type:'选择', code:'def double(x):\n    return x * 2\nprint(double(6))', q:'输出是？', a:1, opts:['12','36','62'], why:'6*2=12。'},
+ {type:'判断', q:'random.randint(1, 10) 永远不会返回 0。', a:0, opts:['正确','错误'], why:'范围包含 1 和 10，不含 0。'},
+ {type:'选择', q:'CPU 是什么？', a:0, opts:['中央处理器，计算机的“大脑”','一种显示器','用来打印的设备'], why:'CPU 是中央处理器，负责运算和控制。'},
+ {type:'判断', q:'Python 区分大小写，age 和 Age 是两个不同的变量。', a:0, opts:['正确','错误'], why:'Python 大小写敏感。'},
+ /* ===== 二~四级新增题 ===== */
+ {type:'选择', q:'ord("a") 与 ord("A") 的差是多少？', a:1, opts:['16','32','26'], why:'小写字母 ASCII 码比对应大写字母大 32（GESP 二级真题）。'},
+ {type:'判断', q:'流程图中，菱形框表示“判断/条件选择”。', a:0, opts:['正确','错误'], why:'菱形是判断框，矩形是处理框，平行四边形是输入输出。'},
+ {type:'选择', q:'abs(-7) 的结果是？', a:0, opts:['7','-7','0'], why:'abs 求绝对值。'},
+ {type:'选择', q:'十六进制 1A 等于十进制多少？', a:1, opts:['16','26','32'], why:'1A = 1×16+10 = 26。'},
+ {type:'选择', q:'bin(10) 的结果是？', a:1, opts:['1010','0b1010','0o12'], why:'Python 的 bin() 带 0b 前缀。'},
+ {type:'选择', q:'8 位二进制原码中，-1 的表示是？', a:2, opts:['00000001','11111110','10000001'], why:'最高位 1 表示负号，后 7 位是数值 1，即 10000001。'},
+ {type:'选择', code:'s = "Hello"\nprint(s.replace("l", "L"))', q:'输出是？', a:1, opts:['HELLO','HeLLo','hello'], why:'只把两个小写 l 替换成大写 L。'},
+ {type:'判断', q:'[x*x for x in range(3)] 得到 [0, 1, 4]。', a:0, opts:['正确','错误'], why:'列表推导式依次求 0²、1²、2²。'},
+ {type:'选择', code:'def f(a):\n    a = a + 10\n    return a\na = 100\nprint(f(a), a)', q:'输出是？', a:1, opts:['110 110','110 100','100 100'], why:'整数不可变，函数内改动不影响外面的 a（GESP 四级真题）。'},
+ {type:'选择', code:'def add(a):\n    a.append(10)\n    return a\na = [1, 2]\nb = add(a)\nprint(len(a), len(b))', q:'输出是？', a:0, opts:['3 3','2 3','2 2'], why:'列表共享同一个箱子，append 后 a、b 长度都是 3（GESP 四级真题）。'},
+ {type:'选择', q:'下列定义中存在语法错误的是？', a:1, opts:['def f(a, b=10):','def f(a=10, b):','def f(a, b):'], why:'带默认值的参数必须放在普通参数后面。'},
+ {type:'选择', q:'想在已有文件末尾续写内容，应使用哪种打开模式？', a:2, opts:['w','r','a'], why:'a（append）追加且不覆盖原内容。'},
+ {type:'选择', code:'try:\n    print(int("3.14"))\nexcept ValueError:\n    print(1)\nfinally:\n    print(2)', q:'输出是？', a:1, opts:['1','先 1 再 2','2'], why:'int("3.14") 触发 ValueError 打印 1，finally 必定再打印 2（GESP 四级真题）。'},
+ {type:'选择', q:'GESP 真题：下列排序算法中不稳定的是？', a:2, opts:['冒泡排序','插入排序','选择排序'], why:'选择排序的跨位交换可能改变相等元素的相对顺序。'},
+ {type:'选择', q:'单层 for 循环遍历 n 个数据，时间复杂度是？', a:1, opts:['O(1)','O(n)','O(n²)'], why:'循环 n 次，随数据量线性增长。'}
+];
+
+function renderExam(box){
+  var qs=shuffle(EXAM_POOL).slice(0,10), answered={};
+  box.innerHTML='';
+  box.appendChild(mk('div','task','🏅 GESP Python 一~四级模拟考级：题库含 31 道真题风格题，随机抽 10 题（判断 + 选择），每题 10 分，60 分及格！'));
+  qs.forEach(function(q,qi){
+    var card=mk('div','hw-q');
+    var head=mk('div','qline');
+    head.innerHTML='<span style="color:#6c5ce7;font-weight:900">第 '+(qi+1)+' 题</span> <span class="hw-type '+(q.type==='判断'?'judge':'choice')+'">'+q.type+'</span>'+esc(q.q);
+    card.appendChild(head);
+    if(q.code) card.appendChild(codeBlock(q.code));
+    var oo=mk('div','opts');
+    q.opts.forEach(function(t,oi){
+      var isCode=/[()=<>%/*]/.test(t);
+      var b=mk('button','opt'+(isCode?' code-opt':''),esc(t));
+      b.onclick=function(){
+        if(answered[qi]!==undefined) return;
+        answered[qi]=oi;
+        card.classList.add('answered', oi===q.a?'correct':'wrong');
+        b.classList.add(oi===q.a?'good':'bad');
+        if(oi!==q.a){ oo.children[q.a].classList.add('good'); tone('no'); } else tone('ok');
+        if(Object.keys(answered).length===10) finish();
+      };
+      oo.appendChild(b);
+    });
+    card.appendChild(oo);
+    card.appendChild(mk('div','why','💡 解析：'+esc(q.why)));
+    box.appendChild(card);
+  });
+  var res=mk('div'); box.appendChild(res);
+  function finish(){
+    var score=qs.filter(function(q,qi){ return answered[qi]===q.a; }).length*10;
+    tone(score>=60?'win':'no');
+    if(score>=60){
+      pSet('exam','h',1); updateHeader(); renderTabs();
+      res.innerHTML='<div class="cert"><div class="seal">🏅</div><h2>恭喜通过模拟考级！</h2><p>得分：<b style="font-size:26px;color:#d97706">'+score+' 分</b></p><p>你已经具备 GESP Python 一~四级的实力啦，去官方报名实战吧！</p></div>';
+    }else{
+      res.innerHTML='<div class="hw-result" style="font-size:19px">得分：'+score+' 分，还差 '+(60-score)+' 分及格！</div>';
+      var rb=mk('button','btn','🔄 再考一次');
+      rb.onclick=function(){ renderExam(box); };
+      res.appendChild(rb);
+    }
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  }
+}
+
+/* ============================================================
+   GESP 考纲清单
+============================================================ */
+var GESP_OUTLINE=[
+ {t:'计算机基础与编程环境、计算机历史', l:null},
+ {t:'变量的定义与使用', l:'l3'},
+ {t:'基本数据类型：整数 int、小数 float、字符串 str、布尔 bool', l:'l4'},
+ {t:'输入输出语句 input() 与 print()', l:'l1', l2:'l7'},
+ {t:'算术运算符 + - * / // % **', l:'l5'},
+ {t:'比较运算符 == != > < >= <=', l:'l6'},
+ {t:'逻辑运算符 and or not', l:'l6'},
+ {t:'顺序结构', l:'l1'},
+ {t:'选择结构 if / elif / else', l:'l13'},
+ {t:'循环结构 while 与 for', l:'l14', l2:'l15'},
+ {t:'break 与 continue', l:'l16'},
+ {t:'Turtle 海龟绘图', l:'l19'},
+ {t:'字符串、列表、字典、元组、集合（为二三级打基础）', l:'l8', l2:'l9'},
+ /* ===== 二级 ===== */
+ {t:'【二级】多层分支结构与 if 嵌套', l:'l20'},
+ {t:'【二级】循环的嵌套', l:'l21'},
+ {t:'【二级】ASCII 编码与字符类型转换 chr()/ord()', l:'l22'},
+ {t:'【二级】常用数学函数 abs/max/min/round 等', l:'l23'},
+ {t:'【二级】流程图：顺序、分支、循环三种结构', l:'l24'},
+ {t:'【二级】计算机存储基础、网络常识', l:null},
+ /* ===== 三级 ===== */
+ {t:'【三级】二、八、十、十六进制转换 bin/oct/hex', l:'l25'},
+ {t:'【三级】原码、反码、补码', l:'l26'},
+ {t:'【三级】字符串常用函数与方法', l:'l27'},
+ {t:'【三级】列表、元组操作与列表推导式', l:'l28'},
+ {t:'【三级】字典、集合的综合应用', l:'l29'},
+ {t:'【三级】枚举法', l:'l30'},
+ {t:'【三级】模拟法', l:'l31'},
+ /* ===== 四级 ===== */
+ {t:'【四级】函数定义、调用、形参与实参', l:'l32'},
+ {t:'【四级】默认参数、返回值、变量作用域', l:'l32', l2:'l33'},
+ {t:'【四级】值传递与引用传递', l:'l33'},
+ {t:'【四级】复合数据的嵌套使用', l:'l29', l2:'l28'},
+ {t:'【四级】异常处理 try/except/else/finally', l:'l34'},
+ {t:'【四级】文件的打开、读写与关闭（r/w/a）', l:'l35'},
+ {t:'【四级】冒泡排序及稳定性', l:'l36'},
+ {t:'【四级】选择排序、插入排序及稳定性', l:'l37'},
+ {t:'【四级】递推算法（斐波那契）', l:'l38'},
+ {t:'【四级】时间复杂度与空间复杂度估算', l:'l39'}
+];
+
+/* ============================================================
+   页面渲染
+============================================================ */
+var tabsEl=document.getElementById('tabs'), mapView=document.getElementById('mapView'),
+    lessonView=document.getElementById('lessonView'), guideView=document.getElementById('guideView'),
+    lessonBody=document.getElementById('lessonBody');
+var view='map', cur=0;
+
+function unlocked(i){ return i===0 || pGet(LESSONS[i-1].id,'h'); }
+function isDone(i){ return pGet(LESSONS[i].id,'h'); }
+function starCount(){ return LESSONS.filter(function(l){ return pGet(l.id,'h'); }).length; }
+
+function updateHeader(){
+  document.getElementById('starCount').textContent=starCount();
+  document.getElementById('progressFill').style.width=(starCount()/LESSONS.length*100)+'%';
+  document.getElementById('soundBtn').textContent=state.sound?'🔊':'🔇';
+}
+
+function tabBtn(html, active, locked, done, title, onclick){
+  var b=mk('button','tab'+(active?' active':'')+(locked?' locked':'')+(done?' done':''),html);
+  if(title) b.title=title;
+  b.onclick=onclick;
+  return b;
+}
+
+function renderTabs(){
+  tabsEl.innerHTML='';
+  tabsEl.appendChild(tabBtn('🗺️ 地图',view==='map',false,false,'',showMap));
+  LESSONS.forEach(function(lv,i){
+    var locked=!unlocked(i);
+    tabsEl.appendChild(tabBtn((locked?'🔒 ':(isDone(i)?'⭐ ':'🎯 '))+lv.icon+(i+1),
+      view==='lesson'&&cur===i, locked, isDone(i), lv.name,
+      function(){ if(locked){ hint('先通过上一课的作业才能解锁哦！'); } else openLesson(i); }));
+  });
+  tabsEl.appendChild(tabBtn('🏅 模拟考',view==='exam',false,false,'GESP 模拟考级',openExam));
+  tabsEl.appendChild(tabBtn('📖 考纲',view==='guide',false,false,'GESP 考纲',openGuide));
+}
+
+function renderMap(){
+  var grid=document.getElementById('mapGrid'); grid.innerHTML='';
+  LESSONS.forEach(function(lv,i){
+    var locked=!unlocked(i), done=isDone(i);
+    var card=mk('div','lv-card'+(locked?' locked':''));
+    card.innerHTML='<div class="st">'+(locked?'🔒':(done?'⭐':'🎯'))+'</div>'+
+      '<div class="ic">'+lv.icon+'</div>'+
+      '<div class="nm">第 '+(i+1)+' 课 · '+lv.name+'</div>'+
+      '<div class="rf">📚 菜鸟教程：'+lv.ref+'<br>🏅 '+lv.lv+'</div>';
+    card.onclick=function(){
+      if(locked){ hint('先通过上一课的作业才能解锁哦！'); } else openLesson(i);
+    };
+    grid.appendChild(card);
+  });
+  var examCard=mk('div','lv-card');
+  examCard.style.border='2px solid #f59e0b';
+  examCard.innerHTML='<div class="st">🏅</div><div class="ic">📝</div><div class="nm">GESP 一~四级模拟考级</div><div class="rf">随机 10 题 · 60 分及格 · 颁发电子证书</div>';
+  examCard.onclick=openExam;
+  grid.appendChild(examCard);
+}
+
+function renderGuide(){
+  var box=document.getElementById('gespChecklist');
+  box.innerHTML='';
+  GESP_OUTLINE.forEach(function(o){
+    var done=o.l && pGet(o.l,'h') || (o.l2 && pGet(o.l2,'h'));
+    var row=mk('div', done?'ok':'pending');
+    row.innerHTML=(done?'✅ ':'⬜ ')+esc(o.t)+(o.l?'  <small>→ 第 '+(LESSONS.findIndex(function(x){return x.id===o.l;})+1)+' 课</small>':'  <small>（常识性内容，课堂讲解即可）</small>');
+    box.appendChild(row);
+  });
+}
+
+function showMap(){
+  view='map';
+  mapView.classList.remove('hidden'); lessonView.classList.add('hidden'); guideView.classList.add('hidden');
+  renderTabs(); renderMap(); window.scrollTo(0,0);
+}
+function openGuide(){
+  view='guide';
+  mapView.classList.add('hidden'); lessonView.classList.add('hidden'); guideView.classList.remove('hidden');
+  renderTabs(); renderGuide(); window.scrollTo(0,0);
+}
+function openExam(){
+  view='exam';
+  mapView.classList.add('hidden'); guideView.classList.add('hidden'); lessonView.classList.remove('hidden');
+  renderTabs();
+  lessonBody.innerHTML='';
+  var head=mk('div','card lv-head');
+  head.innerHTML='<div class="ic">🏅</div><h2>GESP Python 一~四级模拟考级</h2>'+(pGet('exam','h')?'<span class="done-chip">已通过</span>':'');
+  var card=mk('div','card');
+  lessonBody.append(head,card);
+  renderExam(card);
+  window.scrollTo(0,0);
+}
+
+function openLesson(i){
+  view='lesson'; cur=i;
+  mapView.classList.add('hidden'); guideView.classList.add('hidden'); lessonView.classList.remove('hidden');
+  renderTabs(); buildLesson(i); window.scrollTo(0,0);
+}
+
+function buildLesson(i){
+  var lv=LESSONS[i];
+  lessonBody.innerHTML='';
+  var head=mk('div','card lv-head');
+  head.innerHTML='<div class="ic">'+lv.icon+'</div><h2>第 '+(i+1)+' 课 · '+lv.name+'</h2>'+
+    '<div class="chips"><span class="gchip runoob">📚 '+lv.ref+'</span><span class="gchip gesp">🏅 '+lv.lv+'</span>'+
+    (isDone(i)?'<span class="done-chip">⭐ 已通关</span>':'')+'</div>';
+  var story=mk('div','card story');
+  story.innerHTML='<div class="avatar">🐢</div><p><b>趣味故事：</b>'+lv.story+'</p>';
+
+  var learn=mk('div','card kb');
+  learn.appendChild(mk('h3','sec learn','📖 知识点讲解'));
+  lv.secs.forEach(function(s){
+    var sec=mk('div');
+    sec.appendChild(mk('p','', '<b>'+s.h+'</b>'));
+    if(s.p) sec.appendChild(mk('p','',para(s.p)));
+    if(s.code) sec.appendChild(codeBlock(s.code));
+    if(s.out!==undefined) sec.appendChild(outBlock(s.out));
+    if(s.tip) sec.appendChild(mk('p','tip','💡 '+s.tip));
+    if(s.warn) sec.appendChild(mk('p','warn','⚠️ '+s.warn));
+    learn.appendChild(sec);
+  });
+
+  var game=mk('div','card');
+  game.appendChild(mk('h3','sec game','🎮 互动小游戏'));
+  var gbox=mk('div'); game.appendChild(gbox);
+
+  var hw=mk('div','card');
+  hw.appendChild(mk('h3','sec hw','📝 课后作业（GESP 题型）'));
+  var hbox=mk('div'); hw.appendChild(hbox);
+
+  lessonBody.append(head,story,learn,game,hw);
+
+  renderHomework(hbox, lv, function(){
+    updateHeader(); renderTabs();
+    setTimeout(function(){ showReward(i); }, 300);
+  });
+
+  if(pGet(lv.id,'g')){
+    gbox.appendChild(mk('div','lock-note','✅ 本课小游戏已通关（可在下方复习作业）。想再玩一次：'));
+    var again=mk('button','btn ghost','🔁 重玩小游戏');
+    again.style.marginTop='8px';
+    again.onclick=function(){ gbox.innerHTML=''; lv.game(gbox, gameWin); };
+    gbox.appendChild(again);
+  }else{
+    lv.game(gbox, gameWin);
+  }
+  function gameWin(){
+    tone('win');
+    pSet(lv.id,'g',1);
+    hint('🎉 小游戏通关！课后作业已解锁，往下滑开始做题！');
+    gbox.innerHTML='';
+    gbox.appendChild(mk('div','lock-note','✅ 小游戏通关！课后作业已解锁 ↑ 上方是作业区'));
+    var ag=mk('button','btn ghost','🔁 再玩一次');
+    ag.style.marginTop='8px';
+    ag.onclick=function(){ gbox.innerHTML=''; lv.game(gbox,function(){ gbox.innerHTML=''; gbox.appendChild(mk('div','lock-note','✅ 又通关一次，真棒！')); }); };
+    gbox.appendChild(ag);
+    /* 刷新作业解锁状态 */
+    hbox.innerHTML='';
+    renderHomework(hbox, lv, function(){ updateHeader(); renderTabs(); setTimeout(function(){ showReward(i); },300); });
+    window.scrollTo({top:hw.offsetTop-70,behavior:'smooth'});
+  }
+}
+
+function showReward(i){
+  var lv=LESSONS[i];
+  var ov=mk('div','overlay'), card=mk('div','reward');
+  var last=i===LESSONS.length-1;
+  card.innerHTML='<div class="big">⭐</div><h2>第 '+(i+1)+' 课通关！</h2>'+
+    '<p class="sub">你掌握了「'+lv.name+'」<br>'+(last?'39 课全部完成，快去参加 🏅 GESP 一~四级模拟考级吧！':'继续下一课，解锁新知识点！')+'</p>';
+  var acts=mk('div','acts');
+  var nx=mk('button','btn', last?'🏅 去模拟考':'下一课 →');
+  var mp=mk('button','btn ghost','🗺️ 返回地图');
+  nx.onclick=function(){ ov.remove(); last?openExam():openLesson(i+1); };
+  mp.onclick=function(){ ov.remove(); showMap(); };
+  acts.append(nx,mp); card.appendChild(acts);
+  ov.appendChild(card); document.body.appendChild(ov);
+  for(var c=0;c<36;c++){
+    var p=mk('div','cf');
+    p.style.left=Math.random()*100+'%';
+    p.style.background=['#34d399','#fbbf24','#60a5fa','#f472b6','#a78bfa'][c%5];
+    p.style.animationDelay=(Math.random()*0.8)+'s';
+    card.appendChild(p);
+  }
+}
+
+/* ================= 初始化 ================= */
+document.getElementById('backMap').onclick=showMap;
+document.getElementById('backMap2').onclick=showMap;
+document.getElementById('soundBtn').onclick=function(){
+  state.sound=!state.sound; save(); updateHeader(); if(state.sound) tone('click');
+};
+document.getElementById('resetBtn').onclick=function(){
+  if(confirm('确定清空全部学习进度，重新开始吗？')){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    state.prog={}; save(); updateHeader(); showMap();
+  }
+};
+updateHeader();
+showMap();
+</script>
+</body>
+</html>
