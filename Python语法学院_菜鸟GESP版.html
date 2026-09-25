@@ -6,43 +6,66 @@
 <title>Python 语法学院 · 菜鸟知识点 × GESP 一~四级通关</title>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:#2f3542;
-    background:linear-gradient(160deg,#d4fc79 0%,#96e6a1 35%,#a1c4fd 100%);min-height:100vh}
+  body{margin:0;font-family:"YouYuan","Yuanti SC","Microsoft YaHei","PingFang SC",sans-serif;color:#3b3054;
+    background:linear-gradient(160deg,#a8e063,#56ab2f 25%,#43c6ac 50%,#7f7fd5 75%,#f8b6d2 100%);
+    background-size:300% 300%;animation:bgmove 22s ease infinite;min-height:100vh}
+  @keyframes bgmove{0%,100%{background-position:0% 30%}50%{background-position:100% 70%}}
   button{font-family:inherit}
+  .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .bg-deco span{position:absolute;font-size:34px;opacity:.35;animation:floatdeco 7s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.12))}
+  @keyframes floatdeco{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(8deg)}}
+  main,nav.tabs{position:relative;z-index:1}
 
-  header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;
-    padding:11px 18px;box-shadow:0 3px 14px rgba(30,90,60,.12);position:sticky;top:0;z-index:60}
-  .logo{font-size:21px;font-weight:900;background:linear-gradient(135deg,#0f9b8e,#3867d6);
-    -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(255,255,255,.94);
+    padding:11px 18px;box-shadow:0 4px 16px rgba(80,40,140,.18);position:sticky;top:0;z-index:60;
+    border-bottom:4px solid;border-image:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7,#3b82f6,#22c55e) 1}
+  .logo{font-size:21px;font-weight:900;background:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7,#3b82f6,#0f9b8e);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;animation:logoFlow 6s linear infinite}
+  @keyframes logoFlow{to{background-position:250% 0}}
   .stats{margin-left:auto;display:flex;gap:12px;align-items:center}
-  .stars{font-weight:900;font-size:16px;color:#b8860b;white-space:nowrap}
-  .progress{width:130px;height:11px;background:#e5e7eb;border-radius:99px;overflow:hidden}
-  #progressFill{height:100%;width:0;background:linear-gradient(90deg,#f7d794,#f78fb3);transition:width .5s}
+  .stars{font-weight:900;font-size:19px;color:#d97706;white-space:nowrap;background:#fef3c7;border-radius:99px;padding:4px 12px;box-shadow:inset 0 0 0 2px #fcd34d}
+  .stars.bump{animation:bump .45s}
+  @keyframes bump{30%{transform:scale(1.25) rotate(-4deg)}60%{transform:scale(.94)}}
+  .progress{width:140px;height:15px;background:#e9d5ff;border-radius:99px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}
+  #progressFill{height:100%;width:0;border-radius:99px;
+    background:repeating-linear-gradient(45deg,#fbbf24 0 10px,#f472b6 10px 20px,#a78bfa 20px 30px);
+    background-size:200% 100%;animation:stripes 1.2s linear infinite;transition:width .5s}
+  @keyframes stripes{to{background-position:42px 0}}
   .mini-btn{border:none;background:#f1f5f9;border-radius:10px;font-size:15px;padding:6px 9px;cursor:pointer}
   .mini-btn:hover{background:#e2e8f0}
 
-  nav.tabs{display:flex;gap:7px;padding:9px 14px;overflow-x:auto;background:rgba(255,255,255,.75);backdrop-filter:blur(8px)}
-  .tab{flex:0 0 auto;border:none;border-radius:99px;padding:7px 13px;font-size:14.5px;font-weight:800;
-    background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);cursor:pointer;white-space:nowrap}
-  .tab.active{background:linear-gradient(135deg,#0f9b8e,#3867d6);color:#fff}
+  nav.tabs{display:flex;gap:7px;padding:10px 14px;overflow-x:auto;background:rgba(255,255,255,.55);backdrop-filter:blur(8px)}
+  .tab{flex:0 0 auto;border:none;border-radius:99px;padding:8px 14px;font-size:14.5px;font-weight:800;
+    background:#fff;box-shadow:0 3px 0 rgba(120,90,200,.18);cursor:pointer;white-space:nowrap;transition:transform .15s}
+  .tab:hover{transform:translateY(-3px) scale(1.06)}
+  .tab.active{background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;transform:scale(1.08);box-shadow:0 4px 0 rgba(150,60,160,.35)}
   .tab.locked{opacity:.45}
   .tab.done:not(.active){background:#dcfce7;color:#15803d}
 
   main{max-width:1000px;margin:0 auto;padding:15px 15px 60px}
-  .card{background:#fff;border-radius:18px;padding:17px 19px;box-shadow:0 6px 18px rgba(30,90,60,.10);margin-bottom:15px}
+  .card{background:#fff;border-radius:22px;padding:18px 20px;box-shadow:0 8px 0 rgba(120,80,200,.10),0 12px 26px rgba(80,50,140,.12);margin-bottom:16px;border:2px solid rgba(255,255,255,.9)}
   .hidden{display:none}
 
-  .map-hero{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-  .map-hero .avatar{font-size:54px;animation:float 2.6s ease-in-out infinite}
-  .map-hero h2{margin:0 0 4px}.map-hero p{margin:4px 0 0;font-size:15px;color:#555;line-height:1.75}
+  .map-hero{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#fff,#fdf4ff);border:3px dashed #c4b5fd}
+  .map-hero .avatar{font-size:58px;animation:float 2.6s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.15))}
+  .map-hero h2{margin:0 0 4px;font-size:24px;background:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7,#0ea5e9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .map-hero p{margin:4px 0 0;font-size:15px;color:#5b5470;line-height:1.75}
   .map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin-top:15px}
-  .lv-card{position:relative;background:#fff;border-radius:16px;padding:13px 14px;cursor:pointer;
-    box-shadow:0 4px 14px rgba(30,90,60,.10);transition:transform .2s;border:2px solid transparent}
-  .lv-card:hover{transform:translateY(-4px);border-color:#a7f3d0}
-  .lv-card.locked{filter:grayscale(.8);opacity:.55;cursor:not-allowed}
-  .lv-card .ic{font-size:32px}.lv-card .nm{font-weight:800;margin-top:5px;font-size:14.5px;line-height:1.45}
-  .lv-card .st{position:absolute;top:9px;right:11px;font-size:17px}
+  .map-lv-h{grid-column:1/-1;font-size:19px;font-weight:900;margin:16px 0 0;padding:12px 18px;border-radius:18px;color:#fff;
+    display:flex;align-items:center;gap:10px;box-shadow:0 4px 0 rgba(0,0,0,.12);letter-spacing:1px}
+  .map-lv-h small{font-weight:700;opacity:.92;font-size:13px;margin-left:auto}
+  .lv-card{position:relative;background:#fff;border-radius:20px;padding:20px 14px 13px;cursor:pointer;
+    box-shadow:0 5px 0 rgba(120,80,200,.12),0 8px 18px rgba(80,50,140,.10);transition:transform .2s;border:3px solid var(--lc,#e5e7eb)}
+  .lv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:9px;border-radius:16px 16px 0 0;
+    background:linear-gradient(90deg,var(--lc,#e5e7eb),transparent)}
+  .lv-card:hover{transform:translateY(-5px) rotate(-1deg)}
+  .lv-card.locked{filter:grayscale(.85);opacity:.55;cursor:not-allowed}
+  .lv-card .ic{font-size:38px;transition:transform .2s}
+  .lv-card:hover .ic{transform:scale(1.25) rotate(8deg)}
+  .lv-card .nm{font-weight:800;margin-top:6px;font-size:15px;line-height:1.45}
+  .lv-card .st{position:absolute;top:12px;right:12px;font-size:18px}
   .lv-card .rf{font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.4}
+  .lv-card .lvtag{display:inline-block;font-size:11px;font-weight:900;color:#fff;border-radius:99px;padding:2px 9px;margin-top:7px;background:var(--lc,#94a3b8)}
   .foot-tip{color:#7a8290;font-size:12.5px;text-align:center;margin-top:24px}
 
   .back-btn{border:none;background:#fff;border-radius:12px;padding:8px 14px;font-weight:800;cursor:pointer;
@@ -55,10 +78,12 @@
   .gchip.gesp{background:#fef3c7;color:#b45309}
   .done-chip{background:#22c55e;color:#fff;font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 11px}
 
-  .story{background:linear-gradient(135deg,#fef9c3,#fef08a);display:flex;gap:13px;align-items:flex-start}
-  .story .avatar{font-size:42px;line-height:1}.story p{margin:0;font-size:15.5px;line-height:1.8}
-  h3.sec{margin:0 0 9px;font-size:17px}
-  h3.sec.learn{color:#0f9b8e}h3.sec.game{color:#e17055}h3.sec.hw{color:#6c5ce7}
+  .story{background:linear-gradient(135deg,#fef9c3,#fde68a);display:flex;gap:13px;align-items:flex-start;border:3px dashed #f59e0b}
+  .story .avatar{font-size:46px;line-height:1;animation:float 3s ease-in-out infinite}.story p{margin:0;font-size:15.5px;line-height:1.8}
+  h3.sec{margin:0 0 11px;font-size:16px;display:inline-block;padding:7px 18px;border-radius:99px;color:#fff!important;letter-spacing:1px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+  h3.sec.learn{background:linear-gradient(135deg,#10b981,#0d9488)}
+  h3.sec.game{background:linear-gradient(135deg,#fb923c,#f43f5e)}
+  h3.sec.hw{background:linear-gradient(135deg,#a78bfa,#6366f1)}
   .kb p{font-size:15.5px;line-height:1.85;margin:7px 0}
   .kb b{color:#0f766e}
   .tip{background:#ecfdf5;border-radius:12px;padding:9px 13px;font-size:14.5px;line-height:1.7}
@@ -74,18 +99,19 @@
   .task{font-size:16px;font-weight:800;margin-bottom:11px;line-height:1.65}
   .qline{font-weight:800;margin:10px 0;font-size:16.5px;line-height:1.6}
   .opts{display:flex;flex-wrap:wrap;gap:10px;margin:9px 0}
-  .opt{border:2px solid #0f9b8e;background:#fff;border-radius:12px;padding:10px 15px;font-size:15px;
-    font-weight:700;cursor:pointer;transition:.15s;line-height:1.5}
-  .opt:hover{background:#ecfdf5}
-  .opt.good{background:#22c55e;color:#fff;border-color:#22c55e}
+  .opt{border:3px solid #8b5cf6;background:#fff;border-radius:16px;padding:11px 17px;font-size:16px;
+    font-weight:700;cursor:pointer;transition:.15s;line-height:1.5;box-shadow:0 3px 0 rgba(139,92,246,.25)}
+  .opt:hover{background:#f5f3ff;transform:translateY(-2px)}
+  .opt.good{background:#22c55e;color:#fff;border-color:#22c55e;animation:bump .45s}
   .opt.bad{animation:shake .4s;border-color:#ef4444;background:#fee2e2}
   .opt.code-opt{font-family:Consolas,Monaco,monospace}
-  .btn{border:none;border-radius:13px;padding:10px 19px;font-size:15.5px;font-weight:800;cursor:pointer;
-    background:linear-gradient(135deg,#0f9b8e,#3867d6);color:#fff;box-shadow:0 4px 0 rgba(20,80,90,.3)}
-  .btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(20,80,90,.3)}
+  .btn{border:none;border-radius:16px;padding:11px 21px;font-size:16px;font-weight:800;cursor:pointer;
+    background:linear-gradient(135deg,#34d399,#3b82f6);color:#fff;box-shadow:0 5px 0 rgba(30,90,120,.35);transition:transform .1s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(30,90,120,.35)}
   .btn:disabled{opacity:.5;cursor:not-allowed}
-  .btn.ghost{background:#fff;color:#0f9b8e;border:2px solid #0f9b8e;box-shadow:none}
-  .btn.warn{background:linear-gradient(135deg,#f59e0b,#ef4444);box-shadow:0 4px 0 rgba(150,60,20,.3)}
+  .btn.ghost{background:#fff;color:#7c3aed;border:3px solid #a78bfa;box-shadow:none}
+  .btn.warn{background:linear-gradient(135deg,#fbbf24,#f97316);box-shadow:0 5px 0 rgba(150,60,20,.3)}
   .io{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:9px}
   .inp{border:2px solid #99f6e4;border-radius:12px;padding:10px 12px;font-size:16px;width:200px;outline:none}
   .inp:focus{border-color:#0f9b8e}
@@ -176,10 +202,12 @@
     padding:11px 18px;border-radius:14px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:99;
     max-width:84vw;font-size:14.5px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
   .hint.show{opacity:1;transform:translate(-50%,0)}
-  .overlay{position:fixed;inset:0;background:rgba(15,40,40,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:15px}
-  .reward{background:#fff;border-radius:23px;padding:28px 34px;text-align:center;position:relative;animation:pop .45s;max-width:92vw;overflow:hidden}
-  .reward .big{font-size:62px;animation:float 1.6s ease-in-out infinite}
-  .reward h2{margin:8px 0 4px}.reward .sub{color:#555;font-weight:700;font-size:15px;line-height:1.7}
+  .overlay{position:fixed;inset:0;background:rgba(40,20,80,.62);display:flex;align-items:center;justify-content:center;z-index:100;padding:15px}
+  .reward{background:linear-gradient(160deg,#fff,#fdf4ff);border-radius:26px;padding:30px 36px;text-align:center;position:relative;animation:pop .45s;max-width:92vw;overflow:hidden;border:4px solid #fcd34d}
+  .reward .big{font-size:70px;animation:starspin 1.8s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(245,158,11,.5))}
+  @keyframes starspin{0%,100%{transform:scale(1) rotate(-6deg)}50%{transform:scale(1.18) rotate(6deg)}}
+  .reward h2{margin:8px 0 4px;font-size:26px;background:linear-gradient(90deg,#f59e0b,#ec4899,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .reward .sub{color:#5b5470;font-weight:700;font-size:15px;line-height:1.7}
   .reward .acts{display:flex;gap:11px;justify-content:center;margin-top:17px;flex-wrap:wrap}
   .cf{position:absolute;top:-14px;width:10px;height:15px;border-radius:3px;animation:fall 2.4s linear forwards;z-index:1}
 
@@ -191,6 +219,15 @@
 </style>
 </head>
 <body>
+
+<div class="bg-deco" aria-hidden="true">
+  <span style="top:12%;left:4%;animation-delay:0s">🎈</span>
+  <span style="top:30%;right:5%;animation-delay:1.2s">⭐</span>
+  <span style="top:55%;left:3%;animation-delay:2.4s">🌈</span>
+  <span style="top:70%;right:7%;animation-delay:.8s">🎵</span>
+  <span style="top:85%;left:8%;animation-delay:1.8s">🚀</span>
+  <span style="top:8%;right:14%;animation-delay:3s">✨</span>
+</div>
 
 <header class="top">
   <div class="logo">🐢 Python 语法学院 · 菜鸟知识点 × GESP 一~四级</div>
@@ -2323,8 +2360,13 @@ function isDone(i){ return pGet(LESSONS[i].id,'h'); }
 function starCount(){ return LESSONS.filter(function(l){ return pGet(l.id,'h'); }).length; }
 
 function updateHeader(){
-  document.getElementById('starCount').textContent=starCount();
-  document.getElementById('progressFill').style.width=(starCount()/LESSONS.length*100)+'%';
+  var n=starCount();
+  var sc=document.getElementById('starCount');
+  if(sc.textContent!==String(n)){
+    var p=sc.parentElement; p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump');
+  }
+  sc.textContent=n;
+  document.getElementById('progressFill').style.width=(n/LESSONS.length*100)+'%';
   document.getElementById('soundBtn').textContent=state.sound?'🔊':'🔇';
 }
 
@@ -2350,20 +2392,37 @@ function renderTabs(){
 
 function renderMap(){
   var grid=document.getElementById('mapGrid'); grid.innerHTML='';
+  var LV_META=[
+    {upTo:19, medal:'🥉', color:'#22c55e', title:'GESP 一级 · 打地基', sub:'第 1~19 课 · 打好基础'},
+    {upTo:24, medal:'🥈', color:'#3b82f6', title:'GESP 二级 · 进阶挑战', sub:'第 20~24 课 · 更上一层楼'},
+    {upTo:31, medal:'🥇', color:'#f97316', title:'GESP 三级 · 算法入门', sub:'第 25~31 课 · 开动小脑筋'},
+    {upTo:39, medal:'👑', color:'#a855f7', title:'GESP 四级 · 高手之路', sub:'第 32~39 课 · 冲向巅峰'}
+  ];
+  var curLv=-1;
+  function lvOf(i){ for(var k=0;k<LV_META.length;k++) if(i<LV_META[k].upTo) return k; return LV_META.length-1; }
   LESSONS.forEach(function(lv,i){
+    var li=lvOf(i), meta=LV_META[li];
+    if(li!==curLv){
+      curLv=li;
+      var h=mk('div','map-lv-h',meta.medal+' '+meta.title+'<small>'+meta.sub+'</small>');
+      h.style.background='linear-gradient(135deg,'+meta.color+','+meta.color+'cc)';
+      grid.appendChild(h);
+    }
     var locked=!unlocked(i), done=isDone(i);
     var card=mk('div','lv-card'+(locked?' locked':''));
+    card.style.setProperty('--lc', meta.color);
     card.innerHTML='<div class="st">'+(locked?'🔒':(done?'⭐':'🎯'))+'</div>'+
       '<div class="ic">'+lv.icon+'</div>'+
       '<div class="nm">第 '+(i+1)+' 课 · '+lv.name+'</div>'+
-      '<div class="rf">📚 菜鸟教程：'+lv.ref+'<br>🏅 '+lv.lv+'</div>';
+      '<div class="rf">📚 菜鸟教程：'+lv.ref+'</div>'+
+      '<span class="lvtag">🏅 '+lv.lv+'</span>';
     card.onclick=function(){
       if(locked){ hint('先通过上一课的作业才能解锁哦！'); } else openLesson(i);
     };
     grid.appendChild(card);
   });
   var examCard=mk('div','lv-card');
-  examCard.style.border='2px solid #f59e0b';
+  examCard.style.setProperty('--lc','#f59e0b');
   examCard.innerHTML='<div class="st">🏅</div><div class="ic">📝</div><div class="nm">GESP 一~四级模拟考级</div><div class="rf">随机 10 题 · 60 分及格 · 颁发电子证书</div>';
   examCard.onclick=openExam;
   grid.appendChild(examCard);
