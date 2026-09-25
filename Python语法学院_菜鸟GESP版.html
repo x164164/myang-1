@@ -1533,7 +1533,10 @@ var LESSONS=[
  story:'计算机只听得懂“编程语言”。Python 是一条会变魔术的小蛇——名字来自一个搞笑喜剧团，却被全世界用来做游戏、网站、人工智能。今天它要教你第一句魔法：print，让屏幕替你说话！',
  secs:[
   {h:'Python 是什么？', p:'Python 是一种**简单好读**的高级编程语言，文件后缀是 **.py**。从航天飞机到扫地机器人，背后都可能有 Python 的功劳。'},
-  {h:'第一个程序 print()', code:'print("Hello, World!")', out:'Hello, World!', p:'**print()** 就像一个大喇叭，把括号里的内容**显示到屏幕上**。', tip:'注意：print 要**全部小写**；想显示的话要穿上英文引号 " "。'}
+  {h:'第一个程序 print()', code:'print("Hello, World!")', out:'Hello, World!', p:'**print()** 就像一个大喇叭，把括号里的内容**显示到屏幕上**。', tip:'注意：print 要**全部小写**；想显示的话要穿上英文引号 " "。'},
+  {h:'print 的魔法进阶', p:'print 一次可以打印好几样东西，用逗号隔开，它会自动在中间加空格。就像排队报数：第一个人说“我”，第二个人说“8”，第三个人说“岁”，连起来就是一句话！', code:'print("我", "今年", 8, "岁")', out:'我 今年 8 岁'},
+  {h:'print 里的特殊符号', p:'字符串里有一些“隐身符号”：**\\n** 表示换行，**\\t** 表示空一大格（Tab）。它们写在引号里，打印出来时会变身！', code:'print("第一行\\n第二行")\nprint("名字\\t年龄")', out:'第一行\n第二行\n名字\t年龄'},
+  {h:'常见错误大集合', p:'初学最容易踩的坑：把 **print** 写成大写 Print；中文引号 “” 混进代码；括号只写一半。电脑可严格了，一点小差错都会报错！', warn:'print 必须全小写；字符串必须用英文引号 " " 包裹；括号必须成对出现！', tip:'GESP 一级常考 print 的输出格式，特别是逗号分隔和转义字符，考试时要仔细数空格！'}
  ],
  game:gPrint,
  hw:[
@@ -1549,7 +1552,10 @@ var LESSONS=[
  secs:[
   {h:'注释：# 开头的小纸条', code:'# 这一行是注释，电脑不会执行\nprint("我会执行")', out:'我会执行', p:'**#** 后面整行都是注释，专门用来写说明，让别人（和以后的自己）看懂代码。'},
   {h:'缩进：表示“谁属于谁”', code:'if 下雨:\n    print("带伞")   # 前面空了4格，属于 if\nprint("出门")       # 顶格写，不属于 if', p:'Python 用行首空格表示层级，一级缩进通常是 **4 个空格**，同一层级要对齐，漏了缩进程序会报错！'},
-  {h:'变量命名规矩', p:'名字只能用**字母、数字、下划线**，不能以数字开头（2name 不行），而且**区分大小写**，Age 和 age 是两个不同的变量。'}
+  {h:'变量命名规矩', p:'名字只能用**字母、数字、下划线**，不能以数字开头（2name 不行），而且**区分大小写**，Age 和 age 是两个不同的变量。'},
+  {h:'多行注释：三引号魔法', p:'想写一大段说明文字？用三个引号 """ 或 \'\'\' 包起来，可以跨好多行！就像写了一张大纸条贴在代码旁边。', code:'"""\n这是多行注释\n可以写很多行\n"""\nprint("看得见我")', out:'看得见我'},
+  {h:'缩进的层级关系', p:'缩进就像树状图：if 是大树，里面的 print 是树枝，树枝里面还可以有小树枝。同层级的代码必须**对齐**，就像排队时同一排的人要站齐！', code:'if True:\n    print("第一层")\n    if True:\n        print("第二层")', out:'第一层\n第二层'},
+  {h:'注释与缩进的组合', p:'注释可以写在代码后面，也可以单独占一行。但记住：**注释不影响缩进**，Python 只看代码的缩进来判断结构！', code:'if 5 > 3:    # 条件成立\n    print("对啦")  # 这行属于 if\nprint("我不属于 if")', out:'对啦\n我不属于 if', warn:'Tab 和空格不能混用！Python 会分不清层级，建议统一用 4 个空格。', tip:'GESP 一级判断题常考：Tab 和空格混用是否合法？答案是**不合法**！'}
  ],
  game:gIndent,
  hw:[
@@ -1565,7 +1571,10 @@ var LESSONS=[
  secs:[
   {h:'= 是“放进去”', code:'age = 8\nprint(age)', out:'8', p:'这里的 **= 不是数学里的“相等”**，而是赋值：把右边的 8 放进左边的盒子 age。'},
   {h:'变量可以重新赋值', code:'n = 3\nn = 5\nprint(n)', out:'5', p:'再次赋值时，盒子里原来的 3 会被新值 5 替换掉。'},
-  {h:'变量能参与计算', code:'a = 3\nb = 4\nprint(a + b)', out:'7'}
+  {h:'变量能参与计算', code:'a = 3\nb = 4\nprint(a + b)', out:'7'},
+  {h:'变量名：给盒子起名字', p:'变量名要取得有意义，比如用 **score** 表示分数，用 **name** 表示名字。就像给储物柜贴标签，贴清楚了找东西才快！', code:'score = 95\nname = "阿笨"\nprint(name, "考了", score, "分")', out:'阿笨 考了 95 分'},
+  {h:'同时给多个变量赋值', p:'Python 有个超能力：一行代码可以给好几个变量同时赋值！就像魔术师从帽子里同时掏出好几只兔子。', code:'x, y, z = 1, 2, 3\nprint(x + y + z)', out:'6'},
+  {h:'变量的值会变魔术', p:'同一个变量名，在不同时间可以装不同的东西。就像你的书包，今天装语文书，明天装数学书。', code:'box = "苹果"\nprint(box)\nbox = "香蕉"\nprint(box)', out:'苹果\n香蕉', warn:'变量名不能用 Python 的“魔法词”！比如 print、if、for 都是保留字，不能当变量名。', tip:'GESP 一级选择题常考：哪个变量名合法？记住规则：字母/下划线开头，不能是保留字！'}
  ],
  game:gVar,
  hw:[
@@ -1581,7 +1590,10 @@ var LESSONS=[
  secs:[
   {h:'四大家族', code:'a = 7        # int 整数\nb = 3.14     # float 浮点数（小数）\nc = "你好"    # str 字符串\nd = True     # bool 布尔：只有 True / False'},
   {h:'type() 查看类型', code:'print(type("8"))', out:"<class 'str'>", p:'穿上引号的 8 是字符串；不穿引号的 8 才是整数。'},
-  {h:'类型转换', code:'print(int("8") + 2)\nprint(str(8) + "岁")', out:'10\n8岁', p:'**int()** 转整数、**float()** 转小数、**str()** 转字符串。'}
+  {h:'类型转换', code:'print(int("8") + 2)\nprint(str(8) + "岁")', out:'10\n8岁', p:'**int()** 转整数、**float()** 转小数、**str()** 转字符串。'},
+  {h:'整数和小数的秘密', p:'整数 int 就像完整的糖果，小数 float 就像咬了一口的糖果。在 Python 里，整数和小数可以一起算，结果会自动变成小数！', code:'print(3 + 0.5)\nprint(10 / 2)', out:'3.5\n5.0', tip:'注意：10 / 2 结果是 5.0 而不是 5，因为 / 总是返回小数！'},
+  {h:'字符串的加法与乘法', p:'字符串相加是拼接，字符串乘整数是重复。就像把糖葫芦串起来，或者复制粘贴好多遍！', code:'print("Hello" + "Python")\nprint("Go! " * 3)', out:'HelloPython\nGo! Go! Go! '},
+  {h:'布尔值的真身', p:'True 和 False 其实住在数字王国：True 是 1，False 是 0。所以 True + True 等于 2！', code:'print(True + True)\nprint(False + 5)', out:'2\n5', warn:'int("3.14") 会报错！要先用 float("3.14") 转成小数，再 int() 取整。', tip:'GESP 一级常考 type() 的结果和类型转换，记住：int() 只能转纯数字字符串！'}
  ],
  game:gSort,
  hw:[
@@ -1597,7 +1609,10 @@ var LESSONS=[
  secs:[
   {h:'四则运算', code:'print(7 + 2)\nprint(7 - 2)\nprint(7 * 2)\nprint(7 / 2)', out:'9\n5\n14\n3.5', p:'注意：**/** 除出来的结果永远是小数。电脑里乘号是 *，不是 ×。'},
   {h:'三把秘密武器', code:'print(7 // 2)   # 整除：3\nprint(7 % 2)    # 取余：1\nprint(2 ** 3)   # 2的3次方：8', out:'3\n1\n8', tip:'分东西时：每人分几个用 //，分完剩几个用 %。'},
-  {h:'运算顺序', p:'先算 **，再算 * / // %，最后算 + -；有 **( )** 括号先算括号里的。'}
+  {h:'运算顺序', p:'先算 **，再算 * / // %，最后算 + -；有 **( )** 括号先算括号里的。'},
+  {h:'负数与取余', p:'负数也可以取余！就像分糖果时，如果不够分，还可以倒欠。Python 里 -7 % 3 等于 2，因为商是 -3，余数要非负。', code:'print(-7 % 3)\nprint(7 % -3)', out:'2\n-2', tip:'GESP 一级常考负数取余，记住：余数的符号和除数相同！'},
+  {h:'大数计算不翻车', p:'Python 的整数可以非常大，不用担心装不下！就像你的书包，想装多少书就装多少书。', code:'print(123456789 * 987654321)', out:'121932631112635269'},
+  {h:'除法的两种结果', p:'/ 是“真除法”，结果带小数点；// 是“整除”，只留整数部分。就像分披萨：/ 告诉你每人分到 2.5 块，// 告诉你每人只能分到 2 块整的。', code:'print(10 / 4)\nprint(10 // 4)', out:'2.5\n2', warn:'% 和 / 别搞混！% 是取余数，/ 是除法，长得有点像但完全不同。', tip:'GESP 一级编程题常考：计算长方形面积、平均分等，要注意用 / 还是 //！'}
  ],
  game:gCalc,
  hw:[
@@ -1612,7 +1627,10 @@ var LESSONS=[
  story:'真假王国有两扇大门：比较符号会判断“真 True / 假 False”；**and** 要两边都真，**or** 一边真就放行，**not** 专门把真假翻跟头！',
  secs:[
   {h:'比较运算', code:'print(3 > 2)      # True\nprint(3 == 2)     # False\nprint(3 != 2)     # True', p:'>、<、>=、<=、==（相等）、!=（不等），结果只有 True 或 False。', warn:'一个 = 是赋值，两个 == 才是“相等吗”，考级最爱在这里挖坑！'},
-  {h:'逻辑运算', code:'print(3 > 2 and 5 > 9)   # False（一边假）\nprint(3 > 2 or 5 > 9)    # True（一边真就行）\nprint(not 3 > 2)         # False（真被翻成假）'}
+  {h:'逻辑运算', code:'print(3 > 2 and 5 > 9)   # False（一边假）\nprint(3 > 2 or 5 > 9)    # True（一边真就行）\nprint(not 3 > 2)         # False（真被翻成假）'},
+  {h:'比较运算符大集合', p:'Python 的比较符号和数学课很像：**>** 大于、**<** 小于、**>=** 大于等于、**<=** 小于等于、**==** 等于、**!=** 不等于。就像比身高、比分数！', code:'print(5 >= 5)\nprint(7 != 8)\nprint(10 == 10)', out:'True\nTrue\nTrue'},
+  {h:'and、or、not 的排队规则', p:'**and** 像严格老师：两边都真才给过；**or** 像宽松老师：一边真就给过；**not** 像镜子：把真假反过来！', code:'print(True and False)\nprint(True or False)\nprint(not True)', out:'False\nTrue\nFalse'},
+  {h:'组合判断更强大', p:'可以把多个条件组合起来！比如“年龄大于 7 岁 **并且** 身高超过 120 厘米”，用 and 连接两个条件。', code:'age = 8\nheight = 125\nprint(age > 7 and height > 120)', out:'True', warn:'and 两边都要写完整条件！age > 7 and > 5 是错的，要写成 age > 7 and age > 5。', tip:'GESP 一级选择题常考：and 和 or 的混合运算，记住优先级：not > and > or！'}
  ],
  game:gBool,
  hw:[
@@ -1628,7 +1646,10 @@ var LESSONS=[
  secs:[
   {h:'input() 收到的是字符串', code:'name = input("你叫什么？")\nprint("你好，" + name)', p:'程序会停下来等你打字，输入的内容以**字符串**形式存入变量。'},
   {h:'数字输入要转换', code:'age = int(input("你几岁？"))\nprint(age + 1)', p:'不转换直接 +1 会报错或出错，因为字符串不能和数字相加。'},
-  {h:'print 打印多个内容', code:'print("我", 8, "岁")', out:'我 8 岁', p:'用逗号隔开多项，print 会自动在中间加空格。'}
+  {h:'print 打印多个内容', code:'print("我", 8, "岁")', out:'我 8 岁', p:'用逗号隔开多项，print 会自动在中间加空格。'},
+  {h:'input 的提示语', p:'input() 括号里可以写提示语，就像机器人举着牌子问你问题。用户看到提示就知道该输入什么啦！', code:'age = input("请输入你的年龄：")\nprint("你输入的是：" + age)', p:'提示语要写在引号里，用户输入后按回车，内容就被存进变量。'},
+  {h:'连续输入多个数据', p:'可以连续问好几个问题！每个 input 都会停下来等用户回答，就像问卷调查一样。', code:'name = input("名字：")\nage = input("年龄：")\nprint(name + "今年" + age + "岁")', p:'注意：这里 age 还是字符串，不能直接加数字！'},
+  {h:'类型转换实战', p:'如果要做算术，必须先把字符串转成数字。int() 转整数，float() 转小数。就像把“8”变成 8！', code:'a = int(input("第一个数："))\nb = int(input("第二个数："))\nprint(a + b)', p:'用户输入 3 和 5，输出就是 8，而不是 35！', warn:'input() 得到的是字符串，直接做加法会变成拼接！int("3") + int("5") = 8，"3" + "5" = "35"。', tip:'GESP 一级编程题必考 input + int 转换，这是读取用户数据的标准套路！'}
  ],
  game:gChat,
  hw:[
@@ -1644,7 +1665,10 @@ var LESSONS=[
  secs:[
   {h:'索引：从 0 开始', code:'s = "PYTHON"\nprint(s[0])    # P\nprint(s[-1])   # N（倒数第1个）', out:'P\nN'},
   {h:'切片：切一段', code:'print(s[1:4])', out:'YTH', p:'s[1:4] 取编号 **1、2、3**，包含开头不包含结尾。'},
-  {h:'拼接与重复', code:'print("ab" + "cd")\nprint("ab" * 3)\nprint(len("PYTHON"))', out:'abcd\nababab\n6', p:'+ 手拉手拼接，* 重复，len() 数长度。'}
+  {h:'拼接与重复', code:'print("ab" + "cd")\nprint("ab" * 3)\nprint(len("PYTHON"))', out:'abcd\nababab\n6', p:'+ 手拉手拼接，* 重复，len() 数长度。'},
+  {h:'正数索引 vs 负数索引', p:'正数索引从 0 开始数，负数索引从 -1 开始数（倒数）。就像电影院座位：正着数是 1 排 1 座，倒着数是最后一排最后一座！', code:'s = "HELLO"\nprint(s[1])    # E\nprint(s[-2])   # L', out:'E\nL'},
+  {h:'切片的完整公式', p:'s[开始:结束:步长]，就像切蛋糕：从第几片开始切，到第几片结束（不含），每隔几篇拿一块。步长默认是 1。', code:'s = "ABCDEFGH"\nprint(s[0:6:2])   # ACE\nprint(s[::-1])    # 倒序！', out:'ACE\nHGFEDCBA'},
+  {h:'in 检查字符在不在', p:'用 **in** 可以检查字符串里有没有某个字符，就像检查书包里有没有带语文书。', code:'print("P" in "PYTHON")\nprint("X" in "PYTHON")', out:'True\nFalse', warn:'索引越界会报错！s[100] 如果字符串没那么长，程序会崩溃。', tip:'GESP 二三级常考字符串切片，特别是 s[::-1] 倒序，这是经典题型！'}
  ],
  game:gString,
  hw:[
@@ -1660,7 +1684,10 @@ var LESSONS=[
  secs:[
   {h:'创建与访问', code:'bag = ["红宝石", "蓝宝石", "绿宝石"]\nprint(bag[0])', out:'红宝石'},
   {h:'添加 append / 取出 pop', code:'bag.append("钻石")\nprint(bag.pop())', out:'钻石', p:'pop() 取出**最后一个**元素，背包里也会少一个。'},
-  {h:'修改与长度', code:'bag[0] = "黄宝石"\nprint(len(bag))', p:'用编号可以直接修改格子里的内容，len() 数有几个元素。'}
+  {h:'修改与长度', code:'bag[0] = "黄宝石"\nprint(len(bag))', p:'用编号可以直接修改格子里的内容，len() 数有几个元素。'},
+  {h:'列表的混搭能力', p:'列表就像魔法口袋，可以装各种不同类型的东西：数字、字符串，甚至可以装另一个列表！', code:'mix = [1, "阿笨", True, [2, 3]]\nprint(mix[3])\nprint(mix[3][0])', out:'[2, 3]\n2'},
+  {h:'insert 和 remove', p:'**insert()** 可以在指定位置插入新元素，**remove()** 可以删除第一个匹配的元素。就像排队时插队或把某人请出队伍。', code:'nums = [10, 20, 30]\nnums.insert(1, 15)\nprint(nums)\nnums.remove(20)\nprint(nums)', out:'[10, 15, 20, 30]\n[10, 15, 30]'},
+  {h:'列表运算：拼接与重复', p:'列表和字符串很像，+ 是把两个列表拼在一起，* 是重复多遍。就像把两串糖葫芦串在一起！', code:'a = [1, 2]\nb = [3, 4]\nprint(a + b)\nprint(a * 2)', out:'[1, 2, 3, 4]\n[1, 2, 1, 2]', warn:'remove() 只删除第一个匹配的，如果有重复元素，后面的不会被删除！', tip:'GESP 三级常考列表操作：append、pop、len，要记住 append 是加在末尾，pop 是取出末尾！'}
  ],
  game:gGem,
  hw:[
@@ -1675,7 +1702,10 @@ var LESSONS=[
  story:'元组是一列被魔法冻住的队伍，用小括号 () 排好，能看能数，**但谁也不许改动它**——加不进、删不掉、改不了！',
  secs:[
   {h:'元组用 ( )', code:'t = (10, 20, 30)\nprint(t[1])', out:'20', p:'元组也能按编号访问，规则和列表一样从 0 开始。'},
-  {h:'元组不能修改', code:'t[0] = 99   # 报错！', p:'运行会报 TypeError，因为元组是**只读**的。适合存一组不希望被改掉的数据，比如一年四季。'}
+  {h:'元组不能修改', code:'t[0] = 99   # 报错！', p:'运行会报 TypeError，因为元组是**只读**的。适合存一组不希望被改掉的数据，比如一年四季。'},
+  {h:'元组：生活的固定组合', p:'元组适合放一组确定不变的数据，比如一年有 12 个月、一周有 7 天。这些小括号就像保险柜，锁住了里面的内容！', code:'months = ("一", "二", "三", "四", "五", "六")\nprint(months[0])', out:'一'},
+  {h:'元组的拆包魔法', p:'可以把元组里的值一次性分给多个变量，就像拆快递包裹：每个箱子里拿出一样东西！', code:'a, b, c = (10, 20, 30)\nprint(a + b + c)', out:'60'},
+  {h:'元组和列表的变身', p:'元组和列表可以互相转换！list() 把元组变成列表（可以改），tuple() 把列表变成元组（冻住）。', code:'t = (1, 2, 3)\nlst = list(t)\nlst.append(4)\nprint(tuple(lst))', out:'(1, 2, 3, 4)', warn:'单元素元组必须加逗号！(1) 是整数 1，(1,) 才是真正的元组！', tip:'GESP 三级判断题常考：元组是否可修改？答案永远不可修改！考试看到 append、pop、赋值就报错！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🔒 冻住的队伍', tip:'元组只能读，不能改、不能加！',
@@ -1696,7 +1726,9 @@ var LESSONS=[
  story:'字典是一本神奇电话簿：左边写“名字”（键），右边写“号码”（值）。喊一声名字，号码立刻出现；新朋友还能随时加页！',
  secs:[
   {h:'用 { } 创建字典', code:'tel = {"皮皮龙": "555-0001", "机器人": "555-0002"}\nprint(tel["皮皮龙"])', out:'555-0001', p:'通过 **键（名字）** 查找 **值（号码）**。'},
-  {h:'添加或修改', code:'tel["小海龟"] = "555-0004"   # 新键就是添加\ntel["机器人"] = "555-0099"   # 旧键就是修改', p:'键不存在 = 添加新的一对；键已存在 = 覆盖旧值。'}
+  {h:'添加或修改', code:'tel["小海龟"] = "555-0004"   # 新键就是添加\ntel["机器人"] = "555-0099"   # 旧键就是修改', p:'键不存在 = 添加新的一对；键已存在 = 覆盖旧值。'},
+  {h:'🔍 找不到名字会怎样？', p:'电话簿里**没有**这个名字时，直接用方括号查找会“砰”地报错（KeyError）。聪明的做法是先用 **in** 问一问：这个名字在不在电话簿里？', code:'tel = {"皮皮龙": "555-0001"}\nprint("皮皮龙" in tel)\nprint("小怪兽" in tel)', out:'True\nFalse', warn:'tel["小怪兽"] 这样直接查一个不存在的键，会报 KeyError，程序当场停下！先用 in 判断一下更安全。'},
+  {h:'📖 翻开整本电话簿', p:'用 **for 循环**能把字典里的每一对“名字—号码”都翻出来：for 拿到的默认是**键**，再用键找到值。就像一页一页翻电话簿。', code:'tel = {"皮皮龙": "111", "机器人": "222"}\nfor name in tel:\n    print(name, tel[name])', out:'皮皮龙 111\n机器人 222', tip:'GESP 三级常考：给一个字典和一段查找/添加代码，让你选运行结果。记住口诀——**新键=添加、旧键=修改、没有却去查=报错**！'}
  ],
  game:gDict,
  hw:[
@@ -1711,7 +1743,9 @@ var LESSONS=[
  story:'魔法锅有个怪脾气：同样的东西只收一个！一堆重复数字倒进去，“咕嘟”一声就全部去重了。',
  secs:[
   {h:'集合会自动去重', code:'a = {3, 3, 1, 2, 2, 2}\nprint(a)', out:'{1, 2, 3}', p:'集合里的元素**不能重复**，而且没有顺序，所以不能用编号访问。'},
-  {h:'in 判断在不在', code:'print(2 in {1, 2, 3})\nprint(5 in {1, 2, 3})', out:'True\nFalse'}
+  {h:'in 判断在不在', code:'print(2 in {1, 2, 3})\nprint(5 in {1, 2, 3})', out:'True\nFalse'},
+  {h:'🍬 把糖果倒进魔法锅', p:'列表里有一堆重复糖果，用 **set()** 往魔法锅里一倒，重复的立刻消失！想数剩几种口味，用 **len()**。', code:'candy = [1, 2, 2, 3, 3, 3]\ns = set(candy)\nprint(s)\nprint(len(s))', out:'{1, 2, 3}\n3', tip:'GESP 三级常见题型：给一串有重复的列表，问 set 之后剩几个元素——数一数**不同的值**有几个就行。'},
+  {h:'🥣 往锅里再添一颗', p:'用 **add()** 往集合里加新元素；如果加的是已经有的，锅会装作没看见，什么变化也没有。', code:'s = {1, 2, 3}\ns.add(4)\ns.add(2)\nprint(s)', out:'{1, 2, 3, 4}', warn:'集合**没有顺序**，不能写 s[0] 去取“第一个”，那样会报错！想按编号取东西请用列表。'}
  ],
  game:gSet,
  hw:[
@@ -1726,7 +1760,9 @@ var LESSONS=[
  story:'程序要学会做选择：**如果**下雨就带伞，**否则如果**刮风就穿外套，**否则**就放心出门！这就是 if 三兄弟。',
  secs:[
   {h:'if 与 if-else', code:'age = 8\nif age >= 7:\n    print("上小学")\nelse:\n    print("还没上学")', out:'上小学', p:'条件成立走 if 分支，不成立走 else 分支。'},
-  {h:'if-elif-else', code:'score = 85\nif score >= 90:\n    print("优秀")\nelif score >= 80:\n    print("良好")\nelse:\n    print("加油")', out:'良好', tip:'if / elif 行尾必须有冒号 :，下一行必须缩进！'}
+  {h:'if-elif-else', code:'score = 85\nif score >= 90:\n    print("优秀")\nelif score >= 80:\n    print("良好")\nelse:\n    print("加油")', out:'良好', tip:'if / elif 行尾必须有冒号 :，下一行必须缩进！'},
+  {h:'⚖️ 比较运算符小法庭', p:'比较就像天平：**==** 问“两边一样吗”，**!=** 问“不一样吗”，**>、<、>=、<=** 比大小。比较的结果只有 True 或 False 两种。', code:'print(5 == 5)\nprint(5 != 5)\nprint(3 > 7)', out:'True\nFalse\nFalse', warn:'判断“相等”要写**两个等号 ==**！只写一个 = 是“赋值”（把东西装进盒子），写进 if 里会出错。'},
+  {h:'🍰 考考你：游乐园门票', p:'来一道 GESP 风格的题：跟着程序一步一步走，看看每个条件谁先“举手”。', code:'age = 9\nif age < 6:\n    print("免费")\nelif age <= 12:\n    print("半价")\nelse:\n    print("全价")', out:'半价', tip:'GESP 一级必考“读程序写输出”：从上到下逐个检查条件，**第一个成立的分支**执行完就结束，后面的 elif/else 全部跳过！'}
  ],
  game:gWeather,
  hw:[
@@ -1741,7 +1777,9 @@ var LESSONS=[
  story:'while 是一台停不下来的旋转木马：**当**条件成立就一直转，条件不成立才停下。千万别忘了让条件慢慢变“假”，否则会变成死循环！',
  secs:[
   {h:'while 当…就重复', code:'i = 0\nwhile i < 3:\n    print(i)\n    i = i + 1', out:'0\n1\n2', p:'循环三要素：**开始值（i=0）、条件（i<3）、每次变化（i+1）**，缺一不可。'},
-  {h:'死循环', code:'i = 0\nwhile i < 3:\n    print(i)   # 忘记 i = i + 1，永远停不下来！', warn:'条件永远成立时程序会卡住，叫做死循环。'}
+  {h:'死循环', code:'i = 0\nwhile i < 3:\n    print(i)   # 忘记 i = i + 1，永远停不下来！', warn:'条件永远成立时程序会卡住，叫做死循环。'},
+  {h:'🧮 while 变身加法机', p:'while 还能当**累加机**：先准备空盒子 total 和计数器 i，每转一圈把 i 倒进盒子、i 自己加 1。转完 5 圈，盒子里就是 1+2+3+4+5 的总和！', code:'total = 0\ni = 1\nwhile i <= 5:\n    total = total + i\n    i = i + 1\nprint(total)', out:'15', tip:'GESP 一级常考“循环累加”：把每一圈 i 和 total 的值在纸上列成小表格，答案立刻现形！'},
+  {h:'🍬 让条件慢慢变假', p:'想让旋转木马停下，循环体里必须有东西让条件**一点点变假**，比如每圈糖果少一颗，总有一天会吃完。', code:'candy = 3\nwhile candy > 0:\n    print("吃一颗，还剩", candy - 1)\n    candy = candy - 1', out:'吃一颗，还剩 2\n吃一颗，还剩 1\n吃一颗，还剩 0', warn:'如果条件里的变量从来没变化，就是死循环！写 while 前先问自己：**哪一行让条件变小？**'}
  ],
  game:gGuess,
  hw:[
@@ -1757,7 +1795,9 @@ var LESSONS=[
  secs:[
   {h:'range(n)：0 到 n-1', code:'for i in range(3):\n    print(i)', out:'0\n1\n2', p:'range(3) 数 3 个数：**0、1、2**，从 0 开始，到 3 之前停止。'},
   {h:'range(a, b)：从 a 到 b-1', code:'for i in range(2, 5):\n    print(i)', out:'2\n3\n4'},
-  {h:'遍历字符串', code:'for ch in "AB":\n    print(ch)', out:'A\nB'}
+  {h:'遍历字符串', code:'for ch in "AB":\n    print(ch)', out:'A\nB'},
+  {h:'🪜 range(a, b, step)：迈大步走', p:'range 还有第三个秘密参数 **step（步长）**，表示每次迈几步。range(1, 10, 2) 就像上楼梯一次跨两格：1、3、5、7、9。', code:'for i in range(1, 10, 2):\n    print(i)', out:'1\n3\n5\n7\n9', warn:'range 的终点**永远取不到**！range(1, 5) 只到 4，想包含 5 就要写 range(1, 6)。这是考级最爱挖的坑！'},
+  {h:'⭐ 双重循环画星星', p:'循环里还能再套一个循环！**外层**管“第几行”，**内层**管“这一行印几颗星”。print 里写 end="" 表示印完不换行。', code:'for row in range(1, 4):\n    for star in range(row):\n        print("*", end="")\n    print()', out:'*\n**\n***', tip:'GESP 一级常考嵌套循环的输出图案：先数外层有几行，再算每行内层转几圈，在草稿纸上一步一步画出来。'}
  ],
  game:gFire,
  hw:[
@@ -1772,7 +1812,9 @@ var LESSONS=[
  story:'循环跑道上有两个信号灯：**break** 是红灯——立刻冲出跑道结束比赛；**continue** 是跳过垫——跳过这一圈剩下的动作，直接跑下一圈。',
  secs:[
   {h:'break：立刻结束整个循环', code:'for i in range(5):\n    if i == 3:\n        break\n    print(i)', out:'0\n1\n2', p:'i 等于 3 时直接跳出，后面的数都不再打印。'},
-  {h:'continue：跳过本次', code:'for i in range(5):\n    if i == 1:\n        continue\n    print(i)', out:'0\n2\n3\n4', p:'只有 i 等于 1 那一圈被跳过，其它圈照常。'}
+  {h:'continue：跳过本次', code:'for i in range(5):\n    if i == 1:\n        continue\n    print(i)', out:'0\n2\n3\n4', p:'只有 i 等于 1 那一圈被跳过，其它圈照常。'},
+  {h:'🔀 找第一个能被 7 整除的数', p:'循环里想找第一个满足条件的数就停下，找到立刻用 **break** 收工。不用把后面的数全看一遍。', code:'for n in range(1, 20):\n    if n % 7 == 0:\n        print("找到了！", n)\n        break', out:'找到了！ 7', tip:'GESP 一级/二级常考：问 break 会输出什么。记住——break 是**红灯紧急刹车**，continue 是**跳过垫跳一圈**，别把兄弟俩搞混！'},
+  {h:'🧹 跳过偶数只拿奇数', p:'只想要奇数，碰到偶数就用 **continue** 轻轻跳过，像扫地一样把偶数“扫走”，奇数留下来。', code:'for n in range(1, 8):\n    if n % 2 == 0:\n        continue\n    print(n)', out:'1\n3\n5\n7', warn:'break 和 continue 必须写**在循环里面**，外面不能用！不然 Python 会皱眉头报 SyntaxError。'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🚦 循环红绿灯', tip:'break 结束整个循环；continue 只跳过这一次！',
@@ -1794,7 +1836,9 @@ var LESSONS=[
  secs:[
   {h:'定义与调用', code:'def double(x):\n    return x * 2\n\nprint(double(6))', out:'12', p:'**def** 定义函数，x 是参数；**return** 把结果送出函数。定义不会自动执行，必须**调用**才运行。'},
   {h:'多个参数', code:'def add(a, b):\n    return a + b\n\nprint(add(3, 4))', out:'7'},
-  {h:'没有 return', code:'def hi():\n    print("你好")\n\nprint(hi())', out:'你好\nNone', p:'函数不写 return，默认送出 None（空）。'}
+  {h:'没有 return', code:'def hi():\n    print("你好")\n\nprint(hi())', out:'你好\nNone', p:'函数不写 return，默认送出 None（空）。'},
+  {h:'🎁 默认参数：备用口味', p:'参数可以有**默认值**：调用时不给这份材料，机器就自动用备用的。就像点冰淇淋不说口味，店员就默认给你香草味！', code:'def greet(name, word="你好"):\n    print(word + "，" + name + "！")\n\ngreet("皮皮龙")\ngreet("机器人", "早上好")', out:'你好，皮皮龙！\n早上好，机器人！', warn:'带默认值的参数必须写在**最后面**，这是 Python 的规定，写反了会报语法错误！'},
+  {h:'🔄 return 的结果能接着用', p:'return 送出来的结果可以装进变量继续计算，甚至再送进另一台配方机——就像传送带把半成品送到下一道工序。', code:'def add(a, b):\n    return a + b\n\ndef double(x):\n    return x * 2\n\nr = add(1, 2)\nprint(double(r))', out:'6', tip:'GESP 考试常考“函数套函数”：先算最里面的 f(1, 2)=3，再把 3 送进外面的机器。一步一步来，绝不混乱！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'⚗️ 魔法配方机', tip:'参数从入口进，结果从 return 出！',
@@ -1816,7 +1860,9 @@ var LESSONS=[
  secs:[
   {h:'import random 随机数', code:'import random\nprint(random.randint(1, 6))', out:'1~6 中的随机一个整数', p:'**randint(1, 6)** 在 1 到 6 之间（**包含 1 和 6**）随机挑一个整数。'},
   {h:'随机挑选', code:'print(random.choice(["石头", "剪刀", "布"]))', out:'三个中的随机一个'},
-  {h:'时间模块（了解）', code:'import time\ntime.sleep(1)   # 程序暂停 1 秒'}
+  {h:'时间模块（了解）', code:'import time\ntime.sleep(1)   # 程序暂停 1 秒'},
+  {h:'🎲 掷骰子大赛', p:'来做个实验：连续掷 3 次骰子。多运行几次，你会发现每次结果都不一样——这就是随机的魔法！', code:'import random\nfor i in range(3):\n    d = random.randint(1, 6)\n    print("第", i + 1, "次：", d)', out:'（每次运行都不同）比如：\n第 1 次： 4\n第 2 次： 6\n第 3 次： 1', tip:'GESP 一级必考 randint 范围：**randint(a, b) 包含 a 和 b 两端**！这和 range 不包含终点正好相反，是最容易出题挖坑的地方。'},
+  {h:'🃏 洗牌小魔术（了解）', p:'**random.shuffle()** 能把列表像扑克牌一样打乱顺序，玩抽卡、抽签游戏全靠它！', code:'import random\ncards = [1, 2, 3, 4]\nrandom.shuffle(cards)\nprint(cards)', out:'（顺序随机）比如：\n[3, 1, 4, 2]', warn:'用 random 的工具前**必须先写 import random**，否则 Python 会说“我不认识 random”，报 NameError 错误！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🧰 工具箱抽卡', tip:'randint(a,b) 的范围包含 a 和 b！',
@@ -1838,7 +1884,9 @@ var LESSONS=[
  secs:[
   {h:'基本命令', code:'import turtle\nturtle.forward(100)   # 前进100步\nturtle.right(90)      # 向右转90度\nturtle.forward(100)', p:'**forward(d)** 前进，**right(角度)** / **left(角度)** 转弯，海龟默认面朝右方（东）。'},
   {h:'用循环画正方形', code:'for i in range(4):\n    turtle.forward(100)\n    turtle.right(90)', p:'四条边 + 四次右转 90°，正好画出正方形并回到起点。'},
-  {h:'抬笔与落笔（了解）', code:'turtle.penup()     # 抬起笔，移动不画线\nturtle.pendown()   # 放下笔，继续画线'}
+  {h:'抬笔与落笔（了解）', code:'turtle.penup()     # 抬起笔，移动不画线\nturtle.pendown()   # 放下笔，继续画线'},
+  {h:'⭐ 画一颗五角星', p:'五角星的秘密角度是 **144°**：画 5 条边，每条边画完右转 144°，一颗标准五角星就诞生啦！', code:'import turtle\nfor i in range(5):\n    turtle.forward(150)\n    turtle.right(144)', tip:'GESP 一级 Turtle 题常问“right(144) 画出什么图形”。记住口诀：**五角星 144°、正方形 90°、三角形 120°**（转角=360°÷边数，五角星除外是 144°）。'},
+  {h:'🌈 换个颜色再出发', p:'**pencolor("red")** 换画笔颜色，**pensize(3)** 让线条变粗，把小海龟打扮得漂漂亮亮再出发！', code:'import turtle\nturtle.pencolor("red")\nturtle.pensize(3)\nfor i in range(3):\n    turtle.forward(100)\n    turtle.right(120)', out:'画出一个红色粗线三角形', warn:'**转弯不等于前进**！right(90) 只是原地转 90°，不会移动一步；想动位置必须写 forward。还有，海龟默认面朝右方，left 和 right 千万别搞反哦。'}
  ],
  game:gTurtle,
  hw:[
@@ -1856,7 +1904,9 @@ var LESSONS=[
  secs:[
   {h:'多级判断 if-elif-else', code:'score = 95\nif score >= 90:\n    print("优秀")\nelif score >= 60:\n    print("及格")\nelse:\n    print("加油")', out:'优秀', p:'从上往下，哪个条件先成立就走哪条路，后面的不再判断。'},
   {h:'if 嵌套：门里还有门', code:'age = 10\nif age >= 6:\n    if age >= 10:\n        print("上四年级")\n    else:\n        print("上低年级")', out:'上四年级', tip:'内层 if 要比外层再多缩进一格，层级关系才清楚。'},
-  {h:'组合条件 and / or', code:'year = 2024\nif year % 4 == 0 and year % 100 != 0:\n    print("闰年")', out:'闰年'}
+  {h:'组合条件 and / or', code:'year = 2024\nif year % 4 == 0 and year % 100 != 0:\n    print("闰年")', out:'闰年'},
+  {h:'分步拆解：温度穿衣指南 👕', p:'想象早上出门前要决定穿什么衣服，这就是一个多层分支！先摸一摸温度：如果 **低于 0 度**，穿羽绒服；如果 **0 到 15 度**，穿毛衣；如果 **15 到 25 度**，穿长袖；**高于 25 度**，就穿短袖。电脑判断时就像你一步步试，从上往下，只要有一条成立，后面的就跳过不管了。', code:'temp = 18\nif temp < 0:\n    print("穿羽绒服")\nelif temp <= 15:\n    print("穿毛衣")\nelif temp <= 25:\n    print("穿长袖")\nelse:\n    print("穿短袖")', out:'穿长袖', tip:'GESP 二级常考：给一段 if-elif-else 代码和一个具体数值，让你选输出结果。记住规则——**从上往下，第一个成立就执行，后面的全部跳过**！'},
+  {h:'嵌套 if 再练习：先检查门票再看身高', p:'游乐园规定：**先要有票**，进了门再看身高满没满 1.2 米，满了才能玩过山车。这就像大门里还有小门——外层的 if 检查门票，内层的 if 检查身高。', code:'has_ticket = True\nheight = 130\nif has_ticket:\n    if height >= 120:\n        print("可以玩过山车")\n    else:\n        print("身高不够，下次再来")\nelse:\n    print("请先买票")', out:'可以玩过山车', warn:'初学最常见的错误是**忘记缩进**！内层 if 要比外层多缩进 4 格，如果写歪了，Python 会报 IndentationError，或者逻辑完全乱掉。记住：每一层 if 里面的代码都要向右“退一步”！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🌡️ 公告栏判断', tip:'从上往下逐条判断，成立一条就结束！',
@@ -1878,7 +1928,10 @@ var LESSONS=[
  secs:[
   {h:'循环里套循环', code:'for i in range(1, 4):\n    for j in range(1, 4):\n        print(i * j, end=" ")\n    print()', out:'1 2 3 \n2 4 6 \n3 6 9 ', p:'外层 i 每取一个值，内层 j 都要从 1 跑到 3。'},
   {h:'打印九九乘法表', code:'for i in range(1, 10):\n    for j in range(1, i + 1):\n        print(i, "×", j, "=", i*j, end="  ")\n    print()'},
-  {h:'break 只跳出自己所在的一层', code:'for i in range(3):\n    for j in range(3):\n        if j == 1:\n            break\n    print(i)', out:'0\n1\n2', warn:'内层 break 只跳出内层循环，外层循环还会继续！'}
+  {h:'break 只跳出自己所在的一层', code:'for i in range(3):\n    for j in range(3):\n        if j == 1:\n            break\n    print(i)', out:'0\n1\n2', warn:'内层 break 只跳出内层循环，外层循环还会继续！'},
+  {h:'分步拆解：像盖楼房一样理解嵌套循环 🏢', p:'把外层循环想象成**盖楼的层数**，内层循环是**每一层要刷的房间**。比如盖 3 层楼，每层刷 4 个房间：外层 i 从 1 到 3（第 1 层、第 2 层、第 3 层），每盖一层，内层 j 就要从 1 到 4 完整跑一遍（刷完 4 个房间）。**外层走一步，内层走一整圈**——这是嵌套循环最核心的口诀！', code:'for floor in range(1, 4):\n    for room in range(1, 5):\n        print("第", floor, "层 第", room, "号房")', out:'第 1 层 第 1 号房\n第 1 层 第 2 号房\n第 1 层 第 3 号房\n第 1 层 第 4 号房\n第 2 层 第 1 号房\n第 2 层 第 2 号房\n第 2 层 第 3 号房\n第 2 层 第 4 号房\n第 3 层 第 1 号房\n第 3 层 第 2 号房\n第 3 层 第 3 号房\n第 3 层 第 4 号房'},
+  {h:'打印小星星三角形 ⭐', p:'九九表的内层是 range(1, i+1)，如果把数字换成星星，就能画出漂亮的三角形！第 1 行 1 颗星，第 2 行 2 颗……规律就是**内层循环次数跟着外层 i 走**。', code:'for i in range(1, 6):\n    for j in range(i):\n        print("★", end="")\n    print()', out:'★\n★★\n★★★\n★★★★\n★★★★★', tip:'GESP 二级考级中，常给一段双重循环让你**数一数一共打印了多少个字符**，方法就是“外层次数 × 内层次数”；也常让你**补全代码**打印三角形，关键就是内层写 range(i)。'},
+  {h:'倒过来的九九表', p:'如果想让九九表倒着打印（从 9×9 到 1×1），只需要让外层 i 从 9 倒着走到 1，用 range(9, 0, -1) 就行。', code:'for i in range(9, 0, -1):\n    for j in range(1, i + 1):\n        print(i, "×", j, "=", i*j, end="  ")\n    print()', out:'9 × 1 = 9  9 × 2 = 18  9 × 3 = 27  9 × 4 = 36  9 × 5 = 45  9 × 6 = 54  9 × 7 = 63  9 × 8 = 72  9 × 9 = 81  \n8 × 1 = 8  8 × 2 = 16  8 × 3 = 24  8 × 4 = 32  8 × 5 = 40  8 × 6 = 48  8 × 7 = 56  8 × 8 = 64  \n7 × 1 = 7  7 × 2 = 14  7 × 3 = 21  7 × 4 = 28  7 × 5 = 35  7 × 6 = 42  7 × 7 = 49  \n6 × 1 = 6  6 × 2 = 12  6 × 3 = 18  6 × 4 = 24  6 × 5 = 30  6 × 6 = 36  \n5 × 1 = 5  5 × 2 = 10  5 × 3 = 15  5 × 4 = 20  5 × 5 = 25  \n4 × 1 = 4  4 × 2 = 8  4 × 3 = 12  4 × 4 = 16  \n3 × 1 = 3  3 × 2 = 6  3 × 3 = 9  \n2 × 1 = 2  2 × 2 = 4  \n1 × 1 = 1  ', warn:'很多孩子会写成 range(9, 0, 1)，结果什么都打印不出来！因为**步长是正的时起点必须比终点小**。想倒着数，步长一定要写 -1：range(9, 0, -1)。'}
  ],
  game:gMulTable,
  hw:[
@@ -1894,7 +1947,10 @@ var LESSONS=[
  secs:[
   {h:'ord() 与 chr()', code:'print(ord("A"))\nprint(chr(65))\nprint(ord("a") - ord("A"))', out:'65\nA\n32', p:'大写字母 A~Z 是 65~90，小写 a~z 是 97~122，大小写相差 32。'},
   {h:'数字 ↔ 字符串', code:'print(int("12") + 3)\nprint(str(12) + "3")\nprint(float("3.5"))', out:'15\n123\n3.5', p:'int()、str()、float() 是三种常用的“变身魔法”。'},
-  {h:'变身失败会报错', code:'int("你好")   # ValueError', warn:'不是所有字符串都能变成数字，乱变身程序会报 ValueError！'}
+  {h:'变身失败会报错', code:'int("你好")   # ValueError', warn:'不是所有字符串都能变成数字，乱变身程序会报 ValueError！'},
+  {h:'大小写之间藏着秘密 32 🔡', p:'大写字母 A 的 ASCII 码是 65，小写 a 是 97，中间差了整整 **32**！所以，如果你拿到了小写字母的 ASCII 码，**减 32** 就能变成大写；反过来，**加 32** 就变成小写。记住这个“32 号桥”，大小写转换再也不用死记了。', code:'c = "m"\nprint(chr(ord(c) - 32))\nd = "K"\nprint(chr(ord(d) + 32))', out:'M\nk', tip:'GESP 二级真题常考：已知小写字母的 ASCII 码，求对应的大写字母。标准做法就是 **减 32**，不需要逐个背数字！'},
+  {h:'字符串安检门：什么能转、什么不能转 🚪', p:'int() 和 float() 就像学校的安检门：如果字符串里**只有纯数字**（比如 "2024"），就能顺利变身；如果混进了字母、符号或者空格，安检门就会“嘀嘀”报警，抛出 ValueError！', code:'a = "2024"\nb = "3.14"\nprint(int(a) + 1)\nprint(float(b) * 2)', out:'2025\n6.28', warn:'初学者最容易踩的坑是写 int("12+3")，以为结果是 15。其实 "+" 不是数字，程序会直接报错！确保引号里**只有数字和小数点**，才能安全转换。'},
+  {h:'用循环还原秘密信息 🕵️', p:'如果题目给出一串 ASCII 码（比如 65、66、67），让你还原成字母，只要写一个循环，逐个用 chr() 翻译，就能拼出隐藏的信息！', code:'codes = [72, 101, 108, 108, 111]\nfor c in codes:\n    print(chr(c), end="")', out:'Hello', tip:'GESP 真题中常见“给出数字序列输出对应字母”的题型。套路是：**循环 + chr()**，再把每个字符用 end="" 连在一起，最后得到一个单词。'}
  ],
  game:gAscii,
  hw:[
@@ -1910,7 +1966,10 @@ var LESSONS=[
  secs:[
   {h:'内置数学函数', code:'print(abs(-9))\nprint(max(3, 9, 2))\nprint(min(3, 9, 2))\nprint(sum([1, 2, 3]))', out:'9\n9\n2\n6'},
   {h:'math 模块', code:'import math\nprint(math.sqrt(16))', out:'4.0', p:'平方根 sqrt(16)=4，结果是浮点数 4.0。'},
-  {h:'四舍五入 round()', code:'print(round(3.6))\nprint(round(3.4))', out:'4\n3'}
+  {h:'四舍五入 round()', code:'print(round(3.6))\nprint(round(3.4))', out:'4\n3'},
+  {h:'向上取整与向下取整 ceil/floor 📦', p:'班级组织春游，每辆车能坐 40 人，一共有 130 个同学，需要几辆车？130 ÷ 40 = 3.25，但不能只派 3 辆车，不然有人要站着！这时候要**向上取整** math.ceil(3.25) = 4。相反，如果问“能装满几辆车”，就要**向下取整** math.floor(3.25) = 3。', code:'import math\nprint(math.ceil(3.25))\nprint(math.floor(3.25))', out:'4\n3', tip:'GESP 二级常考“装箱/装车”类应用题，答案几乎都要用 ceil 向上取整。看到“至少”“保证装下”这类词，优先想到 ceil！'},
+  {h:'高级运算：平方、对数与幂 🔢', p:'math 模块还有很多厉害的小助手：pow(x, y) 算 x 的 y 次方，log 算对数，pi 是圆周率。平时用得最多的还是 sqrt 和 pow，记住它们考试不慌！', code:'import math\nprint(math.pow(2, 10))\nprint(round(math.pi, 2))\nprint(math.sqrt(2))', out:'1024.0\n3.14\n1.4142135623730951', warn:'很多孩子会写成 print(sqrt(16)) 结果报 NameError。记住：**sqrt 是 math 模块里的函数**，前面必须加 math.，而且开头要 import math！'},
+  {h:'把小数保留两位 💯', p:'做数学题时经常要“保留两位小数”，round(3.14159, 2) 就能做到。注意：如果第二位后面是 5 或更大，就会进位。', code:'print(round(3.14159, 2))\nprint(round(2.71828, 2))\nprint(round(3.5))', out:'3.14\n2.72\n4', tip:'GESP 二级真题常考“round(x, 2) 的输出”，关键看第三位小数是否 ≥5。另外 round 不带第二个参数时，返回的是整数。'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🧮 数学助手出动', tip:'max 取最大、min 取最小、abs 去负号、sqrt 开平方！',
@@ -1932,7 +1991,10 @@ var LESSONS=[
  secs:[
   {h:'常见图形', p:'**椭圆**：开始/结束；**矩形**：处理步骤；**菱形**：条件判断（有“是/否”两条路）；**箭头**：执行方向。'},
   {h:'三大结构', p:'**顺序结构**：一步接一步；**分支结构**：菱形判断，走不同的路；**循环结构**：箭头绕回去反复执行。'},
-  {h:'小知识：存储与网络', p:'内存速度快但断电数据就没了；硬盘/U盘能长期保存；光盘靠激光读写，**不怕强磁场**。'}
+  {h:'小知识：存储与网络', p:'内存速度快但断电数据就没了；硬盘/U盘能长期保存；光盘靠激光读写，**不怕强磁场**。'},
+  {h:'画一画：计算 1~100 的和 🔢', p:'用流程图做“累加”特别直观。先画**椭圆**写“开始”，再画**矩形**令 sum=0、i=1，接着画**菱形**判断“i <= 100 吗？”，如果是，就用**矩形**做 sum=sum+i、i=i+1，再画**箭头**绕回菱形；如果否，就画**矩形**打印 sum，最后画**椭圆**写“结束”。', code:'sum = 0\ni = 1\nwhile i <= 100:\n    sum = sum + i\n    i = i + 1\nprint(sum)', out:'5050', tip:'GESP 二级真题常给你一张流程图，让你**选对应的代码**，或者给你代码让你**补全流程图**。记住口诀：椭圆开始结束、矩形干活、菱形判断、箭头指路！'},
+  {h:'三种结构混合实战 🎯', p:'一个完整的程序往往同时用到顺序、分支、循环。比如“统计 1~50 中 3 的倍数”，外层循环负责从 1 走到 50，里面的分支负责判断“是不是 3 的倍数”，这就是**循环里套分支**。', code:'count = 0\nfor i in range(1, 51):\n    if i % 3 == 0:\n        count = count + 1\nprint(count)', out:'16', warn:'很多孩子会漏掉最后一句 print(count)，导致程序跑完了却看不到结果。记住：**算完一定要输出**，否则电脑只是默默算给自己看！'},
+  {h:'看流程图说结果 🗺️', p:'假设流程图是：开始 → x=5 → 菱形“x > 3？”→ 是：打印“大”→ 结束；否：打印“小”→ 结束。因为 x=5 大于 3，所以走“是”这条路，输出“大”。', code:'x = 5\nif x > 3:\n    print("大")\nelse:\n    print("小")', out:'大', tip:'GESP 真题常把一段代码和流程图放在一起，问“输出是什么”或“菱形里应填什么条件”。关键是把流程图的**每个图形翻译成代码**，再按顺序执行。'}
  ],
  game:gFlowchart,
  hw:[
@@ -1950,7 +2012,10 @@ var LESSONS=[
  secs:[
   {h:'十进制转其他进制', code:'print(bin(10))\nprint(oct(10))\nprint(hex(255))', out:'0b1010\n0o12\n0xff', p:'bin→二进制（0b 前缀），oct→八进制（0o），hex→十六进制（0x，a~f 表示 10~15）。'},
   {h:'字符串进制转回十进制', code:'print(int("1010", 2))\nprint(int("ff", 16))', out:'10\n255', p:'int(字符串, 进制) 第二个参数告诉它“这串数字是几进制”。'},
-  {h:'手算小技巧', p:'二进制 1010 = 1×8 + 0×4 + 1×2 + 0×1 = **10**。每一位的权是 2 的幂。'}
+  {h:'手算小技巧', p:'二进制 1010 = 1×8 + 0×4 + 1×2 + 0×1 = **10**。每一位的权是 2 的幂。'},
+  {h:'8421 拨珠法：秒算二进制 🔢', p:'把 4 位二进制想象成 4 颗珠子，从右到左分别写着 **1、2、4、8**。哪一位是 1，就拨哪颗珠子，最后把拨动的数字加起来。比如 1101：拨 8、4、1，8+4+1=**13**！如果是 5 位，最左边再补一颗 16，依次是 16、8、4、2、1。', code:'print(int("1101", 2))\nprint(int("10101", 2))', out:'13\n21', tip:'GESP 三级手算题常考 4~8 位二进制转十进制，用 8421 法比逐位乘 2 的幂快得多，还不容易出错！'},
+  {h:'十六进制：0~9 不够，字母来凑 🅰️', p:'十六进制每一位可以是 0~15，但 10~15 没法用一个数字表示，就用 **A、B、C、D、E、F** 代替。比如 0x2F：F 是 15，2×16 + 15 = **47**。看到 0x 开头，就知道是十六进制！', code:'print(int("2F", 16))\nprint(int("A0", 16))\nprint(hex(47))', out:'47\n160\n0x2f', warn:'很多孩子把 hex(47) 写成 hex("47")，结果报错！**hex() 里要放整数**，字符串要用 int("2F", 16) 才能转回十进制。'},
+  {h:'GESP 常考：不同进制的“长相” 🎭', p:'同一个数字 10，在不同进制里长得完全不同：十进制是 10，二进制是 0b1010，八进制是 0o12，十六进制是 0xa。考试常把四个进制混在一起让你认亲！', code:'print(bin(10), oct(10), hex(10))\nprint(0b1010 + 0o12 + 0xa)', out:'0b1010 0o12 0xa\n30', tip:'GESP 真题常给 bin/oct/hex 的输出结果，让你选对应的十进制数，或者反过来。记住前缀：**0b 二进制、0o 八进制、0x 十六进制**，就不会被绕晕！'}
  ],
  game:gBaseConv,
  hw:[
@@ -1966,7 +2031,10 @@ var LESSONS=[
  secs:[
   {h:'原码：最高位表示正负', p:'8 位二进制中，最高位 0 表示正数、1 表示负数。例如 +5 的原码是 **0000 0101**，-5 的原码是 **1000 0101**。'},
   {h:'反码与补码（负数）', p:'负数的**反码**：符号位不变，其余位 0↔1 取反；**补码 = 反码 + 1**。-5 的补码是 **1111 1011**。正数的原码=反码=补码。'},
-  {h:'为什么用补码', p:'有了补码，电脑里的减法可以变成加法来算，运算器设计更简单，还不会出现 +0 和 -0 两个零。'}
+  {h:'为什么用补码', p:'有了补码，电脑里的减法可以变成加法来算，运算器设计更简单，还不会出现 +0 和 -0 两个零。'},
+  {h:'钟表绕圈：理解补码最生活化 🕰️', p:'想象一个 12 小时的钟表，现在是 10 点，你想往后拨 4 小时，钟表会显示 2 点而不是 14 点——这就是“模 12”运算。电脑的 8 位二进制也是一个圈，模是 **256**。减法就像在表盘上“倒着拨”，用补码就能把减法变成加法，硬件设计就简单多啦！', code:'# 验证：8 位中 -5 的补码就是 251\nprint((-5) % 256)\nprint(bin(251))', out:'251\n0b11111011', tip:'GESP 三级常考：8 位二进制中，-1 的补码是多少？答案是 **11111111**。因为 -1 倒着拨一格正好是整个表盘的最后一格，也就是 8 个 1。'},
+  {h:'三码转换步步走 🧊', p:'负数的三件“冰外套”不能一次穿齐，要分两步：**第一步** 符号位不变，其余 0↔1 取反（穿上反码）；**第二步** 整体加 1（扣上补码）。以 -3 为例：原码 10000011 → 反码 11111100 → 补码 11111101。', code:'# 用 Python 验证 -3 的补码\nprint(bin((-3) % 256))', out:'0b11111101', warn:'初学最常犯的错误就是：正数也取反！记住：**正数的原码、反码、补码完全一样**，只有负数才需要“翻面加一”。拿到题目先判断正负，再动手。'},
+  {h:'补码为什么牛？➕', p:'电脑里只有加法器，没有减法器。5 - 3 在补码的世界里变成了 5 + (-3)，结果和减法完全一样！这样 CPU 只需要设计加法电路，既省钱又不容易出错。', code:'a = 5\nb = -3\nprint(a + b)\nprint(bin((a + b) % 256))', out:'2\n0b10', tip:'GESP 选择题常问“计算机为什么使用补码”。标准答案就两条：**① 减法变加法，硬件简单；② 0 的表示唯一**（没有 +0 和 -0）。记住这两点，稳拿分！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🧊 冰外套三兄弟', tip:'正数三码相同；负数：反码取反、补码再加 1！',
@@ -1988,7 +2056,10 @@ var LESSONS=[
  secs:[
   {h:'大小写与去空格', code:'print("Hello".upper())\nprint("HELLO".lower())\nprint("  hi  ".strip())', out:'HELLO\nhello\nhi'},
   {h:'替换、查找、切分、拼接', code:'print("猫和狗".replace("狗", "鸟"))\nprint("a,b,c".split(","))\nprint("-".join(["A", "B"]))', out:'猫和鸟\n[\'a\', \'b\', \'c\']\nA-B'},
-  {h:'重要：字符串不可变', code:'s = "abc"\ns.upper()\nprint(s)', out:'abc', warn:'方法不会改变原字符串，要保存结果必须 s = s.upper()！'}
+  {h:'重要：字符串不可变', code:'s = "abc"\ns.upper()\nprint(s)', out:'abc', warn:'方法不会改变原字符串，要保存结果必须 s = s.upper()！'},
+  {h:'安检三兄弟：isdigit / isalpha / isalnum 🔍', p:'输入框里经常要检查内容：是不是纯数字？是不是纯字母？还是字母数字混合？Python 派来三兄弟：**isdigit()** 专查数字，**isalpha()** 专查字母，**isalnum()** 字母数字都放行。返回 True 或 False。', code:'print("2024".isdigit())\nprint("abc".isalpha())\nprint("abc123".isalnum())\nprint("12a".isdigit())', out:'True\nTrue\nTrue\nFalse', tip:'GESP 三级常考“判断输入是否为合法数字”，用 isdigit() 一行就能搞定，比写循环检查快得多！'},
+  {h:'高级查找：find 与 count 🔎', p:'find() 会告诉你某个字符**第一次出现的位置**（从 0 开始数），找不到就返回 -1；count() 则统计它**一共出现了几次**。就像在一本故事书里找“小明”出现了几回、第一次在第几页。', code:'s = "banana"\nprint(s.find("n"))\nprint(s.count("a"))\nprint(s.find("x"))', out:'2\n3\n-1', warn:'很多孩子会以为 s.find("a") 返回 1，其实返回 **0**！因为字符串的索引从 0 开始。考试遇到 find/count 题，先把每个字符的位置写在草稿纸上再选。'},
+  {h:'GESP 真题套路：split 的第二个参数 ✂️', p:'split(",", 1) 表示**只切第一刀**，后面不管有多少逗号都不再切。比如网址 "gesp.ccf.org.cn" 用 split(".", 1) 只分成 ["gesp", "ccf.org.cn"] 两段。', code:'s = "a,b,c,d"\nprint(s.split(","))\nprint(s.split(",", 2))', out:"['a', 'b', 'c', 'd']\n['a', 'b', 'c,d']", tip:'GESP 真题特别喜欢考 split 带第二个参数。看到 split(",", 1) 就要反应过来：**只切一刀，返回两段**；不带参数就是“见逗号就切”。'}
  ],
  game:gStrMethods,
  hw:[
@@ -2005,7 +2076,10 @@ var LESSONS=[
   {h:'切片 [起:止:步长]', code:'a = [0, 1, 2, 3, 4]\nprint(a[1:4])\nprint(a[::-1])', out:'[1, 2, 3]\n[4, 3, 2, 1, 0]', p:'步长 -1 表示倒着取，整个列表就反转了。'},
   {h:'排序与反转', code:'a = [3, 1, 2]\na.sort()\nprint(a)\na.reverse()\nprint(a)', out:'[1, 2, 3]\n[3, 2, 1]', warn:'sort() 直接改变原列表；想保留原列表用 sorted(a)。'},
   {h:'列表推导式', code:'print([i for i in range(1, 8) if i % 2 == 0])', out:'[2, 4, 6]', p:'读作：把 1~7 中“满足偶数条件”的 i 收集成新列表。'},
-  {h:'二维列表：表格一样的列表', code:'a = [[1, 2, 3],\n     [4, 5, 6]]\nprint(a[1][2])\nfor row in a:\n    print(sum(row))', out:'6\n6\n15', p:'列表里装列表就是**二维列表**，像一张表格：a[1][2] 是第 2 行第 3 列的值 6；外层循环取“行”，再遍历一行里的元素（四级考点）。'}
+  {h:'二维列表：表格一样的列表', code:'a = [[1, 2, 3],\n     [4, 5, 6]]\nprint(a[1][2])\nfor row in a:\n    print(sum(row))', out:'6\n6\n15', p:'列表里装列表就是**二维列表**，像一张表格：a[1][2] 是第 2 行第 3 列的值 6；外层循环取“行”，再遍历一行里的元素（四级考点）。'},
+  {h:'推导式再升级：平方与条件 🚀', p:'列表推导式还能同时做“加工”和“筛选”。比如生成 1~5 的平方，但只保留偶数平方：先算 i*i，再用 if 把奇数踢出去。读代码时从中间的 for 开始，再往两边看。', code:'a = [i * i for i in range(1, 6)]\nb = [i * i for i in range(1, 6) if i % 2 == 0]\nprint(a)\nprint(b)', out:'[1, 4, 9, 16, 25]\n[4, 16]', tip:'GESP 三级真题常让你读推导式选结果。记住结构：**[加工 for 变量 in 范围 if 条件]**，先循环、再判断、最后加工，就不会被绕晕！'},
+  {h:'排序的高级玩法：key 与 reverse 🔑', p:'sort() 不仅能排数字，还能按“长度”排字符串！key=len 表示按长度排队，reverse=True 表示从大到小。比如把 ["apple", "hi", "banana"] 按长度从短到长排。', code:'words = ["apple", "hi", "banana"]\nwords.sort(key=len)\nprint(words)\nnums = [5, 2, 8]\nnums.sort(reverse=True)\nprint(nums)', out:"['hi', 'apple', 'banana']\n[8, 5, 2]", warn:'很多孩子写成 sorted(a, reverse=True) 却忘了接收返回值，结果原列表没变！记住：**sorted() 会返回新列表**，要写成 a = sorted(a)；而 a.sort() 才是就地排序。'},
+  {h:'深拷贝陷阱：列表的“影子” 👥', p:'如果写 b = a，b 并不是新列表，而是 a 的“影子”——改 b 会连累 a！想要真正的复制，要用 b = a.copy() 或 b = a[:]。就像拍照和复印的区别。', code:'a = [1, 2, 3]\nb = a\nc = a.copy()\nb[0] = 99\nprint(a)\nprint(c)', out:'[99, 2, 3]\n[1, 2, 3]', tip:'GESP 三级常考“改 b 之后 a 变成什么”。看到 b = a 就要警觉：它们是**同一个列表的两个名字**，改一个另一个跟着变！'}
  ],
  game:gListTrain,
  hw:[
@@ -2021,7 +2095,10 @@ var LESSONS=[
  secs:[
   {h:'字典合并 update', code:'a = {"name": "Tom", "age": 12}\nb = {"name": "Join", "email": "x@q.com"}\nb.update(a)\nprint(len(b))', out:'3', p:'同名的键 name 被覆盖，age 是新键，最终 3 对。'},
   {h:'集合去重统计', code:'print(set("banana"))\nprint(len(set("banana")))', out:"{'b', 'a', 'n'}\n3", p:'集合自动去重，配合 len 就能数“有几种不同字符”。'},
-  {h:'zip 配对打包', code:'print(dict(zip(["a", "b"], [1, 2])))', out:"{'a': 1, 'b': 2}"}
+  {h:'zip 配对打包', code:'print(dict(zip(["a", "b"], [1, 2])))', out:"{'a': 1, 'b': 2}"},
+  {h:'字典统计：水果摊数一数 🍎', p:'水果摊来了一车水果：apple、banana、apple、orange……想统计每种有几个？用字典当“计数器”：如果水果已经在字典里就 +1，不在就设为 1。get() 方法可以安全地取默认值 0，不会报错。', code:'fruits = ["apple", "banana", "apple", "orange", "banana", "apple"]\nd = {}\nfor f in fruits:\n    d[f] = d.get(f, 0) + 1\nprint(d)', out:"{'apple': 3, 'banana': 2, 'orange': 1}", tip:'GESP 三级常考“统计字符/单词出现次数”，模板就是 **d[x] = d.get(x, 0) + 1**。这行代码背下来，计数题秒杀！'},
+  {h:'集合运算：交集、并集、差集 ⭕', p:'两个班级都报了兴趣班，A 班有 {小明, 小红, 小刚}，B 班有 {小红, 小丽, 小刚}。交集 & 是“两个班都报的”，并集 | 是“所有报过的”，差集 - 是“只在 A 班的”。', code:'a = {"小明", "小红", "小刚"}\nb = {"小红", "小丽", "小刚"}\nprint(a & b)\nprint(a | b)\nprint(a - b)', out:"{'小红', '小刚'}\n{'小刚', '小明', '小红', '小丽'}\n{'小明'}", warn:'集合里的元素是**无序**的！所以 print(a & b) 的结果顺序可能每次运行都不同，千万不要按书写顺序去背答案，要看内容而不是顺序。'},
+  {h:'字典的键必须唯一 🔑', p:'如果给字典两次相同的键，后面的会**覆盖**前面的，就像电话簿里同一个人存了两个号码，旧的就被新的替换掉了。键可以是字符串或数字，但不能是列表！', code:'d = {"a": 1, "b": 2, "a": 99}\nprint(d)\nd["c"] = 3\nprint(len(d))', out:"{'a': 99, 'b': 2}\n3", tip:'GESP 真题常考 len(d) 的变化。记住：**同名的键只保留最后一次赋值**，新增的键才使 len +1。'}
  ],
  game:gDictCount,
  hw:[
@@ -2038,7 +2115,10 @@ var LESSONS=[
  secs:[
   {h:'枚举的套路', code:'for 鸡 in range(头数 + 1):\n    兔 = 头数 - 鸡\n    if 鸡*2 + 兔*4 == 腿数:\n        print(鸡, 兔)', p:'让电脑把所有可能一个不漏地试一遍，符合条件的就是答案。'},
   {h:'为什么 range 要到头数+1', p:'鸡最少 0 只、最多等于总头数（全是鸡），range(头数+1) 正好包含 0~头数。'},
-  {h:'枚举的关键', tip:'① 确定范围（从哪试到哪）；② 确定判断条件；③ 一个都不能漏，也不能重复试。'}
+  {h:'枚举的关键', tip:'① 确定范围（从哪试到哪）；② 确定判断条件；③ 一个都不能漏，也不能重复试。'},
+  {h:'🔍 缩小范围，枚举更快', p:'找 100 以内能同时被 3 和 5 整除的数，不用从 1 一个一个试！能同时被 3 和 5 整除就是 15 的倍数，直接跨 15 步：', code:'cnt = 0\nfor i in range(15, 100, 15):\n    print(i)\n    cnt += 1\nprint("只试了", cnt, "次")', out:'15\n30\n45\n60\n75\n90\n只试了 6 次'},
+  {h:'⚡ 找到就收工：break', code:'for n in range(1, 100):\n    if n * n > 200:\n        print(n)\n        break', out:'15', p:'题目只要“第一个”答案时，找到就马上 break，后面的就不用再试了。', warn:'break 写不写程序都不报错，但忘了写会白白多跑很多圈，数据一多就慢到超时啦！'},
+  {h:'🎯 考级小贴士', tip:'GESP 枚举题常考两件事：① 枚举范围怎么定（想想极端情况，比如“全是鸡”）；② 程序大约要试多少次。先估算次数，超过百万次就要想办法缩小范围！'}
  ],
  game:gEnum,
  hw:[
@@ -2054,7 +2134,10 @@ var LESSONS=[
  secs:[
   {h:'什么是模拟', p:'把题目规则原原本本翻译成程序步骤，让电脑像做游戏一样**一步步执行**，过程走完答案自然出现。'},
   {h:'模拟的小技巧', p:'① 先用纸笔或表格手动走 1~2 步；② 用列表表示“圈里还剩谁”；③ 记录每一步变量变化，避免数错。'},
-  {h:'典型场景', code:'# 报数出圈、排队上车、时钟走动\n# 天气变化、游戏回合……\n# 规则越清楚，模拟越简单'}
+  {h:'典型场景', code:'# 报数出圈、排队上车、时钟走动\n# 天气变化、游戏回合……\n# 规则越清楚，模拟越简单'},
+  {h:'🐌 蜗牛爬井模拟', p:'井深 10 米，蜗牛白天爬 3 米、晚上滑 2 米，第几天能爬出去？照着规则一天天“演”：', code:'h = 0\nday = 0\nwhile h < 10:\n    day += 1\n    h += 3\n    if h >= 10:\n        break\n    h -= 2\nprint("第", day, "天爬出去")', out:'第 8 天爬出去'},
+  {h:'📋 给模拟列一张表', p:'手动演算时画表格，每行记“第几天、白天爬到、晚上滑到”：第1天 3→1，第2天 4→2……第8天白天到 10，收工！表格一列，错没错一眼就看出来。', warn:'一定要先加白天爬的 3 米就立刻判断“出没出井口”，再减晚上滑落的 2 米。判断顺序反了，答案就会多算或少算一天！'},
+  {h:'🎯 考级小贴士', tip:'GESP 模拟题爱给一段代码，问“循环结束后某变量是多少”。别硬想，拿出草稿纸按行执行，把每一步的变量变化写下来，稳稳拿分！'}
  ],
  game:gSim,
  hw:[
@@ -2072,7 +2155,10 @@ var LESSONS=[
  secs:[
   {h:'形参与实参', code:'def add(a, b):      # a、b 是形参（占位材料）\n    return a + b\nprint(add(3, 4))      # 3、4 是实参（真实材料）', out:'7'},
   {h:'默认参数必须放最后', code:'def greet(name, word="你好"):\n    print(word, name)\ngreet("阿笨")\ngreet("阿笨", "再见")', out:'你好 阿笨\n再见 阿笨', warn:'def f(a=10, b) 是错误的！有默认值的参数要排在没有默认值的后面。'},
-  {h:'return 把结果送出来', code:'def add10(a):\n    a = a + 10\n    return a\nx = 100\ny = add10(x)\nprint(x, y)', out:'100 110', p:'函数里 a+10 不会改变外面的 x；return 把新值 110 送出来（GESP 真题）。'}
+  {h:'return 把结果送出来', code:'def add10(a):\n    a = a + 10\n    return a\nx = 100\ny = add10(x)\nprint(x, y)', out:'100 110', p:'函数里 a+10 不会改变外面的 x；return 把新值 110 送出来（GESP 真题）。'},
+  {h:'⏰ return 一响就离场', p:'return 像下课铃：一执行，函数立刻结束，后面再多彩的代码也不会跑。所以可以提前 return 处理特殊情况：', code:'def check(n):\n    if n > 0:\n        return "正数"\n    return "非正数"\nprint(check(5), check(-3))', out:'正数 非正数'},
+  {h:'🔀 按名字传参', code:'def intro(name, age):\n    print(name, "今年", age, "岁")\nintro(age=8, name="阿笨")\nintro("小美", 9)', out:'阿笨 今年 8 岁\n小美 今年 9 岁', p:'写上参数名传参，顺序打乱也不怕；不写名字按位置传，就必须一一对齐。'},
+  {h:'🎯 考级小贴士', warn:'函数没有 return 时默认返回 None！看到 print(f(3)) 输出 None，先检查函数里是不是忘了写 return。', tip:'GESP 常考“传参输出题”：先把实参按位置对到形参，标出每个变量的值，再逐行算。默认参数只在“没传这个材料”时才启用。'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'⚗️ 配方机升级版', tip:'形参是占位、实参是真实材料；return 送出结果！',
@@ -2094,7 +2180,10 @@ var LESSONS=[
  secs:[
   {h:'局部变量与全局变量', code:'def f():\n    x = 10      # 局部变量\nf()\nprint(x)        # 报错！外面看不见', warn:'函数内部定义的变量只在函数内有效。想在函数内修改全局变量需要 global 声明。'},
   {h:'列表传入会“共享”（GESP 真题）', code:'def add(a):\n    a.append(10)\n    return a\na = [1, 2, 3]\nb = add(a)\nprint(a, b)', out:'[1, 2, 3, 10] [1, 2, 3, 10]', p:'列表是可变对象，形参 a 和外面的 a 指向同一个箱子，append 两边都看得见。'},
-  {h:'重新赋值就不再共享', code:'def add(a):\n    a = a.append(10)  # append 返回 None！\n    return a', out:'外面 [1,2,3,10]，函数返回 None', warn:'a.append(10) 没有返回值（None）；不要把它再赋给 a！'}
+  {h:'重新赋值就不再共享', code:'def add(a):\n    a = a.append(10)  # append 返回 None！\n    return a', out:'外面 [1,2,3,10]，函数返回 None', warn:'a.append(10) 没有返回值（None）；不要把它再赋给 a！'},
+  {h:'🔑 global 通行证', p:'普通情况下函数只能“看”全局变量，不能改它。领了 global 通行证就能改：', code:'count = 0\ndef add():\n    global count\n    count += 1\nadd()\nadd()\nprint(count)', out:'2'},
+  {h:'🆚 数字 vs 列表对比实验', code:'def change(x, lst):\n    x = 99\n    lst[0] = 99\na = 1\nb = [1, 2]\nchange(a, b)\nprint(a, b)', out:'1 [99, 2]', p:'数字传的是“复印件”，函数里怎么改外面都不变；列表传的是“真箱子”，改里面的东西外面看得见。', warn:'lst[0] = 99 是改箱子里的东西（外面可见）；lst = [99] 是换了一个新箱子（外面的旧箱子不变）。一字之差，结果天差地别！'},
+  {h:'🎯 考级小贴士', tip:'GESP 真题套路：给一段函数代码问 print 输出。口诀——数字字符串改不动，列表字典会共享；append、sort 这些方法返回 None，千万别接住再赋值！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'📦 箱子归属之谜', tip:'数字字符串“传复印件”，列表字典“共享真箱子”！',
@@ -2115,7 +2204,9 @@ var LESSONS=[
  story:'程序也会“摔跤”：除以 0、输入文字当数字、清单越界……try 像给程序戴上护膝，摔倒了 except 接住它，finally 无论如何都要执行（比如关上文件）！',
  secs:[
   {h:'try-except-else-finally', code:'try:\n    n = int(input())\nexcept ValueError:\n    print("输入的不是整数")\nelse:\n    print("没出错，收到", n)\nfinally:\n    print("无论如何都执行")', p:'try 放可能出错的代码；except 接住对应错误；else 在没出错时执行；finally 必定执行。'},
-  {h:'常见异常', code:'1 / 0          # ZeroDivisionError\nint("3.14")    # ValueError\n[1, 2][3]      # IndexError\n{"a": 1}["b"]  # KeyError\nprint(x)       # NameError（x 未定义）', tip:'考级常考：输入 3.14 给 int() 会触发 ValueError，而不是 ZeroDivisionError！'}
+  {h:'常见异常', code:'1 / 0          # ZeroDivisionError\nint("3.14")    # ValueError\n[1, 2][3]      # IndexError\n{"a": 1}["b"]  # KeyError\nprint(x)       # NameError（x 未定义）', tip:'考级常考：输入 3.14 给 int() 会触发 ValueError，而不是 ZeroDivisionError！'},
+  {h:'🚦 try 执行流程四步走', p:'把 try 想成过马路：① 先走 try 这段路；② 一路平安 → 跳过 except，走 else；③ 中途摔倒 → 立刻跳到能接住它的 except，try 里剩下的路不走了；④ 不管摔没摔，finally 最后一定走一遍。', code:'try:\n    print("A")\n    print(1 / 0)\n    print("B")\nexcept ZeroDivisionError:\n    print("C")\nfinally:\n    print("D")', out:'A\nC\nD', warn:'try 里出错那一行之后的代码（比如 print("B")）会被直接跳过，可别以为它会执行！'},
+  {h:'🎯 输出顺序题秘籍', tip:'GESP 真题超爱考“写出程序的输出”：先问“错没错”，再问“被哪个 except 接住”，最后别忘了 finally 永远出场。在草稿纸上按顺序标一标，顺序题稳赢！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'🚨 抓 Bug 小卫士', tip:'看错误现象，说出它的“异常名字”！',
@@ -2138,7 +2229,10 @@ var LESSONS=[
  secs:[
   {h:'三种打开模式', code:'f = open("diary.txt", "w")  # w 写入（覆盖）\nf.write("你好")\nf.close()\nf = open("diary.txt", "a")  # a 追加（末尾续写）\nf.write("Python")\nf.close()\nf = open("diary.txt", "r")  # r 读取\nprint(f.read())\nf.close()', out:'你好Python', warn:'w 会清空原文件！想保留旧内容请用 a。'},
   {h:'with 自动关门', code:'with open("a.txt", "w") as f:\n    f.write("hello")   # 缩进结束自动 close()'},
-  {h:'二进制与编码', code:'open("a.png", "rb")       # 读图片等二进制文件加 b\nopen("a.txt", encoding="utf-8")  # 中文指定 utf-8'}
+  {h:'二进制与编码', code:'open("a.png", "rb")       # 读图片等二进制文件加 b\nopen("a.txt", encoding="utf-8")  # 中文指定 utf-8'},
+  {h:'📄 readlines 读出一个列表', code:'with open("poem.txt", "w") as f:\n    f.write("春眠不觉晓\\n处处闻啼鸟")\nwith open("poem.txt", "r") as f:\n    lines = f.readlines()\nprint(len(lines))\nfor line in lines:\n    print(line.strip())', out:'2\n春眠不觉晓\n处处闻啼鸟', p:'readlines() 把每一行装进一个列表；strip() 负责把行尾的换行符“剪掉”，打印更干净。'},
+  {h:'🔁 最省事的读法：直接 for 循环', code:'with open("poem.txt", "r") as f:\n    for line in f:\n        print("读到了：", line.strip())', out:'读到了：春眠不觉晓\n读到了：处处闻啼鸟', p:'文件对象可以直接放进 for 循环，一行一行读，不用先 readlines。'},
+  {h:'🎯 考级小贴士', warn:'w 模式在 open 的那一瞬间就把旧文件清空了，哪怕一行都没 write！写完不 close()，内容可能还留在“缓冲区”没落盘，用 with 最保险。', tip:'GESP 常考模式选择：读 r、覆盖 w、续写 a、二进制加 b；还可能问“程序结束后文件里是什么内容”——记住 w 会清空，a 会接在末尾。'}
  ],
  game:gFile,
  hw:[
@@ -2153,7 +2247,10 @@ var LESSONS=[
  story:'水里的小气泡总是一个一个往上冒！冒泡排序让相邻两个数“比个子”，左边大就交换。每走一趟，最大的数就沉到最右边。',
  secs:[
   {h:'冒泡怎么排', code:'a = [5, 3, 4, 1, 2]\nfor i in range(len(a) - 1):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j+1] = a[j+1], a[j]', p:'第 i 轮结束，右边 i 个数已经就位，所以内层不用再比较它们。'},
-  {h:'特点', p:'**稳定排序**：相等的两个数不交换，原来谁在前还在前；时间复杂度 **O(n²)**，数据越多越慢。'}
+  {h:'特点', p:'**稳定排序**：相等的两个数不交换，原来谁在前还在前；时间复杂度 **O(n²)**，数据越多越慢。'},
+  {h:'🔬 第一趟逐步看', p:'以 [5, 3, 4, 1] 为例：① 5 和 3 比，5 大，交换 → [3, 5, 4, 1]；② 5 和 4 比，交换 → [3, 4, 5, 1]；③ 5 和 1 比，交换 → [3, 4, 1, 5]。第一趟结束，最大的 5 稳稳沉到最右边！'},
+  {h:'✅ 完整冒泡排一遍', code:'def bubble(a):\n    for i in range(len(a) - 1):\n        for j in range(len(a) - 1 - i):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n    return a\nprint(bubble([5, 3, 4, 1, 2]))', out:'[1, 2, 3, 4, 5]'},
+  {h:'🎯 考级小贴士', warn:'交换要写成 a[j], a[j+1] = a[j+1], a[j] 一步到位！如果分两步写 a[j] = a[j+1] 再 a[j+1] = a[j]，原来的值就被覆盖丢掉了。', tip:'GESP 爱考“第 i 趟结束后的数组长什么样”：记住每趟结束，最右边就多一个就位的最大值。拿 [5,3,4,1,2] 在草稿纸上手动走两趟，套路就懂了！'}
  ],
  game:gBubble,
  hw:[
@@ -2168,7 +2265,10 @@ var LESSONS=[
  story:'选择排序像排队选队长：每轮从剩下的人里挑最矮的，跟最前面的位置交换；插入排序像理扑克牌：每摸一张新牌，就插到手里已排好的牌中合适的位置。',
  secs:[
   {h:'选择排序', code:'a = [4, 2, 5, 1, 3]\nfor i in range(len(a) - 1):\n    mi = i\n    for j in range(i + 1, len(a)):\n        if a[j] < a[mi]:\n            mi = j\n    a[i], a[mi] = a[mi], a[i]', p:'每轮选最小值放到前面。注意：它可能把相等元素“跳着交换”，所以**不稳定**。'},
-  {h:'插入排序', code:'for i in range(1, len(a)):\n    key = a[i]\n    j = i - 1\n    while j >= 0 and a[j] > key:\n        a[j+1] = a[j]\n        j -= 1\n    a[j+1] = key', p:'像抓牌一样把新元素插入前面有序区，相等元素不会越过彼此，**稳定**。'}
+  {h:'插入排序', code:'for i in range(1, len(a)):\n    key = a[i]\n    j = i - 1\n    while j >= 0 and a[j] > key:\n        a[j+1] = a[j]\n        j -= 1\n    a[j+1] = key', p:'像抓牌一样把新元素插入前面有序区，相等元素不会越过彼此，**稳定**。'},
+  {h:'✅ 完整选择排序', code:'def select_sort(a):\n    for i in range(len(a) - 1):\n        mi = i\n        for j in range(i + 1, len(a)):\n            if a[j] < a[mi]:\n                mi = j\n        a[i], a[mi] = a[mi], a[i]\n    return a\nprint(select_sort([4, 2, 5, 1, 3]))', out:'[1, 2, 3, 4, 5]', p:'第 1 轮找到最小的 1 换到最前 → [1, 2, 5, 4, 3]；之后每轮左边多一位“就位队员”。', warn:'最后交换的是 a[i], a[mi]，不是 a[i], a[j]！j 只是巡逻兵，mi 才记录最小值的位置。'},
+  {h:'✅ 完整插入排序', code:'def insert_sort(a):\n    for i in range(1, len(a)):\n        key = a[i]\n        j = i - 1\n        while j >= 0 and a[j] > key:\n            a[j + 1] = a[j]\n            j -= 1\n        a[j + 1] = key\n    return a\nprint(insert_sort([4, 2, 5, 1, 3]))', out:'[1, 2, 3, 4, 5]'},
+  {h:'🎯 考级小贴士', tip:'GESP 真题套路：① 给出某轮排序后的数组，问是哪种排序——选择排序每轮左边多一个最小值，插入排序前面一段始终有序；② 问谁不稳定——选“选择排序”！冒泡、插入都是稳定的。'}
  ],
  game:gSelectSort,
  hw:[
@@ -2184,7 +2284,10 @@ var LESSONS=[
  secs:[
   {h:'斐波那契数列', code:'1, 1, 2, 3, 5, 8, 13, 21 …', p:'递推关系：**f[n] = f[n-1] + f[n-2]**，起点 f[1]=f[2]=1。'},
   {h:'用循环递推', code:'a, b = 1, 1\nfor i in range(6):\n    a, b = b, a + b\nprint(a)', out:'13', p:'每次让 a、b 这对“前两项”向前滚一格，新值由旧值推出。'},
-  {h:'递推的关键', tip:'① 找到递推关系式（后面的怎么由前面的得到）；② 确定初始条件（最初几项）；③ 用循环一步步推到答案。'}
+  {h:'递推的关键', tip:'① 找到递推关系式（后面的怎么由前面的得到）；② 确定初始条件（最初几项）；③ 用循环一步步推到答案。'},
+  {h:'📒 用列表存下整个数列', p:'列表像一本账本，每算出一项就记一笔，后面想用哪项直接查：', code:'f = [1, 1]\nfor i in range(2, 8):\n    f.append(f[i - 1] + f[i - 2])\nprint(f)', out:'[1, 1, 2, 3, 5, 8, 13, 21]'},
+  {h:'✋ 亲手推一遍', p:'从 1、1 出发：1+1=2，1+2=3，2+3=5，3+5=8，5+8=13，8+13=21……每只“新兔子”都是前两项加出来的，手推 8 项只要半分钟！', warn:'f.append(...) 会改变列表，但 append 返回 None，别写成 f = f.append(...)；另外 range(2, 8) 是从下标 2 补到下标 7，边界要数清楚！'},
+  {h:'🎯 考级小贴士', tip:'GESP 递推题常问“第 n 项是多少”或“程序输出什么”：先把初始几项写下来，再按递推式往后推。特别要看清题目是从第 0 项还是第 1 项开始数，差一位全错！'}
  ],
  game:gFib,
  hw:[
@@ -2200,7 +2303,10 @@ var LESSONS=[
  secs:[
   {h:'大 O 记号', code:'print(a)            # O(1)  和数据多少无关\nfor x in a: ...     # O(n)  一层循环\nfor x in a:\n    for y in a: ... # O(n²) 两层嵌套', p:'n=100 时，O(n) 约 100 次操作，O(n²) 约 10000 次，差距巨大。'},
   {h:'时间 vs 空间', p:'**时间复杂度**看操作次数；**空间复杂度**看额外占用的存储空间。'},
-  {h:'稳定性回顾', p:'冒泡 ✅ 稳定、插入 ✅ 稳定、选择 ❌ 不稳定。稳定 = 相等关键字排完序后相对顺序不变。'}
+  {h:'稳定性回顾', p:'冒泡 ✅ 稳定、插入 ✅ 稳定、选择 ❌ 不稳定。稳定 = 相等关键字排完序后相对顺序不变。'},
+  {h:'⏱ 数量级差多少', code:'n = 1000\nprint(n)       # O(n) 大约的操作次数\nprint(n * n)   # O(n²) 大约的操作次数', out:'1000\n1000000', p:'n 从 100 变到 1000，O(n) 只慢 10 倍，O(n²) 却慢 100 倍！数据一多，选错算法就等不到结果啦。'},
+  {h:'🔍 数循环，定复杂度', p:'看代码先问：有几层“和 n 有关”的循环套在一起？0 层是 O(1)，1 层是 O(n)，2 层是 O(n²)。冒泡、选择、插入排序都是两层循环，所以都是 O(n²)。', warn:'两层循环不一定是 O(n²)！如果内层循环次数固定（比如 range(10)），不随 n 变化，整体仍然是 O(n)。'},
+  {h:'🎯 考级小贴士', tip:'GESP 真题会给一段函数让你选复杂度：抓住“循环套几层、每层跑多少次”就行；还会考稳定性判断——记牢“冒泡插入稳定、选择不稳定”，送分题别丢！'}
  ],
  game:function(box,win){ gScene(box,win,{
    title:'📈 算法测速员', tip:'数循环层数：0层 O(1)，1层 O(n)，2层 O(n²)！',
