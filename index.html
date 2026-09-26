@@ -2461,7 +2461,7 @@ var tabsEl=document.getElementById('tabs'), mapView=document.getElementById('map
     lessonBody=document.getElementById('lessonBody');
 var view='map', cur=0;
 
-function unlocked(i){ return i===0 || pGet(LESSONS[i-1].id,'h'); }
+function unlocked(i){ return true; }
 function isDone(i){ return pGet(LESSONS[i].id,'h'); }
 function starCount(){ return LESSONS.filter(function(l){ return pGet(l.id,'h'); }).length; }
 
